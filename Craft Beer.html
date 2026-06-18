@@ -3950,26 +3950,7 @@
       // --- Coin insertion effect for login buttons ---
       loginButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Flash animation trigger
-          const textEl = btn.querySelector('.btn-text-flash');
-          const originalText = textEl.textContent;
-          
-          textEl.textContent = 'COIN OK!';
-          textEl.style.color = '#00f0ff';
-          btn.style.borderColor = '#00f0ff';
-          btn.style.boxShadow = 'var(--neon-glow-cyan)';
-          
-          // Play a retro synth coin sound if web audio API allows or simulated delay
-          setTimeout(() => {
-            textEl.textContent = 'LOADING...';
-            setTimeout(() => {
-              window.location.href = 'login.html';
-              textEl.textContent = originalText;
-              textEl.style.color = '';
-              btn.style.borderColor = '';
-              btn.style.boxShadow = '';
-            }, 1000);
-          }, 800);
+          window.location.href = 'login.html';
         });
       });
       

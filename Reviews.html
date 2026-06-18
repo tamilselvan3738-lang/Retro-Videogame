@@ -2776,14 +2776,9 @@
         
         <div class="rev-stats-grid">
           <div class="rev-card rev-stat-card">
-            <div class="rev-stat-num">4.9 / 5.0</div>
+            <div class="rev-stat-num">4.9 </div>
             <div class="rev-stat-label">Average Player Rating</div>
             <div class="rev-stars" style="justify-content: center; margin-top: 0.5rem; margin-bottom: 0;">
-              <span class="rev-star-filled">★</span>
-              <span class="rev-star-filled">★</span>
-              <span class="rev-star-filled">★</span>
-              <span class="rev-star-filled">★</span>
-              <span class="rev-star-filled">★</span>
             </div>
           </div>
           
@@ -3557,26 +3552,7 @@
       // --- Coin insertion effect for login buttons ---
       loginButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Flash animation trigger
-          const textEl = btn.querySelector('.btn-text-flash');
-          const originalText = textEl.textContent;
-          
-          textEl.textContent = 'COIN OK!';
-          textEl.style.color = '#00f0ff';
-          btn.style.borderColor = '#00f0ff';
-          btn.style.boxShadow = 'var(--neon-glow-cyan)';
-          
-          // Play a retro synth coin sound if web audio API allows or simulated delay
-          setTimeout(() => {
-            textEl.textContent = 'LOADING...';
-            setTimeout(() => {
-              window.location.href = 'login.html';
-              textEl.textContent = originalText;
-              textEl.style.color = '';
-              btn.style.borderColor = '';
-              btn.style.boxShadow = '';
-            }, 1000);
-          }, 800);
+          window.location.href = 'login.html';
         });
       });
 
