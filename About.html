@@ -2425,21 +2425,31 @@
     }
 
     .ab-card-icon {
-      font-size: 2.5rem;
       margin-bottom: 1.5rem;
       display: inline-block;
     }
 
+    .ab-card-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
     .ab-card-icon.pink {
-      text-shadow: var(--neon-glow-pink);
+      color: var(--color-neon-pink);
+      filter: drop-shadow(0 0 4px var(--color-neon-pink));
     }
 
     .ab-card-icon.cyan {
-      text-shadow: var(--neon-glow-cyan);
+      color: var(--color-neon-cyan);
+      filter: drop-shadow(0 0 4px var(--color-neon-cyan));
     }
 
     .ab-card-icon.yellow {
-      text-shadow: var(--neon-glow-yellow);
+      color: var(--color-neon-yellow);
+      filter: drop-shadow(0 0 4px var(--color-neon-yellow));
     }
 
     .ab-card h3 {
@@ -2582,8 +2592,19 @@
     }
 
     .ab-slot-img {
-      font-size: 2.2rem;
       margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+    }
+
+    .ab-slot-img svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
     }
 
     .ab-slot-name {
@@ -2711,8 +2732,20 @@
     }
 
     .ab-dash-avatar {
-      font-size: 3rem;
       z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 64px;
+      height: 64px;
+    }
+
+    .ab-dash-avatar svg {
+      width: 48px;
+      height: 48px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
     }
 
     .ab-dash-bio h3 {
@@ -3344,21 +3377,44 @@
       <div class="ab-lab-grid">
         <!-- Card 1 -->
         <div class="ab-card">
-          <div class="ab-card-icon pink">📺</div>
+          <div class="ab-card-icon pink">
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <line x1="17" y1="4" x2="17" y2="20" />
+              <circle cx="19.5" cy="8" r="1" fill="currentColor" />
+              <circle cx="19.5" cy="12" r="1" fill="currentColor" />
+              <line x1="18.5" y1="16" x2="20.5" y2="16" />
+              <path d="M7 2l5 2 5-2" />
+            </svg>
+          </div>
           <h3>CRT Recapping</h3>
           <p>We source authentic vintage capacitors to rebuild monitor boards, correcting colors, focus, and scanning lines for true 240p gaming warmth.</p>
         </div>
         
         <!-- Card 2 -->
         <div class="ab-card" style="border-color: rgba(0, 240, 255, 0.25);">
-          <div class="ab-card-icon cyan">🕹️</div>
+          <div class="ab-card-icon cyan">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="14" width="18" height="7" rx="2" />
+              <circle cx="12" cy="5" r="3" />
+              <path d="M12 8v6" />
+              <circle cx="8" cy="17.5" r="1" fill="currentColor" />
+              <circle cx="16" cy="17.5" r="1" fill="currentColor" />
+            </svg>
+          </div>
           <h3>Joystick Calibration</h3>
           <p>Standard buttons are swapped for authentic Japanese Sanwa and Seimitsu joysticks, ensuring pixel-perfect combat responsiveness.</p>
         </div>
         
         <!-- Card 3 -->
         <div class="ab-card" style="border-color: rgba(255, 183, 0, 0.25);">
-          <div class="ab-card-icon yellow">💾</div>
+          <div class="ab-card-icon yellow">
+            <svg viewBox="0 0 24 24">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+          </div>
           <h3>ROM Preservation</h3>
           <p>Original circuit boards are kept clean and functional. We preserve game chips to safeguard gaming history and high-score boards.</p>
         </div>
@@ -3420,28 +3476,36 @@
         <div class="ab-crew-grid">
           <!-- Character 1 -->
           <div class="ab-crew-slot active" data-char="rex">
-            <div class="ab-slot-img">👨‍🔧</div>
+            <div class="ab-slot-img">
+              <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="ab-slot-name">REX</div>
             <div class="ab-slot-label">ADMIN 01</div>
           </div>
           
           <!-- Character 2 -->
           <div class="ab-crew-slot" data-char="neona">
-            <div class="ab-slot-img">👩‍🔬</div>
+            <div class="ab-slot-img">
+              <svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="ab-slot-name">NEONA</div>
             <div class="ab-slot-label">ALCHEMIST</div>
           </div>
           
           <!-- Character 3 -->
           <div class="ab-crew-slot" data-char="gridlock">
-            <div class="ab-slot-img">👨‍💻</div>
+            <div class="ab-slot-img">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 16h20v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2zM8 8l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="ab-slot-name">GRIDLOCK</div>
             <div class="ab-slot-label">SYS_ADMIN</div>
           </div>
           
           <!-- Character 4 -->
           <div class="ab-crew-slot" data-char="toxic">
-            <div class="ab-slot-img">👩‍🎤</div>
+            <div class="ab-slot-img">
+              <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10a7 7 0 0 0 14 0" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="17" x2="12" y2="22" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="22" x2="15" y2="22" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <div class="ab-slot-name">TOXIC</div>
             <div class="ab-slot-label">CASTER</div>
           </div>
@@ -3462,7 +3526,9 @@
             <div class="ab-dash-profile">
               <div class="ab-dash-visual">
                 <img src="images/fighting_games.png" alt="CRT Screen overlaying game interface" class="ab-dash-avatar-bg">
-                <div class="ab-dash-avatar" id="dashAvatar">👨‍🔧</div>
+                <div class="ab-dash-avatar" id="dashAvatar">
+                  <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
               </div>
               
               <div class="ab-dash-bio">
@@ -4011,7 +4077,7 @@
           role: "CHIEF RESTORATION ENGINEER",
           favGame: "STREET FIGHTER II",
           special: "↓ ↘ → + Joystick Twist",
-          avatar: "👨‍🔧",
+          avatar: `<svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
           power: "90%",
           defense: "80%",
           speed: "70%"
@@ -4021,7 +4087,7 @@
           role: "HEAD ALCHEMIST / COCKTAILS",
           favGame: "PAC-MAN",
           special: "→ ↓ ↘ + Shaker Shake",
-          avatar: "👩‍🔬",
+          avatar: `<svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17h10" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
           power: "60%",
           defense: "70%",
           speed: "95%"
@@ -4031,7 +4097,7 @@
           role: "LEAD DEVELOPER / SYS_ADMIN",
           favGame: "DOOM (1993)",
           special: "↓ ↓ + Admin Override",
-          avatar: "👨‍💻",
+          avatar: `<svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="13" rx="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 16h20v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2zM8 8l3 3-3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
           power: "80%",
           defense: "90%",
           speed: "60%"
@@ -4041,7 +4107,7 @@
           role: "EVENT HOST / TOURNAMENT CASTER",
           favGame: "MORTAL KOMBAT II",
           special: "← → + Mic Drop",
-          avatar: "👩‍🎤",
+          avatar: `<svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10a7 7 0 0 0 14 0" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="17" x2="12" y2="22" stroke-linecap="round" stroke-linejoin="round"/><line x1="9" y1="22" x2="15" y2="22" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
           power: "75%",
           defense: "65%",
           speed: "90%"
@@ -4070,7 +4136,7 @@
             const char = slot.getAttribute('data-char');
             const data = crewData[char];
             if (data) {
-              dashAvatar.textContent = data.avatar;
+              dashAvatar.innerHTML = data.avatar;
               dashName.textContent = data.name;
               dashRole.textContent = data.role;
               dashFavGame.textContent = data.favGame;
