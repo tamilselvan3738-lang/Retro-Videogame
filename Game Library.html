@@ -1,0 +1,4096 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Arcade Bar & Grill - Game Library</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       1. CSS CUSTOM PROPERTIES (DESIGN SYSTEM)
+       ========================================== */
+    :root {
+      --font-primary: 'Space Grotesk', sans-serif;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-retro: 'Press Start 2P', cursive;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Dark Theme Colors (Default) */
+      --color-bg-body: #05050d;
+      --color-bg-nav: rgba(10, 10, 26, 0.75);
+      --color-border-nav: rgba(255, 0, 127, 0.15);
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #94a3b8;
+      
+      --color-neon-pink: #ff007f;
+      --color-neon-cyan: #00f0ff;
+      --color-neon-yellow: #ffb700;
+      
+      --neon-glow-pink: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+      --neon-glow-cyan: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+      --neon-glow-yellow: 0 0 8px rgba(255, 183, 0, 0.6), 0 0 20px rgba(255, 183, 0, 0.3);
+      
+      --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --grid-opacity: 0.15;
+    }
+
+    /* Light Theme Colors overrides */
+    html.light-theme {
+      --color-bg-body: #f8fafc;
+      --color-bg-nav: rgba(255, 255, 255, 0.8);
+      --color-border-nav: rgba(15, 23, 42, 0.1);
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      
+      --color-neon-pink: #d90468;
+      --color-neon-cyan: #0099ad;
+      --color-neon-yellow: #d97706;
+      
+      --neon-glow-pink: 0 0 8px rgba(217, 4, 104, 0.4);
+      --neon-glow-cyan: 0 0 8px rgba(0, 153, 173, 0.4);
+      --neon-glow-yellow: 0 0 8px rgba(217, 119, 6, 0.4);
+      
+      --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      --grid-opacity: 0.04;
+    }
+
+    /* ==========================================
+       2. RESET & BASE STYLES
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background-color: var(--color-bg-body);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* ==========================================
+       3. PREMIUM NAVIGATION BAR STYLES
+       ========================================== */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--color-bg-nav);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      border-bottom: 2px solid var(--color-border-nav);
+      box-shadow: var(--shadow-nav);
+      transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    /* Container layout: Logo (Left) | Scrollable Menu (Center) | Utilities (Right) */
+    .nav-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+    }
+
+    /* 3.1 LOGO (Left) */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.15rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      flex-shrink: 0;
+      user-select: none;
+      transition: color var(--transition-normal);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 6px;
+      box-shadow: var(--neon-glow-pink);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    }
+
+    .logo-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .nav-logo:hover .logo-icon {
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .primary {
+      font-size: 1.1rem;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(255,0,127,0.1);
+      line-height: 1;
+    }
+
+    .logo-text .secondary {
+      font-family: var(--font-retro);
+      font-size: 0.45rem;
+      color: var(--color-neon-yellow);
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+      animation: neonFlash 2s infinite alternate;
+    }
+
+    /* 3.2 CENTER MENU SYSTEM (Scrollable with Masking) */
+    .nav-menu-wrapper {
+      flex-grow: 1;
+      max-width: 1100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-width: 0; /* Allow the wrapper to shrink below content size and trigger scroll overflow */
+    }
+
+    /* Fading gradients at edges when overflow exists */
+    .nav-menu-wrapper::before,
+    .nav-menu-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+      opacity: 0;
+    }
+    .nav-menu-wrapper.fade-left::before {
+      left: 0;
+      background: linear-gradient(to right, var(--color-bg-body), transparent);
+      opacity: 1;
+    }
+    .nav-menu-wrapper.fade-right::after {
+      right: 0;
+      background: linear-gradient(to left, var(--color-bg-body), transparent);
+      opacity: 1;
+    }
+    
+    /* In Light mode we need different gradient overlays */
+    html.light-theme .nav-menu-wrapper.fade-left::before {
+      background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
+    }
+    html.light-theme .nav-menu-wrapper.fade-right::after {
+      background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+    }
+
+    /* Scroll buttons (Chevrons) - visible on desktop when overflow is present */
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-bg-body);
+      border: 1px solid var(--color-border-nav);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: var(--color-neon-cyan);
+      transition: opacity var(--transition-normal), transform var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
+    }
+    .scroll-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-btn:hover {
+      background: var(--color-neon-cyan);
+      color: var(--color-bg-body);
+      box-shadow: var(--neon-glow-cyan);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .scroll-btn-left {
+      left: 2px;
+    }
+    .scroll-btn-right {
+      right: 2px;
+    }
+
+    .scroll-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* The actual horizontal scroll container */
+    .nav-menu-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      padding: 0.4rem 0.5rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Prevent links and dropdowns from shrinking and getting squished in narrow headers */
+    .nav-menu-scroll > * {
+      flex-shrink: 0;
+    }
+
+    /* Safe alignment fallback when overflow is present */
+    .nav-menu-wrapper.has-scroll-overflow .nav-menu-scroll {
+      justify-content: flex-start;
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    /* Perfectly center the center navigation wrapper by giving equal flex-grow allocation to left and right sidebars */
+    @media (min-width: 1200px) {
+      .nav-logo {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        min-width: max-content;
+      }
+      .nav-actions {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        min-width: max-content;
+      }
+    }
+
+    /* Chrome, Safari, Opera */
+    .nav-menu-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Menu Link Styling */
+    .nav-link {
+      padding: 0.25rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+      user-select: none;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width var(--transition-fast);
+    }
+
+    /* Hover States - Glow and visual cue */
+    .nav-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    html.light-theme .nav-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-link:hover::before {
+      width: 60%;
+    }
+
+    /* Active page state styling */
+    .nav-link.active {
+      color: var(--color-neon-cyan);
+      font-weight: 600;
+      background: rgba(0, 240, 255, 0.08);
+    }
+    
+    html.light-theme .nav-link.active {
+      background: rgba(0, 153, 173, 0.08);
+    }
+
+    .nav-link.active::before {
+      width: 80%;
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    /* 3.3 UTILITIES (Right) - Toggles & CTA */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Switch base styling */
+    .icon-toggle-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-toggle-btn:hover {
+      color: var(--color-neon-cyan);
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .icon-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      transition: transform var(--transition-normal), opacity var(--transition-fast);
+    }
+
+    /* Dark Mode Toggle specific */
+    .theme-toggle .sun-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(90deg);
+      position: absolute;
+    }
+    .theme-toggle .moon-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    html.light-theme .theme-toggle .sun-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    html.light-theme .theme-toggle .moon-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(-90deg);
+      position: absolute;
+    }
+
+    /* RTL Toggle Button with SVG flip arrow */
+    .rtl-toggle-btn svg {
+      transition: transform var(--transition-normal);
+    }
+    
+    html[dir="rtl"] .rtl-toggle-btn svg {
+      transform: rotate(180deg);
+      color: var(--color-neon-pink);
+    }
+
+    /* Login Button - Arcade Style "INSERT COIN" / "PRESS START" */
+    .btn-login {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      letter-spacing: 1.2px;
+      background: #000000;
+      color: var(--color-neon-yellow);
+      border: 3px double var(--color-neon-yellow);
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40px;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .btn-login:hover {
+      color: #000000;
+      background: var(--color-neon-yellow);
+      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    .btn-login:hover::after {
+      left: 140%;
+      opacity: 1;
+    }
+
+    .btn-login:active {
+      transform: scale(0.98) translateY(1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .coin-slot-icon {
+      width: 8px;
+      height: 11px;
+      background-color: currentColor;
+      border-radius: 2px;
+      display: inline-block;
+      position: relative;
+    }
+    .coin-slot-icon::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 2px;
+      height: 7px;
+      background-color: #000000;
+    }
+    .btn-login:hover .coin-slot-icon::before {
+      background-color: var(--color-neon-yellow);
+    }
+
+    .btn-text-flash {
+      animation: insertCoinFlash 1.5s infinite steps(2);
+    }
+
+    /* 3.4 MOBILE MENU BUTTON (Hamburger) */
+    .mobile-menu-btn {
+      display: none; /* Hidden on desktop */
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      z-index: 1100;
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background-color: rgba(255, 0, 127, 0.05);
+    }
+
+    .hamburger-line {
+      width: 22px;
+      height: 2px;
+      background-color: var(--color-text-primary);
+      border-radius: 2px;
+      transition: transform var(--transition-normal), opacity var(--transition-normal), background-color var(--transition-fast);
+    }
+
+    /* Mobile Hamburger Active state morphing into 'X' */
+    .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background-color: var(--color-neon-pink);
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background-color: var(--color-neon-pink);
+    }
+
+    /* 3.5 MOBILE DRAWER MENU */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Hidden off-screen by default */
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background-color: var(--color-bg-body);
+      border-left: 2px solid var(--color-border-nav);
+      z-index: 1050;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      padding: 75px 1.5rem 2rem 1.5rem;
+      gap: 1.5rem;
+      transition: right var(--transition-normal), left var(--transition-normal);
+      overflow-y: auto;
+    }
+    
+    .mobile-drawer.active {
+      right: 0;
+    }
+
+    /* Overlay backing */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1040;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-drawer .nav-link {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .mobile-drawer .nav-link::before {
+      bottom: 50%;
+      left: 0;
+      transform: translateY(50%);
+      width: 3px;
+      height: 0;
+      transition: height var(--transition-fast);
+    }
+    
+    .mobile-drawer .nav-link:hover::before,
+    .mobile-drawer .nav-link.active::before {
+      height: 70%;
+      width: 3px;
+    }
+
+    .mobile-drawer-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border-nav);
+    }
+
+    .mobile-actions {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mobile-drawer .btn-login {
+      justify-content: center;
+      width: 100%;
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================
+       4. RTL LAYOUT MODIFICATIONS
+       ========================================== */
+    html[dir="rtl"] {
+      /* Flip logic for items */
+      direction: rtl;
+    }
+
+    /* Adjust margins and alignments for RTL */
+    html[dir="rtl"] .logo-text .secondary {
+      letter-spacing: 0;
+    }
+
+    html[dir="rtl"] .mobile-drawer {
+      right: auto;
+      left: -100%;
+      border-left: none;
+      border-right: 2px solid var(--color-border-nav);
+      box-shadow: 10px 0 40px rgba(0,0,0,0.8);
+    }
+
+    html[dir="rtl"] .mobile-drawer.active {
+      left: 0;
+      right: auto;
+    }
+
+    html[dir="rtl"] .mobile-drawer .nav-link::before {
+      left: auto;
+      right: 0;
+    }
+
+    .drawer-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+      z-index: 10;
+    }
+
+    .drawer-close-btn:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background: rgba(255, 0, 127, 0.05);
+      transform: scale(1.05);
+    }
+
+    .drawer-close-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    html[dir="rtl"] .drawer-close-btn {
+      right: auto;
+      left: 15px;
+    }
+
+    .nav-item-dropdown {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .dropdown-toggle::after {
+      content: '▾';
+      font-size: 0.7rem;
+      margin-left: 0.25rem;
+      display: inline-block;
+      transition: transform var(--transition-fast);
+    }
+    
+    html[dir="rtl"] .dropdown-toggle::after {
+      margin-left: 0;
+      margin-right: 0.25rem;
+    }
+
+    .nav-item-dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+      color: var(--color-neon-cyan);
+    }
+
+    .dropdown-submenu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-left: 1.5rem;
+      transition: max-height var(--transition-normal) ease-out, opacity var(--transition-fast), margin var(--transition-fast);
+    }
+
+    html[dir="rtl"] .dropdown-submenu {
+      padding-left: 0;
+      padding-right: 1.5rem;
+    }
+
+    .mobile-drawer .dropdown-submenu.open {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (min-width: 993px) {
+      .nav-menu-wrapper:not(.has-scroll-overflow) {
+        overflow: visible !important;
+      }
+
+      .nav-menu-scroll {
+        overflow: visible !important;
+        overflow-x: visible !important;
+      }
+
+      .desktop-dropdown {
+        position: relative;
+        width: auto !important;
+        display: inline-flex;
+      }
+
+      .desktop-submenu {
+        position: absolute;
+        top: calc(100% + 15px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-5px);
+        background-color: var(--color-bg-nav);
+        backdrop-filter: blur(12px) saturate(160%);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        border: 2px solid var(--color-border-nav);
+        border-radius: 8px;
+        padding: 0.4rem;
+        min-width: 110px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        box-shadow: var(--shadow-nav);
+        opacity: 0;
+        visibility: hidden;
+        max-height: none !important;
+        transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+        z-index: 100;
+      }
+
+      .desktop-dropdown:hover .desktop-submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    .submenu-link {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      border-radius: 6px;
+      transition: all var(--transition-fast);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      user-select: none;
+    }
+
+    .submenu-link::before {
+      content: '►';
+      font-size: 0.5rem;
+      color: var(--color-neon-pink);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all var(--transition-fast);
+    }
+
+    html[dir="rtl"] .submenu-link::before {
+      content: '◄';
+    }
+
+    .submenu-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.04);
+      padding-left: 1.2rem;
+    }
+
+    html.light-theme .submenu-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    html[dir="rtl"] .submenu-link:hover {
+      padding-left: 0.8rem;
+      padding-right: 1.2rem;
+    }
+
+    .submenu-link:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .submenu-link.active {
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.05);
+    }
+
+
+    /* ==========================================
+       6. HERO & FEATURED SPOTLIGHT SECTION
+       ========================================== */
+    .hero-showcase {
+      padding-top: 110px;
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      padding-bottom: 30px;
+    }
+
+    .retro-grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .grid-lines {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 200vw;
+      height: 300vh;
+      transform: translateX(-50%) perspective(500px) rotateX(60deg);
+      background-image: 
+        linear-gradient(to right, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: center bottom;
+      animation: gridScroll 20s linear infinite;
+      transform-origin: center bottom;
+    }
+
+    .synth-sun {
+      position: absolute;
+      bottom: 35%;
+      left: 50%;
+      transform: translate(-50%, 20%);
+      width: 450px;
+      height: 450px;
+      background: linear-gradient(to bottom, var(--color-neon-pink), var(--color-neon-yellow));
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.12;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    
+    html.light-theme .synth-sun {
+      opacity: 0.04;
+    }
+
+    .hero-content {
+      max-width: 1100px;
+      padding: 0 2rem;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-retro);
+      line-height: 1.5;
+      font-size: 0.6rem;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--color-neon-cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--neon-glow-cyan);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      font-weight: 600;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(to bottom, #ffffff 30%, #e2e8f0 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+    }
+    
+    html.light-theme .hero-title {
+      background: linear-gradient(to bottom, #0f172a, #334155);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.2));
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      color: var(--color-text-secondary);
+      max-width: 700px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+    }
+
+    .retro-details {
+      position: absolute;
+      top: 15%;
+      left: 5%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.25;
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      color: var(--color-neon-cyan);
+    }
+
+    .retro-details-right {
+      position: absolute;
+      bottom: 20%;
+      right: 7%;
+      animation: float 8s ease-in-out infinite alternate;
+      opacity: 0.25;
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      color: var(--color-neon-pink);
+    }
+
+    /* ==========================================
+       7. INTERACTIVE CYBER-DECK EXPLORER CONTROLS
+       ========================================== */
+    .database-explorer-header {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto 2rem auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 10;
+      position: relative;
+    }
+
+    .search-box-container {
+      display: flex;
+      width: 100%;
+      max-width: 650px;
+      background: rgba(10, 10, 26, 0.65);
+      border: 2px solid var(--color-border-nav);
+      border-radius: 8px;
+      padding: 0.35rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    html.light-theme .search-box-container {
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .search-box-container:focus-within {
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .game-search-input {
+      flex-grow: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .btn-search-glow {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: var(--color-neon-pink);
+      color: #ffffff;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      box-shadow: var(--neon-glow-pink);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-search-glow:hover {
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      color: #000000;
+      transform: translateY(-1px);
+    }
+
+    /* Holographic HUD Category Toggles */
+    .hud-filters-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 0.5rem;
+    }
+
+    .hud-filters-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hud-filters {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.4rem;
+      background: rgba(10, 10, 26, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 30px;
+      flex-shrink: 0;
+    }
+
+    html.light-theme .hud-filters {
+      background: rgba(255, 255, 255, 0.65);
+      border-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .hud-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .hud-btn:hover {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    html.light-theme .hud-btn:hover {
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .hud-btn.active {
+      color: var(--color-neon-pink);
+      background: rgba(255, 0, 127, 0.08);
+      border-color: rgba(255, 0, 127, 0.3);
+      box-shadow: var(--neon-glow-pink);
+      text-shadow: 0 0 5px rgba(255, 0, 127, 0.2);
+    }
+
+    /* ==========================================
+       8. CYBER-GRID DECK & CARD MAIN FRAMES
+       ========================================== */
+    .games-showcase-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+      z-index: 10;
+      position: relative;
+    }
+
+    .cyber-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      min-height: 400px;
+      transition: opacity var(--transition-normal);
+    }
+
+    .mainframe-card {
+      background: rgba(10, 10, 26, 0.55);
+      border: 1px solid var(--color-border-nav);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    html.light-theme .mainframe-card {
+      background: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
+    }
+
+    .mainframe-card:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink), 0 15px 35px rgba(0, 0, 0, 0.5);
+      transform: translateY(-4px);
+    }
+
+    html.light-theme .mainframe-card:hover {
+      box-shadow: var(--neon-glow-pink), 0 15px 35px rgba(15, 23, 42, 0.04);
+    }
+
+    /* Cabinet Mainframe Corner Brackets */
+    .corner-bracket {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 2px solid transparent;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .bracket-tl { top: 6px; left: 6px; border-top-color: var(--color-neon-cyan); border-left-color: var(--color-neon-cyan); }
+    .bracket-tr { top: 6px; right: 6px; border-top-color: var(--color-neon-cyan); border-right-color: var(--color-neon-cyan); }
+    .bracket-bl { bottom: 6px; left: 6px; border-bottom-color: var(--color-neon-cyan); border-left-color: var(--color-neon-cyan); }
+    .bracket-br { bottom: 6px; right: 6px; border-bottom-color: var(--color-neon-cyan); border-right-color: var(--color-neon-cyan); }
+
+    .mainframe-card:hover .corner-bracket {
+      border-color: var(--color-neon-pink);
+    }
+
+    /* Card Image Rig */
+    .card-img-wrapper {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    html.light-theme .card-img-wrapper {
+      border-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .mainframe-card:hover .card-img-wrapper img {
+      transform: scale(1.06);
+    }
+
+    /* Availability Badges */
+    .status-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--font-retro);
+      font-size: 0.54rem;
+      letter-spacing: 0.5px;
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      z-index: 5;
+      line-height: 1;
+    }
+
+    .status-badge.online {
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--color-neon-cyan);
+      border: 1px solid var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .status-badge.in-use {
+      background: rgba(255, 0, 127, 0.15);
+      color: var(--color-neon-pink);
+      border: 1px solid var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .status-badge.maintenance {
+      background: rgba(255, 183, 0, 0.15);
+      color: var(--color-neon-yellow);
+      border: 1px solid var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    /* Card Header details */
+    .card-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--color-neon-yellow);
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-title-rig {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      line-height: 1.2;
+    }
+
+    .card-desc-preview {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Micro statistics line */
+    .card-specs-row {
+      display: flex;
+      gap: 0.75rem;
+      border-top: 1px dashed rgba(255,255,255,0.06);
+      padding-top: 0.75rem;
+      font-size: 0.74rem;
+      color: var(--color-text-secondary);
+    }
+
+    html.light-theme .card-specs-row {
+      border-top-color: rgba(15, 23, 42, 0.06);
+    }
+
+    .card-specs-row span strong {
+      color: var(--color-text-primary);
+    }
+
+    /* Decode Spec Trigger Button */
+    .btn-init {
+      margin-top: auto;
+      width: 100%;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      border: 1px solid var(--color-neon-cyan);
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.02);
+      padding: 0.6rem;
+      border-radius: 6px;
+      transition: all var(--transition-fast);
+      box-shadow: inset 0 0 5px rgba(0, 240, 255, 0.05);
+      cursor: pointer;
+    }
+
+    .mainframe-card:hover .btn-init {
+      background: var(--color-neon-cyan);
+      color: #000000;
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .btn-init:active {
+      transform: scale(0.98);
+    }
+
+    /* ==========================================
+       8.5 INTERACTIVE BLUEPRINT DRAWER PANEL
+       ========================================== */
+    .blueprint-drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1090;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+    }
+    
+    .blueprint-drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .blueprint-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 580px;
+      max-width: 95%;
+      height: 100vh;
+      background-color: rgba(10, 10, 26, 0.95);
+      border-left: 2px solid var(--color-neon-cyan);
+      box-shadow: -15px 0 45px rgba(0, 240, 255, 0.15);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      transition: right var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+    }
+
+    html.light-theme .blueprint-drawer {
+      background-color: rgba(255, 255, 255, 0.98);
+      border-left-color: var(--color-neon-pink);
+      box-shadow: -15px 0 45px rgba(255, 0, 127, 0.05);
+    }
+
+    .blueprint-drawer.active {
+      right: 0;
+    }
+
+    html[dir="rtl"] .blueprint-drawer {
+      right: auto;
+      left: -100%;
+      border-left: none;
+      border-right: 2px solid var(--color-neon-cyan);
+      box-shadow: 15px 0 45px rgba(0, 240, 255, 0.15);
+    }
+    
+    html[dir="rtl"].light-theme .blueprint-drawer {
+      border-right-color: var(--color-neon-pink);
+    }
+
+    html[dir="rtl"] .blueprint-drawer.active {
+      left: 0;
+      right: auto;
+    }
+
+    .drawer-crt-screen {
+      padding: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    /* Screen Scanlines Overlay */
+    .drawer-crt-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .drawer-close-btn-rig {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-close-drawer {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255,255,255,0.02);
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .btn-close-drawer:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      transform: scale(1.05);
+    }
+
+    /* Blueprint visual tags */
+    .blueprint-visual-header {
+      border-bottom: 2px solid var(--color-border-nav);
+      padding-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .blueprint-badge {
+      align-self: flex-start;
+      font-family: var(--font-retro);
+      font-size: 0.5rem;
+      color: var(--color-neon-yellow);
+      background: rgba(255, 183, 0, 0.08);
+      border: 1px solid var(--color-neon-yellow);
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .blueprint-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      letter-spacing: -0.5px;
+    }
+
+    .blueprint-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Specification Grid in Drawer */
+    .specs-blueprint-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    html.light-theme .specs-blueprint-box {
+      background: rgba(15, 23, 42, 0.02);
+      border-color: rgba(15, 23, 42, 0.06);
+    }
+
+    .specs-blueprint-box h4 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--color-neon-cyan);
+    }
+
+    .specs-blueprint-box table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .game-specs-table th, 
+    .game-specs-table td {
+      padding: 0.6rem 0;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: left;
+    }
+    
+    html.light-theme .game-specs-table th, 
+    html.light-theme .game-specs-table td {
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    html[dir="rtl"] .game-specs-table th, 
+    html[dir="rtl"] .game-specs-table td {
+      text-align: right;
+    }
+
+    .game-specs-table th {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-neon-yellow);
+      width: 35%;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .game-specs-table td {
+      color: var(--color-text-primary);
+    }
+
+    /* Live Diagnostics Grid (Section 7) */
+    .diagnostics-terminal {
+      background: #03030c;
+      border: 2px solid #00ff00;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: monospace;
+      color: #00ff00;
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.2), inset 0 0 15px rgba(0,255,0,0.1);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .diagnostics-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #00ff00;
+      padding-bottom: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .diagnostics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .terminal-machine-node {
+      border: 1px dashed rgba(0, 255, 0, 0.4);
+      padding: 0.6rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      background: rgba(0, 255, 0, 0.02);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .terminal-machine-node:hover {
+      border-style: solid;
+      border-color: #00ff00;
+      background: rgba(0, 255, 0, 0.05);
+    }
+
+    .terminal-machine-node.active-selected {
+      border-style: solid;
+      border-color: #00ff00;
+      background: rgba(0, 255, 0, 0.15);
+      box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+    }
+
+    .node-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.7rem;
+    }
+
+    .node-title {
+      font-weight: 700;
+    }
+
+    .node-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #00ff00;
+      box-shadow: 0 0 8px #00ff00;
+    }
+
+    .node-status-dot.offline {
+      background-color: #ff0055;
+      box-shadow: 0 0 8px #ff0055;
+    }
+
+    .node-status-dot.maintenance {
+      background-color: #ffb700;
+      box-shadow: 0 0 8px #ffb700;
+    }
+
+    .node-meta {
+      font-size: 0.62rem;
+      opacity: 0.8;
+    }
+
+    .terminal-footer-log {
+      border: 1px solid rgba(0, 255, 0, 0.25);
+      background: rgba(0, 0, 0, 0.45);
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.65rem;
+      line-height: 1.4;
+      height: 90px;
+      overflow-y: auto;
+      margin-top: 0.5rem;
+    }
+
+    /* ==========================================
+       9. SITE FOOTER STYLES
+       ========================================== */
+    .site-footer {
+      background-color: rgba(6, 6, 18, 0.95);
+      border-top: 3px solid var(--color-border-nav);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+      padding: 4rem 2rem 2rem 2rem;
+      position: relative;
+      z-index: 10;
+      transition: background-color var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    html.light-theme .site-footer {
+      background-color: rgba(241, 245, 249, 0.95);
+      border-top: 3px solid var(--color-border-nav);
+      box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.03);
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-brand .nav-logo {
+      align-self: flex-start;
+    }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 2px;
+    }
+    
+    html[dir="rtl"] .footer-title::after {
+      left: auto;
+      right: 0;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      transition: color var(--transition-fast), padding var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-link:hover {
+      color: var(--color-neon-cyan);
+      text-shadow: var(--neon-glow-cyan);
+      padding-left: 4px;
+    }
+    
+    html[dir="rtl"] .footer-link:hover {
+      padding-left: 0;
+      padding-right: 4px;
+    }
+
+    .footer-contact-info {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-contact-info li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .footer-contact-info li svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--color-neon-pink);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 3rem auto 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+    
+    html.light-theme .footer-bottom {
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .footer-copyright {
+      order: 1;
+    }
+
+    .footer-easter-egg {
+      order: 2;
+      font-family: var(--font-retro);
+      font-size: 0.5rem;
+      color: var(--color-neon-yellow);
+      animation: insertCoinFlash 1.5s infinite;
+      letter-spacing: 0.5px;
+      user-select: none;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+      order: 3;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .social-btn:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background: rgba(255, 0, 127, 0.05);
+      transform: translateY(-3px);
+    }
+
+    .social-btn svg {
+      transform: scale(1.05);
+    }
+
+    /* ==========================================
+       Animations & Navigation Responsive Media Queries
+       ========================================== */
+    @keyframes neonFlash {
+      0%, 100% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+      45%, 55% { opacity: 0.4; text-shadow: none; }
+      50% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+    }
+
+    @keyframes insertCoinFlash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    @keyframes gridScroll {
+      0% { background-position: center 0px; }
+      100% { background-position: center 1000px; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* ==========================================
+       SECTION CARD STYLES
+       ========================================== */
+    .game-section-card {
+      background: rgba(10, 10, 26, 0.55);
+      border: 2px solid var(--color-border-nav);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.light-theme .game-section-card {
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    .game-section-card:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(0, 0, 0, 0.6);
+      transform: translateY(-5px);
+    }
+
+    html.light-theme .game-section-card:hover {
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(15, 23, 42, 0.05);
+    }
+
+    .game-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--color-neon-cyan);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      box-shadow: var(--neon-glow-cyan);
+
+      line-height: 1.5;
+
+}
+
+    .game-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      color: var(--color-text-primary);
+    }
+
+    .game-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       7. RESPONSIVE MEDIA QUERIES
+       ========================================== */
+    @media (min-width: 1200px) and (max-width: 1360px) {
+      .nav-link {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.35rem;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .nav-actions {
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      .nav-container {
+        padding: 0 1.5rem;
+      }
+      .nav-logo {
+        font-size: 1.25rem;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+      }
+      .logo-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 1199.98px) {
+      .nav-menu-wrapper {
+        display: none;
+      }
+      .nav-actions {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .game-section-card {
+        padding: 2rem;
+      }
+    }
+
+    /* Modern responsive updates for mobile-first design */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Target 768px (Tablet) */
+    @media (max-width: 768px) {
+      .retro-details,
+      .retro-details-right {
+        display: none !important;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .games-showcase-container {
+        padding: 2rem 1rem;
+      }
+      .hud-filters-wrapper {
+        justify-content: flex-start !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .site-footer {
+        padding: 2.5rem 1rem 1.5rem 1rem;
+      }
+      .footer-container {
+        gap: 2rem;
+      }
+    }
+
+    /* Target 480px (Mobile Landscape) */
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 0.75rem;
+      }
+      .nav-logo {
+        font-size: 1rem;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .logo-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      
+      /* Hero Showcase scale down */
+      .hero-showcase {
+        padding-top: 100px;
+        padding-bottom: 40px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      /* Search and Header elements */
+      .database-explorer-header {
+        padding: 0 1rem !important;
+        margin-bottom: 1.5rem !important;
+        gap: 1rem !important;
+      }
+      .search-box-container {
+        padding: 0.25rem !important;
+      }
+      .btn-search-glow {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.75rem !important;
+      }
+      
+      /* Diagnostics Controls */
+      .diagnostics-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+      }
+      .diagnostics-controls button {
+        width: 100% !important;
+        text-align: center !important;
+      }
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.light-theme .game-section-card {
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    .game-section-card:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(0, 0, 0, 0.6);
+      transform: translateY(-5px);
+    }
+
+    html.light-theme .game-section-card:hover {
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(15, 23, 42, 0.05);
+    }
+
+    .game-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      letter-spacing: 1px;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--color-neon-cyan);
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      box-shadow: var(--neon-glow-cyan);
+
+      line-height: 1.5;
+
+}
+
+    .game-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      color: var(--color-text-primary);
+    }
+
+    .game-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       7. RESPONSIVE MEDIA QUERIES
+       ========================================== */
+    @media (min-width: 1200px) and (max-width: 1360px) {
+      .nav-link {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.35rem;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .nav-actions {
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      .nav-container {
+        padding: 0 1.5rem;
+      }
+      .nav-logo {
+        font-size: 1.25rem;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+      }
+      .logo-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 1199.98px) {
+      .nav-menu-wrapper {
+        display: none;
+      }
+      .nav-actions {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .game-section-card {
+        padding: 2rem;
+      }
+    }
+
+    /* Modern responsive updates for mobile-first design */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Target 768px (Tablet) */
+    @media (max-width: 768px) {
+      .retro-details,
+      .retro-details-right {
+        display: none !important;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .games-showcase-container {
+        padding: 2rem 1rem;
+      }
+      .hud-filters-wrapper {
+        justify-content: flex-start !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .site-footer {
+        padding: 2.5rem 1rem 1.5rem 1rem;
+      }
+      .footer-container {
+        gap: 2rem;
+      }
+    }
+
+    /* Target 480px (Mobile Landscape) */
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 0.75rem;
+      }
+      .nav-logo {
+        font-size: 1rem;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .logo-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      
+      /* Hero Showcase scale down */
+      .hero-showcase {
+        padding-top: 100px;
+        padding-bottom: 40px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-desc {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      /* Search and Header elements */
+      .database-explorer-header {
+        padding: 0 1rem !important;
+        margin-bottom: 1.5rem !important;
+        gap: 1rem !important;
+      }
+      .search-box-container {
+        padding: 0.25rem !important;
+      }
+      .btn-search-glow {
+        padding: 0.4rem 1rem !important;
+        font-size: 0.75rem !important;
+      }
+      
+      /* Diagnostics Controls */
+      .diagnostics-controls {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.75rem !important;
+      }
+      .diagnostics-controls button {
+        width: 100% !important;
+        text-align: center !important;
+      }
+      #selectedNodeDisplay {
+        margin-left: 0 !important;
+        justify-content: center !important;
+      }
+      
+      /* Drawer padding */
+      .drawer-crt-screen {
+        padding: 1.25rem !important;
+        gap: 1.25rem !important;
+      }
+      
+      /* Stack spec tables */
+      .game-specs-table, 
+      .game-specs-table tbody, 
+      .game-specs-table tr, 
+      .game-specs-table th, 
+      .game-specs-table td {
+        display: block;
+        width: 100% !important;
+      }
+      .game-specs-table th {
+        border-bottom: none;
+        padding-bottom: 0.15rem;
+        width: 100%;
+      }
+      .game-specs-table td {
+        padding-top: 0;
+        padding-bottom: 0.75rem;
+      }
+      
+      /* Footer styling */
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .footer-brand {
+        text-align: center;
+        align-items: center;
+      }
+      .footer-brand .nav-logo {
+        align-self: center;
+      }
+      .footer-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      html[dir="rtl"] .footer-title::after {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+      .card-specs-row {
+        flex-wrap: wrap !important;
+        gap: 0.5rem 0.75rem !important;
+      }
+    }
+
+    /* Target 400px (Cards scaling safety) */
+    @media (max-width: 400px) {
+      .cyber-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* Target 320px (Mobile Portrait) */
+    @media (max-width: 320px) {
+      .nav-container {
+        padding: 0 0.5rem;
+        gap: 0.5rem;
+      }
+      .nav-logo {
+        font-size: 0.85rem;
+      }
+      .logo-text .secondary {
+        display: none;
+      }
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      .diagnostics-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    /* ==========================================
+       NAVBAR OVERRIDES FOR DESKTOP & LAPTOP
+       ========================================== */
+    .nav-link {
+      border: 1px solid transparent;
+      transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast) !important;
+    }
+    
+    .nav-link.active {
+      color: var(--color-neon-cyan) !important;
+      font-weight: 600 !important;
+      background: rgba(0, 240, 255, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
+    }
+    
+    html.light-theme .nav-link.active {
+      background: rgba(0, 153, 173, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 8px rgba(0, 153, 173, 0.2) !important;
+    }
+
+    @media (min-width: 993px) {
+      .scroll-btn {
+        display: none !important;
+      }
+      .nav-menu-scroll {
+        overflow: visible !important;
+        overflow-x: visible !important;
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .nav-menu-wrapper {
+        overflow: visible !important;
+        max-width: none !important;
+      }
+      .nav-menu-wrapper::before,
+      .nav-menu-wrapper::after {
+        display: none !important;
+      }
+      .nav-link::before {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 993px) and (max-width: 1440px) {
+      .nav-link {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.4rem !important;
+      }
+      .nav-menu-scroll {
+        gap: 0.1rem !important;
+      }
+    }
+
+    /* Fix grid card minimum width overflow on mobile viewports */
+    .mainframe-card, .game-section-card {
+      min-width: 0 !important;
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+  <!-- Retro Glowing Background Grid -->
+  <div class="retro-grid-bg">
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- 1. HEADER & PREMIUM NAVBAR -->
+  <header class="header-nav" id="headerNav">
+    <div class="nav-container">
+      
+      <!-- LEFT: Logo area -->
+      <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+        <div class="logo-icon">
+          <!-- Pixel console controller SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="primary">RETRO</span>
+          <span class="secondary">ARCADE BAR</span>
+        </div>
+      </a>
+
+      <!-- CENTER: Scrollable Navigation Menu (15 items) -->
+      <nav class="nav-menu-wrapper" id="navMenuWrapper">
+        <!-- Chevron buttons for desktop scroll control -->
+        <button class="scroll-btn scroll-btn-left" id="scrollLeftBtn" aria-label="Scroll menu left">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        
+        <div class="nav-menu-scroll" id="navMenuScroll">
+          <!-- Dropdown for Home (Desktop) -->
+          <div class="nav-item-dropdown desktop-dropdown">
+            <a href="./index.html" class="nav-link dropdown-toggle">Home</a>
+            <div class="dropdown-submenu desktop-submenu">
+              <a href="./index.html" class="submenu-link">Home 1</a>
+              <a href="./home 2.html" class="submenu-link">Home 2</a>
+            </div>
+          </div>
+          <a href="./About.html" class="nav-link">About</a>
+          <a href="./Games.html" class="nav-link">Games</a>
+          <a href="./Game Library.html" class="nav-link active">Game Library</a>
+          <a href="./Live boards.html" class="nav-link">Live boards</a>
+          <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+          <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+          <a href="./Events.html" class="nav-link">Events</a>
+          <a href="./Parties.html" class="nav-link">Parties</a>
+          <a href="./Membership.html" class="nav-link">Membership</a>
+          <a href="./Gallery.html" class="nav-link">Gallery</a>
+          <a href="./Guides.html" class="nav-link">Guides</a>
+          <a href="./Pricing.html" class="nav-link">Pricing</a>
+          <a href="./Reviews.html" class="nav-link">Reviews</a>
+          <a href="./Contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <button class="scroll-btn scroll-btn-right" id="scrollRightBtn" aria-label="Scroll menu right">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </nav>
+
+      <!-- RIGHT: Interactive Utility Actions -->
+      <div class="nav-actions">
+        <!-- Dark Mode Toggle -->
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Mode">
+          <!-- Sun Icon -->
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+          </svg>
+        </button>
+
+        <!-- Right to Left (RTL) Toggle -->
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtn" aria-label="Toggle Text Direction" title="Toggle Layout Direction">
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+          </svg>
+        </button>
+
+        <!-- Login Button ("SIGN IN") -->
+        <button class="btn-login" id="loginBtn" aria-label="Sign in to profile">
+          <span class="btn-text-flash">Login</span>
+        </button>
+      </div>
+
+      <!-- Hamburger Button (Mobile Only) -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- 2. MOBILE SLIDE-OUT DRAWER MENU -->
+  <!-- 2. MOBILE SLIDE-OUT DRAWER MENU -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    
+    <!-- Back / Close Button -->
+    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation menu" title="Close Menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+    
+    <!-- Vertical Menu links -->
+    <nav class="mobile-menu-links">
+      <!-- Dropdown for Home -->
+      <div class="nav-item-dropdown">
+        <a href="./index.html" class="nav-link dropdown-toggle" id="mobileHomeToggle">Home</a>
+        <div class="dropdown-submenu" id="mobileHomeSubmenu">
+          <a href="./index.html" class="submenu-link">Home 1</a>
+          <a href="./home 2.html" class="submenu-link">Home 2</a>
+        </div>
+      </div>
+        <a href="./About.html" class="nav-link">About</a>
+        <a href="./Games.html" class="nav-link">Games</a>
+        <a href="./Game Library.html" class="nav-link active">Game Library</a>
+        <a href="./Live boards.html" class="nav-link">Live boards</a>
+        <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+        <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+        <a href="./Events.html" class="nav-link">Events</a>
+        <a href="./Parties.html" class="nav-link">Parties</a>
+        <a href="./Membership.html" class="nav-link">Membership</a>
+        <a href="./Gallery.html" class="nav-link">Gallery</a>
+        <a href="./Guides.html" class="nav-link">Guides</a>
+        <a href="./Pricing.html" class="nav-link">Pricing</a>
+        <a href="./Reviews.html" class="nav-link">Reviews</a>
+        <a href="./Contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Utility Toggles in Mobile Footer -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-actions">
+        <!-- Dark Mode Toggle (Mobile) -->
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtnMobile" aria-label="Toggle Dark/Light Mode">
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+          </svg>
+        </button>
+
+        <!-- RTL Toggle (Mobile) -->
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtnMobile" aria-label="Toggle Text Direction">
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Login CTA (Mobile) -->
+      <button class="btn-login" id="loginBtnMobile" aria-label="Sign in to profile">
+        <span class="btn-text-flash">Login</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- 3. HERO & SEARCH SECTION -->
+  <!-- 3. HERO SHOWCASE SECTION -->
+  <main class="hero-showcase">
+    <div class="synth-sun"></div>
+    <div class="retro-details">COINS: 99</div>
+    <div class="retro-details-right">LOBBY 01</div>
+    
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" class="play-class-icon" fill="currentColor" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;">
+          <path d="M4 2h2v2H4V2zm14 0h2v2h-2V2zm-12 4h12v2H6V6zm-2 2h16v2H4V8zm0 2h3v2H4v-2zm5 0h6v2H9v-2zm7 0h4v2h-4v-2zm-7 4h6v2H9v-2zM2 16h2v4H2v-4zm18 0h2v4h-2v-4z"/>
+        </svg>
+        ACCESSING DATABASE...
+      </div>
+      <h1 class="hero-title">
+        Arcade <span>Explorer</span>
+      </h1>
+      <p class="hero-desc">
+        A real-time database dashboard of our retro cabinets. Filter by era, search titles, view blueprint hardware specs, or inspect live mainframe diagnostic nodes.
+      </p>
+    </div>
+  </main>
+
+  <!-- 4. CYBER-DECK DATABASE EXPLORER CONTROLS -->
+  <div class="database-explorer-header">
+    <!-- Search Box -->
+    <div class="search-box-container">
+      <input type="text" id="gameSearchInput" class="game-search-input" placeholder="SCAN MAIN FRAME DATABASE..." aria-label="Search game database">
+      <button class="btn-search-glow" id="searchScanBtn">SCAN</button>
+    </div>
+
+    <!-- Holographic Category Filters -->
+    <div class="hud-filters-wrapper">
+      <div class="hud-filters" id="hudFilters">
+        <button class="hud-btn active" data-category="all">All Cabinets</button>
+        <button class="hud-btn" data-category="featured">Spotlight</button>
+        <button class="hud-btn" data-category="classics-80s">80s Classics</button>
+        <button class="hud-btn" data-category="favorites-90s">90s Favorites</button>
+        <button class="hud-btn" data-category="rare-titles">Rare Archives</button>
+        <button class="hud-btn" data-category="highscore-challenges">High Score</button>
+        <button class="hud-btn" data-category="new-arrivals">Restorations</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. MAIN CYBER-GRID DECK -->
+  <section class="games-showcase-container">
+    <div class="cyber-grid" id="cyberGrid">
+      <!-- Generated dynamically in JS -->
+    </div>
+  </section>
+
+  <!-- 6. INTERACTIVE BLUEPRINT CONSOLE DRAWER -->
+  <div class="blueprint-drawer-overlay" id="blueprintOverlay"></div>
+  <aside class="blueprint-drawer" id="blueprintDrawer">
+    <div class="drawer-crt-screen" id="blueprintDrawerContent">
+      <!-- Generated dynamically in JS -->
+    </div>
+  </aside>
+
+  <!-- 7. DIAGNOSTICS & SYSTEM MONITOR SECTION -->
+  <section class="games-showcase-container" style="padding-top: 0; margin-top: 1.5rem;">
+    <div class="game-section-card" id="live-status">
+      <span class="game-badge" style="margin-bottom: 1rem;">STAGE 06 - SYSTEM MONITOR</span>
+      <h2 class="game-title" style="margin-bottom: 0.5rem; font-size: 1.8rem;">Live Mainframe Diagnostics</h2>
+      <p class="game-desc" style="margin-bottom: 1.5rem;">
+        Click on individual cabinet nodes to ping systems or reboot mainframe nodes. Interactive controls are wired directly into repair deck relays.
+      </p>
+
+      <div class="diagnostics-terminal">
+        <div class="diagnostics-header">
+          <span>SYS.VER: 4.80 // RETRO-LOBBY DIAGNOSTICS</span>
+          <span id="diagnosticTimer">SYNC: OK</span>
+        </div>
+
+        <div class="diagnostics-controls" style="display: flex; gap: 1rem; margin-top: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; align-items: center;">
+          <button class="btn-terminal-action" id="pingBtn" style="background: transparent; border: 1px solid #00ff00; color: #00ff00; padding: 0.4rem 0.8rem; font-family: monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s ease; border-radius: 4px; box-shadow: 0 0 5px rgba(0,255,0,0.2);">[ PING SYSTEM RELAYS ]</button>
+          <button class="btn-terminal-action" id="rebootBtn" style="background: transparent; border: 1px solid #ff0055; color: #ff0055; padding: 0.4rem 0.8rem; font-family: monospace; font-size: 0.72rem; cursor: pointer; transition: all 0.2s ease; border-radius: 4px; box-shadow: 0 0 5px rgba(255,0,85,0.2);">[ REBOOT MAINFRAME ]</button>
+          <div id="selectedNodeDisplay" style="color: #00ff00; font-family: monospace; font-size: 0.72rem; display: flex; align-items: center; margin-left: auto;">SELECTED NODE: NONE</div>
+        </div>
+
+        <div class="diagnostics-grid" id="diagnosticsGrid">
+          <div class="terminal-machine-node" data-node="PAC-MAN">
+            <div class="node-header">
+              <span class="node-title">PAC-MAN</span>
+              <span class="node-status-dot" id="dot-PAC-MAN"></span>
+            </div>
+            <div class="node-meta">80s / CRT: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">TEMP: 34°C</div>
+          </div>
+          
+          <div class="terminal-machine-node" data-node="DONKEY KONG">
+            <div class="node-header">
+              <span class="node-title">DONKEY KONG</span>
+              <span class="node-status-dot" id="dot-DONKEY-KONG"></span>
+            </div>
+            <div class="node-meta">80s / CRT: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">TEMP: 31°C</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="SF-II TURBO">
+            <div class="node-header">
+              <span class="node-title">SF-II TURBO</span>
+              <span class="node-status-dot" id="dot-SF-II-TURBO"></span>
+            </div>
+            <div class="node-meta">90s / CRT: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">TEMP: 37°C</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="OUTRUN 2">
+            <div class="node-header">
+              <span class="node-title">OUTRUN 2</span>
+              <span class="node-status-dot" id="dot-OUTRUN-2"></span>
+            </div>
+            <div class="node-meta">Featured: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">MOTOR: OK</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="TEMPEST">
+            <div class="node-header">
+              <span class="node-title">TEMPEST</span>
+              <span class="node-status-dot offline" id="dot-TEMPEST"></span>
+            </div>
+            <div class="node-meta">80s / Vector: OFF</div>
+            <div class="node-meta" style="color: #ff0055;">CRT CAP ERROR</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="COMP.SPACE">
+            <div class="node-header">
+              <span class="node-title">COMP.SPACE</span>
+              <span class="node-status-dot" id="dot-COMP-SPACE"></span>
+            </div>
+            <div class="node-meta">Rare / B&W: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">POWER: STABLE</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="SUNSET RIDERS">
+            <div class="node-header">
+              <span class="node-title">SUNSET RIDERS</span>
+              <span class="node-status-dot" id="dot-SUNSET-RIDERS"></span>
+            </div>
+            <div class="node-meta">New: ACTIVE</div>
+            <div class="node-meta" style="color: #ffb700;">COINS IN: 420</div>
+          </div>
+
+          <div class="terminal-machine-node" data-node="DAYTONA USA">
+            <div class="node-header">
+              <span class="node-title">DAYTONA USA</span>
+              <span class="node-status-dot maintenance" id="dot-DAYTONA-USA"></span>
+            </div>
+            <div class="node-meta">90s / Linked: MAINT</div>
+            <div class="node-meta" style="color: #ffb700;">RECALIBRATING</div>
+          </div>
+        </div>
+
+        <div class="terminal-footer-log" id="terminalLog">
+          [15:39:01] LOBBY REBOOT SEQUENCE COMPLETED SUCCESS.<br>
+          [15:39:05] PAC-MAN CABINET SENSOR CHECK... 100% OK.<br>
+          [15:39:10] SF-II SENSOR CHECK... 100% OK.<br>
+          [15:39:12] WARNING: TEMPEST CRT TUBE SHUTDOWN DETECTED. PREVENTATIVE OFFLINE TOGGLE.<br>
+          [15:39:15] SYSTEM READY - WAITING FOR COIN DOOR TRIGGERS...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SITE FOOTER -->
+  <footer class="site-footer">
+
+    <div class="footer-container">
+
+      
+
+      <!-- Column 1: Brand & Logo -->
+
+      <div class="footer-col">
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+
+            <div class="logo-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+
+              </svg>
+
+            </div>
+
+            <div class="logo-text">
+
+              <span class="primary">RETRO</span>
+
+              <span class="secondary">ARCADE BAR</span>
+
+            </div>
+
+          </a>
+
+          <p class="footer-tagline">
+
+            Eat. Drink. Play. Repeat. The ultimate gaming lounge featuring classic arcade cabinets, high-tech pinball, craft beverages, and gourmet sliders.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Column 2: Navigation -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Navigation</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="navbar.html#home" class="footer-link">Home</a></li>
+
+          <li><a href="navbar.html#about" class="footer-link">About Us</a></li>
+
+          <li><a href="Games.html" class="footer-link">Arcade Cabinets</a></li>
+
+          <li><a href="Game%20Library.html" class="footer-link">Game Library</a></li>
+
+          <li><a href="Live boards.html" class="footer-link">Live Leaderboards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 3: Menu & Events -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Menu & Play</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="Craft Beer.html" class="footer-link">Craft Beer & Drinks</a></li>
+
+          <li><a href="Food Menu.html" class="footer-link">Food Menu</a></li>
+
+          <li><a href="Events.html" class="footer-link">Events & Tournaments</a></li>
+
+          <li><a href="Parties.html" class="footer-link">Private Parties</a></li>
+
+          <li><a href="navbar.html#rewards" class="footer-link">Membership Rewards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 4: Contact & Hours -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Hours & Location</h2>
+
+        <ul class="footer-contact-info">
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+
+            <span>8 Bit Boulevard, Neon District, Level 99</span>
+
+          </li>
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M22 5.72l-4.24 4.24a8.953 8.953 0 0 0-2.73-2.73L19.28 3H22v2.72zM2 18.28l4.24-4.24a8.953 8.953 0 0 0 2.73 2.73L4.72 21H2v-2.72zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+
+            <span>Mon - Thu: 4 PM - 12 AM<br>Fri - Sat: 12 PM - 2 AM<br>Sun: 12 PM - 11 PM</span>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+      <p class="footer-copyright">&copy; 2026 Retro Arcade Bar. All rights reserved.</p>
+
+      <div class="footer-easter-egg">INSERT COIN TO CONTINUE - PLAYER 1 READY</div>
+
+      <div class="footer-socials">
+
+        <a href="#" class="social-btn" aria-label="Twitter">
+
+          <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Discord">
+
+          <svg viewBox="0 0 24 24"><path d="M19.27 4.73a16.14 16.14 0 0 0-3.97-1.23.08.08 0 0 0-.08.04c-.17.31-.36.71-.49 1.03a14.88 14.88 0 0 0-4.46 0c-.13-.32-.33-.72-.51-1.03a.08.08 0 0 0-.08-.04 16.09 16.09 0 0 0-3.97 1.23.08.08 0 0 0-.04.03C2.86 8.96 1.94 13.08 2.37 17.15a.08.08 0 0 0 .03.06 16.27 16.27 0 0 0 4.9 2.48.08.08 0 0 0 .09-.03c.38-.52.72-1.08 1.01-1.67a.08.08 0 0 0-.04-.11 10.63 10.63 0 0 1-1.54-.73.08.08 0 0 1-.01-.13c.1-.07.2-.15.3-.22a.08.08 0 0 1 .08-.01c3.2 1.46 6.67 1.46 9.82 0a.08.08 0 0 1 .08.01c.1.07.2.15.3.22a.08.08 0 0 1-.01.13c-.48.29-.99.53-1.54.73a.08.08 0 0 0-.04.11c.29.59.63 1.15.98 1.67a.08.08 0 0 0 .09.03 16.2 16.2 0 0 0 4.9-2.48.08.08 0 0 0 .03-.06c.52-4.75-.87-8.83-3.44-12.39a.08.08 0 0 0-.04-.03zM8.52 14.85c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98zm6.96 0c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Instagram">
+
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Twitch">
+
+          <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Elements ---
+      const htmlEl = document.documentElement;
+      
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeToggleBtnMobile = document.getElementById('themeToggleBtnMobile');
+      
+      const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+      const rtlToggleBtnMobile = document.getElementById('rtlToggleBtnMobile');
+      
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      
+      const navMenuWrapper = document.getElementById('navMenuWrapper');
+      const navMenuScroll = document.getElementById('navMenuScroll');
+      const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+      const scrollRightBtn = document.getElementById('scrollRightBtn');
+      
+      const loginButtons = [document.getElementById('loginBtn'), document.getElementById('loginBtnMobile')];
+      const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+      
+      // --- Theme (Light/Dark) Logic ---
+      function toggleTheme() {
+        const isLight = htmlEl.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      }
+
+      // Initialize Theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        htmlEl.classList.add('light-theme');
+      } else {
+        htmlEl.classList.remove('light-theme');
+      }
+
+      themeToggleBtn.addEventListener('click', toggleTheme);
+      themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+      // --- RTL (Right-to-Left) Logic ---
+      function toggleRTL() {
+        const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+        const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+        updateRTL(newDir);
+      }
+
+      function updateRTL(dir) {
+        htmlEl.setAttribute('dir', dir);
+        localStorage.setItem('dir', dir);
+        
+        const isRTL = dir === 'rtl';
+        
+        // Relocate mobile drawer animation side dynamically based on direction
+        if (isRTL) {
+          mobileDrawer.style.left = '';
+          mobileDrawer.style.right = '';
+          mobileMenuBtn.style.order = '-1'; // Place menu button correctly in RTL
+        } else {
+          mobileDrawer.style.left = '';
+          mobileDrawer.style.right = '';
+          mobileMenuBtn.style.order = '0';
+        }
+        
+        // Re-calculate menu boundaries for arrows in new direction
+        checkScrollOverflow();
+      }
+
+      // Initialize RTL
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      updateRTL(savedDir);
+
+      rtlToggleBtn.addEventListener('click', toggleRTL);
+      rtlToggleBtnMobile.addEventListener('click', toggleRTL);
+
+      // --- Mobile Menu Toggle ---
+      function toggleMobileMenu() {
+        const isActive = mobileMenuBtn.classList.toggle('active');
+        mobileDrawer.classList.toggle('active', isActive);
+        mobileOverlay.classList.toggle('active', isActive);
+      }
+
+      function closeMobileMenu() {
+        mobileMenuBtn.classList.remove('active');
+        mobileDrawer.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+      }
+
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+      drawerCloseBtn.addEventListener('click', closeMobileMenu);
+      
+      // Close drawer when clicking a mobile link (excluding dropdown toggles)
+      mobileDrawer.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          // If this is a dropdown toggle, do not close the menu
+          if (link.classList.contains('dropdown-toggle')) {
+            return;
+          }
+
+          // Update active link classes
+          document.querySelectorAll('.nav-link, .submenu-link').forEach(nl => nl.classList.remove('active'));
+          
+          const targetHref = link.getAttribute('href');
+          if (targetHref) {
+            const selector = `a[href="${targetHref}"]`;
+            document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+          }
+          
+          closeMobileMenu();
+        });
+      });
+
+      // Mobile drawer Home dropdown click toggle
+      const mobileHomeToggle = document.getElementById('mobileHomeToggle');
+      const mobileHomeSubmenu = document.getElementById('mobileHomeSubmenu');
+
+      if (mobileHomeToggle && mobileHomeSubmenu) {
+        mobileHomeToggle.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent default link navigation
+          e.stopPropagation(); // Prevent event bubbling
+          
+          const isOpen = mobileHomeSubmenu.classList.toggle('open');
+          mobileHomeToggle.classList.toggle('caret-rotated', isOpen);
+        });
+      }
+
+      // --- Desktop Horizontal Menu Scroll & Arrow Controls ---
+      function checkScrollOverflow() {
+        const clientWidth = navMenuScroll.clientWidth;
+        if (clientWidth === 0) return;
+        
+        let contentWidth = 0;
+        const children = navMenuScroll.children;
+        for (let i = 0; i < children.length; i++) {
+          contentWidth += children[i].offsetWidth;
+        }
+        if (children.length > 1) {
+          contentWidth += (children.length - 1) * 4; // gap spacing (~4px)
+        }
+        
+        const hasOverflow = contentWidth > clientWidth;
+        
+        if (!hasOverflow) {
+          scrollLeftBtn.classList.remove('visible');
+          scrollRightBtn.classList.remove('visible');
+          navMenuWrapper.classList.remove('fade-left', 'fade-right', 'has-scroll-overflow');
+          return;
+        }
+
+        navMenuWrapper.classList.add('has-scroll-overflow');
+
+        // Show/hide arrows depending on scroll position
+        const scrollLeft = Math.abs(navMenuScroll.scrollLeft);
+        const scrollWidth = navMenuScroll.scrollWidth;
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const buffer = 8;
+        
+        let atStart, atEnd;
+        
+        if (!isRTL) {
+          atStart = scrollLeft <= buffer;
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+          
+          scrollLeftBtn.classList.toggle('visible', !atStart);
+          scrollRightBtn.classList.toggle('visible', !atEnd);
+          
+          navMenuWrapper.classList.toggle('fade-left', !atStart);
+          navMenuWrapper.classList.toggle('fade-right', !atEnd);
+        } else {
+          atStart = scrollLeft <= buffer;
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+          
+          scrollLeftBtn.classList.toggle('visible', !atEnd);
+          scrollRightBtn.classList.toggle('visible', !atStart);
+          
+          navMenuWrapper.classList.toggle('fade-left', !atEnd);
+          navMenuWrapper.classList.toggle('fade-right', !atStart);
+        }
+      }
+
+      scrollLeftBtn.addEventListener('click', () => {
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const scrollAmount = 250;
+        navMenuScroll.scrollBy({
+          left: isRTL ? scrollAmount : -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      scrollRightBtn.addEventListener('click', () => {
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const scrollAmount = 250;
+        navMenuScroll.scrollBy({
+          left: isRTL ? -scrollAmount : scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      navMenuScroll.addEventListener('scroll', checkScrollOverflow);
+      window.addEventListener('resize', checkScrollOverflow);
+      
+      // Call initial check
+      setTimeout(checkScrollOverflow, 200);
+
+      // Desktop Link Clicks Active Indicator
+      navMenuScroll.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelectorAll('.nav-link').forEach(nl => nl.classList.remove('active'));
+          const selector = `a[href="${link.getAttribute('href')}"]`;
+          document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+        });
+      });
+
+      // --- Coin insertion effect for login buttons ---
+      loginButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Flash animation trigger
+          const textEl = btn.querySelector('.btn-text-flash');
+          const originalText = textEl.textContent;
+          
+          textEl.textContent = 'COIN OK!';
+          textEl.style.color = '#00f0ff';
+          btn.style.borderColor = '#00f0ff';
+          btn.style.boxShadow = 'var(--neon-glow-cyan)';
+          
+          // Play a retro synth coin sound if web audio API allows or simulated delay
+          setTimeout(() => {
+            textEl.textContent = 'LOADING...';
+            setTimeout(() => {
+              window.location.href = 'login.html';
+              textEl.textContent = originalText;
+              textEl.style.color = '';
+              btn.style.borderColor = '';
+              btn.style.boxShadow = '';
+            }, 1000);
+          }, 800);
+        });
+      });
+      
+
+      // ==========================================
+      // CYBER-DECK CABINETS DATABASE DEFINITION
+      // ==========================================
+      const CABINETS_DATABASE = [
+        {
+          id: "outrun-2-sp",
+          title: "OutRun 2 SP",
+          categories: ["featured", "all"],
+          image: "images/library_featured.png",
+          era: "2003 / SEGA CHIHIRO",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "1'54\"290 by YU_SUZUKI",
+          specs: {
+            chassis: "Twin Deluxe CRT Cabinet / 29\" Screen",
+            cpu: "Intel Pentium 4 @ 2.93 GHz",
+            audio: "Sega Custom Synth (Linear PCM)",
+            restored: "80 Hours"
+          },
+          description: "The definitive arcade racing experience with active force feedback steering, drift mechanics, and beautiful branching routes across Europe.",
+          diagnostics: [
+            "STEERING MOTOR CALIBRATION: OK",
+            "CARD READER SYSTEM: READY",
+            "FORCE FEEDBACK FLUID: 98% EFFICIENT",
+            "NETWORK SEED: HOST CONTROLLER ACTIVE"
+          ],
+          trivia: "Our cabinet features the original red twin seats, fully imported from Japan and restored using new force-feedback motors."
+        },
+        {
+          id: "pac-man",
+          title: "Pac-Man",
+          categories: ["classics-80s", "highscore-challenges", "all"],
+          image: "images/classics_1980s.png",
+          era: "1980 / MIDWAY",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "3,333,360 by BILLY_M",
+          specs: {
+            chassis: "Standard Upright / 19\" Color CRT",
+            cpu: "Zilog Z80 @ 3.072 MHz",
+            audio: "Namco 3-channel Analog WSG",
+            restored: "240 Hours"
+          },
+          description: "The iconic yellow dot-muncher that defined the golden age of arcade gaming. Dodge Blinky, Pinky, Inky, and Clyde to achieve gaming immortality.",
+          diagnostics: [
+            "ROM INTEGRITY CHECK: PASS",
+            "COIN SLOT OPTICS: CLEAN",
+            "CRT CONVERGENCE: ALIGNED",
+            "JOYSTICK leaf-switches: REPLACED"
+          ],
+          trivia: "Features the notorious level 256 split-screen glitch code preserved in its original ROM chip."
+        },
+        {
+          id: "galaga",
+          title: "Galaga",
+          categories: ["classics-80s", "highscore-challenges", "all"],
+          image: "images/highscore_challenges.png",
+          era: "1981 / NAMCO",
+          status: "in-use",
+          statusText: "IN USE",
+          highScore: "15,999,990 by J_MCALLISTER",
+          specs: {
+            chassis: "Standard Upright / 19\" Color CRT",
+            cpu: "Dual Z80 @ 3.125 MHz",
+            audio: "Namco 3-channel Custom WSG",
+            restored: "110 Hours"
+          },
+          description: "Command your fighter, defend against swarming insectoid aliens, and double your firepower by letting your ship get captured by tractor beams.",
+          diagnostics: [
+            "RAPID FIRE CHIP: ENGAGED",
+            "CRT GRID ALIGNMENT: 99%",
+            "INPUT DELAY: 0.8ms",
+            "CABINET DECAL: SEALED"
+          ],
+          trivia: "Equipped with a custom double-ship capture relay switch to verify sound synthesizers."
+        },
+        {
+          id: "space-invaders",
+          title: "Space Invaders",
+          categories: ["classics-80s", "all"],
+          image: "images/classic_cabinets.png",
+          era: "1978 / TAITO",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "184,870 by ALIEN_HUNTER",
+          specs: {
+            chassis: "Cabaret Cabinet / B&W CRT Overlay",
+            cpu: "Intel 8080 @ 2.0 MHz",
+            audio: "Discrete Analog Synthesizer",
+            restored: "150 Hours"
+          },
+          description: "Defend Earth from descending alien rows in the legendary shooter that caused a 100-yen coin shortage in Japan upon release.",
+          diagnostics: [
+            "ANALOG BASS SYNTH: OSCILLATING",
+            "COLOR OVERLAY GEL: SECURED",
+            "MIRROR BEZEL REFLECTOR: OK",
+            "5V POWER RAIL: 5.01V"
+          ],
+          trivia: "Uses the original black-and-white monitor projected onto a half-silvered mirror with back-lit space background artwork."
+        },
+        {
+          id: "asteroids",
+          title: "Asteroids",
+          categories: ["classics-80s", "rare-titles", "all"],
+          image: "images/rare_titles.png",
+          era: "1979 / ATARI",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "41,337,900 by VECTOR_VANDAL",
+          specs: {
+            chassis: "Standard Quadrascan Vector / 19\"",
+            cpu: "MOS Technology 6502 @ 1.5 MHz",
+            audio: "Atari Custom Discrete Analog",
+            restored: "180 Hours"
+          },
+          description: "Pilot your ship through a field of tumbling space rocks. Features precise vector graphics rendering bright, crisp line segments directly to the CRT.",
+          diagnostics: [
+            "VECTOR X-Y DEFLECTION: CALIBRATED",
+            "HIGH VOLTAGE UNIT: 19.2KV STABLE",
+            "THRUST KEY DEBOUNCE: OK",
+            "SPOT-KILLER CIRCUIT: DISARMED"
+          ],
+          trivia: "Deflection board capacitors were custom-upgraded to modern solid-state equivalents to prevent screen jitter."
+        },
+        {
+          id: "centipede",
+          title: "Centipede",
+          categories: ["classics-80s", "all"],
+          image: "images/classics_1980s.png",
+          era: "1980 / ATARI",
+          status: "in-use",
+          statusText: "IN USE",
+          highScore: "16,275,000 by BUG_STOMPER",
+          specs: {
+            chassis: "Standard Upright / 19\" Color CRT",
+            cpu: "MOS Technology 6502 @ 1.2 MHz",
+            audio: "Atari POKEY Sound Generator",
+            restored: "90 Hours"
+          },
+          description: "Blast multiplying insect segments, poisonous spiders, and fleas using the ultra-precise original 3-inch trackball interface.",
+          diagnostics: [
+            "TRACKBALL BEARINGS: CLEAN & OILED",
+            "POKEY PITCH COUNTER: STABLE",
+            "FLICKER OFFSET: ADJUSTED",
+            "START BUTTON BULB: ACTIVE"
+          ],
+          trivia: "Restored using vintage-stock Atari trackball bearings soaked in sewing machine oil for zero friction."
+        },
+        {
+          id: "street-fighter-ii",
+          title: "SF-II Turbo",
+          categories: ["favorites-90s", "highscore-challenges", "all"],
+          image: "images/fighting_games.png",
+          era: "1992 / CAPCOM CPS-1",
+          status: "in-use",
+          statusText: "IN USE",
+          highScore: "99 Wins by RYU_DOJO",
+          specs: {
+            chassis: "Capcom Big Blue / 25\" Color CRT",
+            cpu: "Motorola 68000 @ 12.0 MHz",
+            audio: "Yamaha YM2151 FM Synth",
+            restored: "135 Hours"
+          },
+          description: "The pinnacle of competitive fighting games. Play Ryu, Ken, Chun-Li and master the hyper-speed fighting arts of Champion Edition.",
+          diagnostics: [
+            "KICK HARNESS SIGNAL: VERIFIED OK",
+            "JOYSTICK GATES: OCTAGONAL",
+            "YAMAHA OSCILLATOR: SYNCED",
+            "RGB VIDEO LEVEL: BALANCED"
+          ],
+          trivia: "Wired with a custom kick harness converting the auxiliary cabinet buttons to standard Capcom CPS-1/2 layouts."
+        },
+        {
+          id: "mortal-kombat-ii",
+          title: "Mortal Kombat II",
+          categories: ["favorites-90s", "all"],
+          image: "images/favorites_1990s.png",
+          era: "1993 / MIDWAY Y-UNIT",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "88 Wins by FATALITY_K",
+          specs: {
+            chassis: "Midway Upright / 25\" Color CRT",
+            cpu: "Texas Instruments TMS34010 @ 6.25 MHz",
+            audio: "Williams DCS Compressed Sound",
+            restored: "140 Hours"
+          },
+          description: "Step into the Outworld arena with digitized fighters, bone-crunching combos, and legendary Fatalities that made gaming history.",
+          diagnostics: [
+            "DCS AUDIO RAM: PASS",
+            "COIN SLOT SWITCH: DETECTED",
+            "FATALITY TIMER: VERIFIED",
+            "EEPROM DATA RESET: COMPLETED"
+          ],
+          trivia: "Contains the original Revision 3.1 ROMs allowing for all hidden bosses and glitch moves."
+        },
+        {
+          id: "tekken-3",
+          title: "Tekken 3",
+          categories: ["favorites-90s", "all"],
+          image: "images/fighting_games.png",
+          era: "1997 / NAMCO SYSTEM 12",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "75 Wins by M_RAVEN",
+          specs: {
+            chassis: "Namco Cabinet / 29\" Color CRT",
+            cpu: "32-bit RISC processor @ 33.86 MHz",
+            audio: "Namco C352 32-channel Wavetable",
+            restored: "95 Hours"
+          },
+          description: "Unlock the 3D fighting revolution. Smooth polygon animations, sidestep dodges, and legendary characters like Jin Kazama and Hwoarang.",
+          diagnostics: [
+            "SYSTEM BOARD VOLTAGE: 5.05V",
+            "3D RENDER ENGINE: PASS",
+            "EPROM INTEGRITY: VERIFIED",
+            "CABINET COOLING FANS: ACTIVE"
+          ],
+          trivia: "Runs on Namco System 12 hardware, which is a modified PlayStation 1 board running at overclocked CPU frequencies."
+        },
+        {
+          id: "nba-jam",
+          title: "NBA Jam",
+          categories: ["favorites-90s", "all"],
+          image: "images/multiplayer_cabinets.png",
+          era: "1993 / MIDWAY",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "108-62 by BOOM_SHAKA",
+          specs: {
+            chassis: "4-Player Showcase / 33\" CRT",
+            cpu: "Texas Instruments TMS34010 @ 6.25 MHz",
+            audio: "Williams DCS Audio Engine",
+            restored: "160 Hours"
+          },
+          description: "He's on fire! The legendary 2v2 basketball game that features gravity-defying dunks, wild announcer comments, and secret characters.",
+          diagnostics: [
+            "PLAYER 3 & 4 CONTROLS: CONNECTED",
+            "DCS AUDIO COMPRESSION: 100%",
+            "SUBWOOFER RELAY: PASS",
+            "RGB CHASSIS FOCUS: SHARP"
+          ],
+          trivia: "Features the original 4-player cabinet with an upgraded cabinet base to handle enthusiastic tournament play."
+        },
+        {
+          id: "computer-space",
+          title: "Computer Space",
+          categories: ["rare-titles", "all"],
+          image: "images/rare_titles.png",
+          era: "1971 / NUTTING",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "9,990 by COSMO_KID",
+          specs: {
+            chassis: "Fiberglass Cabinet / 15\" GE B&W",
+            cpu: "No CPU (Discrete TTL Logic Gates)",
+            audio: "Custom Diode White Noise Gen",
+            restored: "520 Hours"
+          },
+          description: "The world's first commercial arcade video game. Housed in a gorgeous, futuristic fiberglass cabinet and containing no microprocessor.",
+          diagnostics: [
+            "TTL LOGIC GATE BOARD: VOLTAGE 5.02V",
+            "FIBERGLASS SEAL: SHINY",
+            "DIODE NOISE GENERATOR: STEADY",
+            "TUBE HV REGULATOR: STABLE"
+          ],
+          trivia: "This is one of only a few dozen operational Computer Space units worldwide, featuring its original metallic blue gel-coat finish."
+        },
+        {
+          id: "sega-r360",
+          title: "Sega R-360",
+          categories: ["rare-titles", "all"],
+          image: "images/rare_titles.png",
+          era: "1990 / SEGA Y-BOARD",
+          status: "maintenance",
+          statusText: "MAINTENANCE",
+          highScore: "4,890,200 by G-LOC_ACE",
+          specs: {
+            chassis: "360° Gyroscopic Cabin / CRT",
+            cpu: "Triple Motorola 68000 @ 12.5 MHz",
+            audio: "Yamaha YM2151 sound chip",
+            restored: "750 Hours"
+          },
+          description: "The holy grail of arcade simulation. A massive gyroscopic capsule that rotates the pilot 360 degrees in all directions while playing G-LOC.",
+          diagnostics: [
+            "GYROSCOPIC ACTUATORS: HALTED",
+            "SAFETY HARNESS SENSORS: CHECK",
+            "EMERGENCY STOP LOOP: OPEN",
+            "HYDRAULIC PRESSURE: 0 PSI"
+          ],
+          trivia: "Requires specialized aviation maintenance checks every month. The hydraulic pumps were imported from a German amusement builder."
+        },
+        {
+          id: "death-chase",
+          title: "Death Chase",
+          categories: ["rare-titles", "all"],
+          image: "images/status_availability.png",
+          era: "1983 / VECTOR BEAM",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "1,290,100 by CHASE_DEV",
+          specs: {
+            chassis: "Standard Vector / 19\" B&W CRT",
+            cpu: "MOS 6502 @ 1.5 MHz",
+            audio: "Discrete Analog Noise Circuits",
+            restored: "220 Hours"
+          },
+          description: "Rare vector racing/shooting hybrid cabinet. Fly through neon vector landscapes chasing target vessels.",
+          diagnostics: [
+            "DEFLECTION TRANSISTORS: COOL",
+            "INTEGRATOR CIRCUIT: SYNCED",
+            "COIN SLOT MECH: OK",
+            "HIGH VOLTAGE LINE: 12.2V"
+          ],
+          trivia: "Only 100 cabinets were ever manufactured. Our unit was rescued from a flooded basement in Seattle."
+        },
+        {
+          id: "donkey-kong",
+          title: "Donkey Kong",
+          categories: ["classics-80s", "highscore-challenges", "all"],
+          image: "images/classics_1980s.png",
+          era: "1981 / NINTENDO",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "1,272,700 by ROB_L",
+          specs: {
+            chassis: "Standard Upright / 19\" Sanyo 20EZ",
+            cpu: "Zilog Z80 @ 3.072 MHz",
+            audio: "Intel 8035 microcontroller",
+            restored: "170 Hours"
+          },
+          description: "Guide Jumpman (Mario) up the steel girders to rescue Pauline from the giant ape. The ultimate test of arcade timing and platforming precision.",
+          diagnostics: [
+            "SANYO 20EZ DEFLECTION: STABLE",
+            "NINTENDO AUDIO CAP: SHIELDED",
+            "JUMP BUTTON MICROSWITCH: NEW",
+            "MARIO DECAL: RESTORED"
+          ],
+          trivia: "Uses the notorious Sanyo 20EZ monitor, famous for its rich colors but challenging chassis board repairs."
+        },
+        {
+          id: "tempest",
+          title: "Tempest",
+          categories: ["classics-80s", "rare-titles", "all"],
+          image: "images/rare_titles.png",
+          era: "1981 / ATARI",
+          status: "maintenance",
+          statusText: "MAINTENANCE",
+          highScore: "1,414,213 by VECTOR_WIZ",
+          specs: {
+            chassis: "Color Vector Quadrascan CRT",
+            cpu: "MOS Technology 6502 @ 1.5 MHz",
+            audio: "Dual Atari POKEY generators",
+            restored: "290 Hours"
+          },
+          description: "Atari's color vector masterpiece. Control your claw-shaped ship around geometric webs, firing down channels to eliminate oncoming aliens.",
+          diagnostics: [
+            "COLOR VECTOR CHASSIS: ERROR",
+            "HV DEFLECTION TRANSISTOR: FAILED",
+            "POKEY GENERATORS: STABLE",
+            "INTERLOCK SWITCH: CLOSED"
+          ],
+          trivia: "Currently offline due to a vector deflection transistor failure. A replacement chassis board is being bench tested."
+        },
+        {
+          id: "defender",
+          title: "Defender",
+          categories: ["classics-80s", "all"],
+          image: "images/classics_1980s.png",
+          era: "1981 / WILLIAMS",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "9,999,950 by STAR_DEFENDER",
+          specs: {
+            chassis: "Standard Upright / 19\" Color CRT",
+            cpu: "Motorola 6809 @ 1.0 MHz",
+            audio: "Williams Custom Audio Board",
+            restored: "210 Hours"
+          },
+          description: "Defend humanoids on a scrolling side-view mountain landscape. Famous for its complex 5-button control layout and extreme difficulty.",
+          diagnostics: [
+            "6809 BUS TIMINGS: CRITICAL",
+            "REVERSE BUTTON MICROSWITCH: ACTIVE",
+            "SMART BOMB RELAY: PASS",
+            "CRT GLASS SHIELD: POLISHED"
+          ],
+          trivia: "Known as one of the hardest control panels to master. Every single button has been replaced with modern leaf-switches to retain the original bounce."
+        },
+        {
+          id: "sunset-riders",
+          title: "Sunset Riders",
+          categories: ["new-arrivals", "all"],
+          image: "images/new_arrivals.png",
+          era: "1991 / KONAMI",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "$420,120 by CORMACK",
+          specs: {
+            chassis: "4-Player Cabinet / 25\" Color CRT",
+            cpu: "Konami Custom Motorola 68000",
+            audio: "Yamaha YM2151 + YM3012 Synth",
+            restored: "190 Hours"
+          },
+          description: "Bounty hunting cowboy action in Konami's beautiful 4-player cooperative run-and-gun shooter. 'Bury me with my money!'",
+          diagnostics: [
+            "KONAMI SOUND CHIP: HYPERACTIVE",
+            "COIN SLOT RELAY: RUNNING",
+            "PLAYER 1-4 PCB PORTS: CALIBRATED",
+            "CRT POWER CONVERTER: OK"
+          ],
+          trivia: "This unit was completely refitted with new artwork and a recap of its Konami sound synthesizer board, restoring its signature cowboy audio."
+        },
+        {
+          id: "marvel-vs-capcom-2",
+          title: "MvC 2",
+          categories: ["favorites-90s", "highscore-challenges", "all"],
+          image: "images/fighting_games.png",
+          era: "2000 / SEGA NAOMI",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "120 Wins by MVC_CHAMP",
+          specs: {
+            chassis: "Naomi Universal / 29\" Color CRT",
+            cpu: "Hitachi SH-4 @ 200 MHz",
+            audio: "Yamaha AICA 45 MHz Synth",
+            restored: "90 Hours"
+          },
+          description: "Take you for a ride! The legendary 3v3 tag-team crossover fighting game featuring Marvel superheroes and Capcom fighters.",
+          diagnostics: [
+            "NAOMI BOARD VOLTAGE: 5.06V",
+            "GD-ROM DRIVE: CALIBRATED",
+            "JOYSTICK leaf-switches: OK",
+            "AUDIO SYNTH: STABLE"
+          ],
+          trivia: "Our cabinet is an original Japanese Sega Naomi Universal upright cabinet, repainted in its signature white and blue."
+        },
+        {
+          id: "tron",
+          title: "Tron",
+          categories: ["classics-80s", "rare-titles", "all"],
+          image: "images/rare_titles.png",
+          era: "1982 / BALLY MIDWAY",
+          status: "online",
+          statusText: "ONLINE",
+          highScore: "12,890,400 by USER_MCP",
+          specs: {
+            chassis: "Standard Upright / 19\" Color CRT",
+            cpu: "Zilog Z80 @ 2.5 MHz",
+            audio: "Dual AY-3-8910 Sound Chips",
+            restored: "280 Hours"
+          },
+          description: "Enter the grid. Guide your light cycle, battle tanks, and hack the MCP in Bally Midway's beautiful futuristic neon cabinet.",
+          diagnostics: [
+            "FLIGHT STICK GIMBAL: SMOOTH",
+            "BLACKLIGHT BULB: RETROFITTED",
+            "AY-3-8910 OSCILLATORS: OK",
+            "HV CHASSIS: 19.5KV"
+          ],
+          trivia: "Features the original glowing blue translucent flight stick control and UV-reactive cabinet cabinet decals."
+        },
+        {
+          id: "cruisn-usa",
+          title: "Cruis'n USA",
+          categories: ["favorites-90s", "all"],
+          image: "images/racing_games.png",
+          era: "1994 / MIDWAY V-UNIT",
+          status: "in-use",
+          statusText: "IN USE",
+          highScore: "1'42\"10 by USA_RACER",
+          specs: {
+            chassis: "Sit-Down Cockpit / 25\" Color CRT",
+            cpu: "ADSP-21062 @ 46 MHz",
+            audio: "Midway Sound Engine",
+            restored: "150 Hours"
+          },
+          description: "Race across the United States from Golden Gate to Washington DC. Features digitized cars and high-speed driving dynamics.",
+          diagnostics: [
+            "STEERING POTENTIOMETER: CENTERED",
+            "FORCE FEEDBACK SOLENOID: PASS",
+            "V-UNIT ROMS: ACTIVE",
+            "COIN SLOT LIGHT: OK"
+          ],
+          trivia: "Equipped with the original sit-down driver seat, with custom subwoofers mounted directly underneath the bench."
+        }
+      ];
+
+      // DOM Elements cache
+      const cyberGrid = document.getElementById('cyberGrid');
+      const gameSearchInput = document.getElementById('gameSearchInput');
+      const searchScanBtn = document.getElementById('searchScanBtn');
+      const hudFilters = document.getElementById('hudFilters');
+      
+      const blueprintOverlay = document.getElementById('blueprintOverlay');
+      const blueprintDrawer = document.getElementById('blueprintDrawer');
+      const blueprintDrawerContent = document.getElementById('blueprintDrawerContent');
+
+      let currentCategory = "all";
+      let searchQuery = "";
+      let scanTimeout = null;
+
+      // ==========================================
+      // GRID RENDERING LOGIC
+      // ==========================================
+      function renderGrid(filter, search) {
+        if (!cyberGrid) return;
+        
+        // Filter cabinets matching query & filter category
+        const filtered = CABINETS_DATABASE.filter(game => {
+          const matchesCategory = filter === "all" || game.categories.includes(filter);
+          const matchesSearch = !search || 
+                                game.title.toUpperCase().includes(search.toUpperCase()) || 
+                                game.description.toUpperCase().includes(search.toUpperCase()) || 
+                                game.era.toUpperCase().includes(search.toUpperCase());
+          return matchesCategory && matchesSearch;
+        });
+
+        // Clear grid and render filtered list
+        if (filtered.length === 0) {
+          cyberGrid.innerHTML = `
+            <div class="scanning-loader" style="grid-column: 1/-1; text-align: center; font-family: var(--font-retro); color: var(--color-neon-pink); padding: 5rem 2rem; font-size: 1.1rem; border: 1px dashed var(--color-neon-pink); border-radius: 8px; background: rgba(255,0,85,0.02); box-shadow: inset 0 0 15px rgba(255,0,85,0.05);">
+              ⚠️ NO ACTIVE CABINET MATCHES DECODE PROTOCOLS. Try another query.
+            </div>
+          `;
+          return;
+        }
+
+        cyberGrid.innerHTML = filtered.map(game => `
+          <div class="mainframe-card" data-id="${game.id}">
+            <div class="corner-bracket bracket-tl"></div>
+            <div class="corner-bracket bracket-tr"></div>
+            <div class="corner-bracket bracket-bl"></div>
+            <div class="corner-bracket bracket-br"></div>
+            
+            <span class="status-badge ${game.status}">${game.statusText}</span>
+            
+            <div class="card-img-wrapper">
+              <img src="${game.image}" alt="${game.title}" loading="lazy">
+            </div>
+            
+            <div class="card-header-meta">
+              <span>${game.era}</span>
+              <span style="color: var(--color-neon-pink); font-size: 0.65rem;">${game.highScore ? 'HI-SCORE LOCK' : ''}</span>
+            </div>
+            
+            <div class="card-title-rig">
+              <h3 class="card-title">${game.title}</h3>
+              <p class="card-desc-preview">${game.description}</p>
+            </div>
+            
+            <div class="card-specs-row">
+              <span><strong>CHASSIS:</strong> ${game.specs.chassis.split('/')[0].trim()}</span>
+              <span><strong>RESTORE:</strong> ${game.specs.restored}</span>
+            </div>
+            
+            <button class="btn-init">View Blueprint</button>
+          </div>
+        `).join('');
+      }
+
+      // Initialize Grid
+      renderGrid(currentCategory, searchQuery);
+
+      // ==========================================
+      // SEARCH & FILTER INPUT HANDLERS
+      // ==========================================
+      function initiateGridScan() {
+        if (!cyberGrid) return;
+        
+        // Show Matrix scanning effect
+        cyberGrid.style.opacity = "0.5";
+        cyberGrid.innerHTML = `
+          <div class="scanning-loader" style="grid-column: 1/-1; text-align: center; font-family: var(--font-retro); color: var(--color-neon-cyan); padding: 5rem 2rem; font-size: 1.2rem; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); animation: pulse 1s infinite alternate;">
+            ⚡ SCANNING DATABASE INDEX... DECODING DATAFRAME ⚡
+          </div>
+        `;
+
+        if (scanTimeout) clearTimeout(scanTimeout);
+
+        // After a simulated scanning delay of 300ms, render grid with filtered items
+        scanTimeout = setTimeout(() => {
+          renderGrid(currentCategory, searchQuery);
+          cyberGrid.style.opacity = "1";
+        }, 300);
+      }
+
+      // Search keyup/input handler
+      if (gameSearchInput) {
+        gameSearchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value;
+          initiateGridScan();
+        });
+      }
+
+      // Search button click handler
+      if (searchScanBtn) {
+        searchScanBtn.addEventListener('click', () => {
+          searchQuery = gameSearchInput.value;
+          initiateGridScan();
+        });
+      }
+
+      // HUD Category filter button clicks
+      if (hudFilters) {
+        hudFilters.addEventListener('click', (e) => {
+          const btn = e.target.closest('.hud-btn');
+          if (!btn) return;
+          
+          // Toggle active class
+          hudFilters.querySelectorAll('.hud-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          currentCategory = btn.getAttribute('data-category');
+          initiateGridScan();
+        });
+      }
+
+      // ==========================================
+      // BLUEPRINT DRAWER EVENT HANDLERS
+      // ==========================================
+      function openBlueprint(gameId) {
+        const game = CABINETS_DATABASE.find(g => g.id === gameId);
+        if (!game || !blueprintDrawerContent || !blueprintDrawer || !blueprintOverlay) return;
+
+        // Render dynamic drawer screen content
+        blueprintDrawerContent.innerHTML = `
+          <div class="drawer-close-btn-rig">
+            <button class="btn-close-drawer" id="closeDrawerBtn" aria-label="Close blueprint drawer">✕</button>
+          </div>
+          <div class="blueprint-visual-header">
+            <span class="blueprint-badge">${game.era}</span>
+            <h3 class="blueprint-title">${game.title}</h3>
+            <p class="blueprint-desc">${game.description}</p>
+          </div>
+
+          <div class="specs-blueprint-box">
+            <h4>Technical Specifications</h4>
+            <table class="game-specs-table">
+              <tbody>
+                <tr>
+                  <th>Cabinet Type</th>
+                  <td>${game.specs.chassis}</td>
+                </tr>
+                <tr>
+                  <th>CPU Architecture</th>
+                  <td>${game.specs.cpu}</td>
+                </tr>
+                <tr>
+                  <th>Audio Synthesizer</th>
+                  <td>${game.specs.audio}</td>
+                </tr>
+                <tr>
+                  <th>Bench Hours</th>
+                  <td>${game.specs.restored}</td>
+                </tr>
+                <tr>
+                  <th>Current Status</th>
+                  <td style="color: ${game.status === 'online' ? 'var(--color-neon-cyan)' : game.status === 'in-use' ? 'var(--color-neon-pink)' : 'var(--color-neon-yellow)'}; font-weight: bold; text-transform: uppercase; text-shadow: 0 0 5px currentColor;">
+                    ${game.statusText}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="specs-blueprint-box" style="border-color: rgba(0, 255, 0, 0.25); background: rgba(0, 255, 0, 0.03);">
+            <h4 style="color: #00ff00;">Live Relays & Diagnostic History</h4>
+            <ul style="list-style: square; padding-left: 1.25rem; font-family: monospace; font-size: 0.76rem; color: #00ff00; line-height: 1.6; display: flex; flex-direction: column; gap: 0.35rem;">
+              ${game.diagnostics.map(log => `<li>${log}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="specs-blueprint-box">
+            <h4>Crew Commentary & Trivia</h4>
+            <p style="font-size: 0.85rem; line-height: 1.6; font-style: italic; color: var(--color-text-secondary); margin: 0;">
+              "${game.trivia}"
+            </p>
+          </div>
+        `;
+
+        // Wire close button inside loaded drawer
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        if (closeDrawerBtn) {
+          closeDrawerBtn.addEventListener('click', closeBlueprint);
+        }
+
+        // Open drawer
+        blueprintOverlay.classList.add('active');
+        blueprintDrawer.classList.add('active');
+      }
+
+      function closeBlueprint() {
+        if (blueprintOverlay && blueprintDrawer) {
+          blueprintOverlay.classList.remove('active');
+          blueprintDrawer.classList.remove('active');
+        }
+      }
+
+      // Close drawer on overlay clicks
+      if (blueprintOverlay) {
+        blueprintOverlay.addEventListener('click', closeBlueprint);
+      }
+
+      // Listen for click inside cyber grid to open drawer
+      if (cyberGrid) {
+        cyberGrid.addEventListener('click', (e) => {
+          const btn = e.target.closest('.btn-init');
+          if (btn) {
+            const card = btn.closest('.mainframe-card');
+            const gameId = card.getAttribute('data-id');
+            openBlueprint(gameId);
+          }
+        });
+      }
+
+      // ==========================================
+      // LIVE DIAGNOSTICS & SYSTEM CONTROLLER
+      // ==========================================
+      const diagnosticsGrid = document.getElementById('diagnosticsGrid');
+      const terminalLog = document.getElementById('terminalLog');
+      const pingBtn = document.getElementById('pingBtn');
+      const rebootBtn = document.getElementById('rebootBtn');
+      const selectedNodeDisplay = document.getElementById('selectedNodeDisplay');
+      const diagnosticTimer = document.getElementById('diagnosticTimer');
+
+      let selectedNodeName = null;
+
+      // Timer node sync clock
+      setInterval(() => {
+        if (diagnosticTimer) {
+          const now = new Date();
+          diagnosticTimer.textContent = `SYNC: OK // ${now.toLocaleTimeString()}`;
+        }
+      }, 1000);
+
+      // Node selection click handler
+      if (diagnosticsGrid) {
+        diagnosticsGrid.addEventListener('click', (e) => {
+          const node = e.target.closest('.terminal-machine-node');
+          if (!node) return;
+
+          // Clear selection
+          diagnosticsGrid.querySelectorAll('.terminal-machine-node').forEach(n => n.classList.remove('active-selected'));
+
+          selectedNodeName = node.getAttribute('data-node');
+          node.classList.add('active-selected');
+
+          if (selectedNodeDisplay) {
+            selectedNodeDisplay.textContent = `SELECTED NODE: ${selectedNodeName}`;
+          }
+
+          // Print log line
+          writeTerminalLog(`NODE ENVELOPE OPENED: ${selectedNodeName} - RETRIEVING REGISTER DATA...`);
+        });
+      }
+
+      // Helper function to write to diagnostics terminal log
+      function writeTerminalLog(message) {
+        if (!terminalLog) return;
+        const now = new Date();
+        const timeStr = `[${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}]`;
+        
+        terminalLog.innerHTML += `<br>${timeStr} ${message}`;
+        terminalLog.scrollTop = terminalLog.scrollHeight;
+      }
+
+      // Ping relays action button
+      if (pingBtn) {
+        pingBtn.addEventListener('click', () => {
+          if (selectedNodeName) {
+            // Selected node ping
+            writeTerminalLog(`PING COMMAND INITIALIZED ON TARGET: ${selectedNodeName}`);
+            
+            // Get node element
+            const nodeEl = diagnosticsGrid.querySelector(`[data-node="${selectedNodeName}"]`);
+            const dot = nodeEl ? nodeEl.querySelector('.node-status-dot') : null;
+            
+            // Make dot blink offline/online for visual feedback
+            if (dot) {
+              const originalClassList = [...dot.classList];
+              dot.className = "node-status-dot in-use"; // flash pink
+              
+              setTimeout(() => {
+                dot.className = originalClassList.join(" ");
+                
+                // Print reply log based on status
+                if (originalClassList.includes('offline')) {
+                  writeTerminalLog(`REPLY FROM GATEWAY: UNREACHABLE (CRT CAP ERROR)`);
+                } else if (originalClassList.includes('maintenance')) {
+                  writeTerminalLog(`REPLY FROM GATEWAY: MAINTENANCE RECALIBRATION ONGOING`);
+                } else {
+                  writeTerminalLog(`REPLY FROM GATEWAY: SUCCESS TIME=1.4ms TTL=64`);
+                }
+              }, 400);
+            }
+          } else {
+            // Multi ping scan for all 8 nodes
+            writeTerminalLog(`MULTI-PING SCAN INITIALIZED FOR ALL 8 NODES...`);
+            let index = 0;
+            const nodes = diagnosticsGrid.querySelectorAll('.terminal-machine-node');
+            
+            nodes.forEach(node => {
+              const name = node.getAttribute('data-node');
+              const dot = node.querySelector('.node-status-dot');
+              
+              setTimeout(() => {
+                if (dot.classList.contains('offline')) {
+                  writeTerminalLog(`${name} -> PACKET DROPPED (CRT CONVERGENCE FAIL)`);
+                } else if (dot.classList.contains('maintenance')) {
+                  writeTerminalLog(`${name} -> RECALIBRATING (WAIT STATE)`);
+                } else {
+                  writeTerminalLog(`${name} -> SYSTEM REPLY OK (PING VERIFIED)`);
+                }
+              }, index * 200);
+              
+              index++;
+            });
+          }
+        });
+      }
+
+      // Reboot mainframe action button
+      if (rebootBtn) {
+        rebootBtn.addEventListener('click', () => {
+          if (rebootBtn.disabled) return;
+          rebootBtn.disabled = true;
+          
+          writeTerminalLog(`MAINFRAME REBOOT SEQUENCE INITIALIZED. AUTH OK.`);
+          
+          const dots = diagnosticsGrid.querySelectorAll('.node-status-dot');
+          const originalClasses = Array.from(dots).map(d => d.className);
+
+          // Phase 1: Set all nodes offline
+          setTimeout(() => {
+            dots.forEach(d => { d.className = "node-status-dot offline"; });
+            writeTerminalLog(`POWER RELAYS CYCLED. ALL Mainframes offline...`);
+          }, 400);
+
+          // Phase 2: Check BIOS RAM
+          setTimeout(() => {
+            writeTerminalLog(`CLEARING REGISTER CACHES... CORE RAM INTEGRITY: 100% OK`);
+          }, 1000);
+
+          // Phase 3: Set all nodes maintenance (yellow booting)
+          setTimeout(() => {
+            dots.forEach(d => { d.className = "node-status-dot maintenance"; });
+            writeTerminalLog(`BOOTING KERNEL VER 4.80 // INITIALIZING DEVICE DRIVERS...`);
+          }, 1600);
+
+          // Phase 4: Restore original states
+          setTimeout(() => {
+            dots.forEach((d, idx) => { d.className = originalClasses[idx]; });
+            writeTerminalLog(`ALL MAIN NODES SYNCHRONIZED. LOBBY RESUMED SUCCESS.`);
+            rebootBtn.disabled = false;
+          }, 2400);
+        });
+      }
+
+      // Diagnostics terminal background noise reporter
+      const logLines = [
+        "POLLING DAYTONA LINK PORTS... DISCOVERED 2 SIBLING CARDS.",
+        "PAC-MAN HIGH SCORE PORT DATA REPLICATED: SUCCESS.",
+        "SF-II CABINET TEMPERATURE STABLE AT 37°C.",
+        "COIN DOOR SIGNAL DISCOVERED: 1 SLOT CREDIT REGISTERED.",
+        "LIVE DIAGNOSTIC SYNC VERIFIED OK.",
+        "COMP.SPACE POWER STATUS RECALIBRATED: 100% EFFICIENT.",
+        "DAYTONA RECALIBRATION SIGNAL SENT... MOTOR ROTATION SUCCESS."
+      ];
+
+      function addRandomLogMessage() {
+        // If a reboot or active ping process isn't running, append occasional status updates
+        if (rebootBtn && rebootBtn.disabled) return; // skip when rebooting
+        
+        const randomMsg = logLines[Math.floor(Math.random() * logLines.length)];
+        writeTerminalLog(randomMsg);
+      }
+
+      setInterval(addRandomLogMessage, 6000);
+    });
+  </script>
+</body>
+</html>

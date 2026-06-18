@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Arcade Bar & Grill - Player Login</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       1. CSS CUSTOM PROPERTIES (DESIGN SYSTEM)
+       ========================================== */
+    :root {
+      /* Theme independent tokens */
+      --font-primary: 'Space Grotesk', sans-serif;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-retro: 'Press Start 2P', cursive;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Dark Theme Colors (Default) */
+      --color-bg-body: #05050d;
+      --color-bg-nav: rgba(10, 10, 26, 0.75);
+      --color-border-nav: rgba(255, 0, 127, 0.15);
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #94a3b8;
+      
+      --color-neon-pink: #ff007f;
+      --color-neon-cyan: #00f0ff;
+      --color-neon-yellow: #ffb700;
+      
+      --neon-glow-pink: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+      --neon-glow-cyan: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+      --neon-glow-yellow: 0 0 8px rgba(255, 183, 0, 0.6), 0 0 20px rgba(255, 183, 0, 0.3);
+      
+      --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --grid-opacity: 0.15;
+    }
+
+    /* Light Theme Colors overrides */
+    html.light-theme {
+      --color-bg-body: #f8fafc;
+      --color-bg-nav: rgba(255, 255, 255, 0.8);
+      --color-border-nav: rgba(15, 23, 42, 0.1);
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      
+      --color-neon-pink: #d90468;
+      --color-neon-cyan: #0099ad;
+      --color-neon-yellow: #d97706;
+      
+      --neon-glow-pink: 0 0 8px rgba(217, 4, 104, 0.4);
+      --neon-glow-cyan: 0 0 8px rgba(0, 153, 173, 0.4);
+      --neon-glow-yellow: 0 0 8px rgba(217, 119, 6, 0.4);
+      
+      --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      --grid-opacity: 0.04;
+    }
+
+    /* ==========================================
+       2. RESET & BASE STYLES
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    body {
+      background-color: var(--color-bg-body);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* Glowing retro neon grid background */
+    .retro-grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .grid-lines {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 200vw;
+      height: 300vh;
+      transform: translateX(-50%) perspective(500px) rotateX(60deg);
+      background-image: 
+        linear-gradient(to right, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: center bottom;
+      animation: gridScroll 20s linear infinite;
+      transform-origin: center bottom;
+    }
+
+    /* Sun/glow behind card */
+    .synth-sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 450px;
+      background: linear-gradient(to bottom, var(--color-neon-pink), var(--color-neon-yellow));
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    
+    html.light-theme .synth-sun {
+      opacity: 0.04;
+    }
+
+    @keyframes gridScroll {
+      0% { background-position: center 0px; }
+      100% { background-position: center 1000px; }
+    }
+
+    @keyframes insertCoinFlash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    @keyframes neonFlash {
+      0%, 100% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+      45%, 55% { opacity: 0.4; text-shadow: none; }
+      50% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+    }
+
+    /* ==========================================
+       3. TOP-RIGHT PAGE CONTROLS
+       ========================================== */
+    .login-header-controls {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      z-index: 100;
+    }
+
+    html[dir="rtl"] .login-header-controls {
+      right: auto;
+      left: 1.5rem;
+    }
+
+    .icon-toggle-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    html.light-theme .icon-toggle-btn {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(15, 23, 42, 0.1);
+    }
+
+    .icon-toggle-btn:hover {
+      color: var(--color-neon-cyan);
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .icon-toggle-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      transition: transform var(--transition-normal), opacity var(--transition-fast);
+    }
+
+    /* Dark Mode Toggle specific */
+    .theme-toggle .sun-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(90deg);
+      position: absolute;
+    }
+    .theme-toggle .moon-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    html.light-theme .theme-toggle .sun-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    html.light-theme .theme-toggle .moon-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(-90deg);
+      position: absolute;
+    }
+
+    /* RTL Flip arrow direction */
+    html[dir="rtl"] .rtl-toggle-btn svg {
+      transform: rotate(180deg);
+      color: var(--color-neon-pink);
+    }
+
+    /* ==========================================
+       4. CENTERED LOGIN CARD
+       ========================================== */
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .login-card {
+      background: rgba(10, 10, 26, 0.65);
+      border: 2px solid rgba(255, 0, 127, 0.15);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05), var(--neon-glow-pink);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    html.light-theme .login-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid rgba(217, 4, 104, 0.15);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .login-card:hover {
+      border-color: var(--color-neon-cyan);
+      box-shadow: 0 20px 50px rgba(0, 240, 255, 0.1), var(--neon-glow-cyan);
+    }
+
+    /* Centered logo container */
+    .login-logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      user-select: none;
+      transition: color var(--transition-normal);
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 8px;
+      box-shadow: var(--neon-glow-pink);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    }
+
+    .logo-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .nav-logo:hover .logo-icon {
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .primary {
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(255,0,127,0.1);
+      line-height: 1;
+    }
+
+    .logo-text .secondary {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      color: var(--color-neon-yellow);
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      animation: neonFlash 2s infinite alternate;
+    }
+
+    /* Form control spacing */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-primary);
+      letter-spacing: 0.5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .login-input {
+      width: 100%;
+      background: rgba(10, 10, 26, 0.8);
+      border: 1px solid var(--color-border-nav);
+      border-radius: 8px;
+      padding: 0.88rem 1.1rem;
+      color: var(--color-neon-cyan);
+      font-family: var(--font-primary);
+      font-size: 0.98rem;
+      outline: none;
+      transition: all var(--transition-fast);
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    html.light-theme .login-input {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .login-input:focus {
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    /* Eye icon button styling inside password field */
+    .password-toggle-btn {
+      position: absolute;
+      top: 50%;
+      right: 1.1rem;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-fast);
+      z-index: 10;
+    }
+
+    html[dir="rtl"] .password-toggle-btn {
+      right: auto;
+      left: 1.1rem;
+    }
+
+    .password-toggle-btn:hover {
+      color: var(--color-neon-pink);
+    }
+
+    .password-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .password-toggle-btn .eye-off-icon {
+      display: none;
+    }
+
+    .password-toggle-btn.showing-password .eye-icon {
+      display: none;
+    }
+    .password-toggle-btn.showing-password .eye-off-icon {
+      display: block;
+    }
+
+    /* Remember me & Forgot row */
+    .form-options-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      margin-top: -0.25rem;
+    }
+
+    .login-checkbox-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+      color: var(--color-text-secondary);
+    }
+
+    .login-checkbox-wrapper input {
+      display: none;
+    }
+
+    .custom-checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+      display: inline-block;
+      position: relative;
+      transition: all var(--transition-fast);
+    }
+
+    html.light-theme .custom-checkbox {
+      border: 2px solid #cbd5e1;
+      background: #f1f5f9;
+    }
+
+    .login-checkbox-wrapper:hover .custom-checkbox {
+      border-color: var(--color-neon-pink);
+      box-shadow: 0 0 8px rgba(255, 0, 127, 0.4);
+    }
+
+    .login-checkbox-wrapper input:checked + .custom-checkbox {
+      background: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .login-checkbox-wrapper input:checked + .custom-checkbox::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 4px;
+      height: 7px;
+      border: solid #ffffff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .forgot-link {
+      color: var(--color-neon-cyan);
+      transition: color var(--transition-fast), text-shadow var(--transition-fast);
+      font-family: var(--font-display);
+      font-weight: 500;
+    }
+
+    .forgot-link:hover {
+      color: var(--color-text-primary);
+      text-shadow: var(--neon-glow-cyan);
+    }
+
+    /* Submit Login Button */
+    .btn-submit {
+      width: 100%;
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      background: #000000;
+      color: var(--color-neon-yellow);
+      border: 3px double var(--color-neon-yellow);
+      padding: 0.9rem 1rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40px;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .btn-submit:hover {
+      color: #000000;
+      background: var(--color-neon-yellow);
+      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      transform: translateY(-2px);
+    }
+
+    .btn-submit:hover::after {
+      left: 140%;
+      opacity: 1;
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px);
+    }
+
+    .btn-text-flash {
+      animation: insertCoinFlash 1.5s infinite steps(2);
+    }
+
+    /* Continue Divider */
+    .divider-container {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: var(--color-text-secondary);
+      font-size: 0.75rem;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .divider-container::before,
+    .divider-container::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px dashed var(--color-border-nav);
+    }
+
+    .divider-container:not(:empty)::before {
+      margin-right: .75em;
+    }
+
+    .divider-container:not(:empty)::after {
+      margin-left: .75em;
+    }
+    
+    html[dir="rtl"] .divider-container:not(:empty)::before {
+      margin-right: 0;
+      margin-left: .75em;
+    }
+    html[dir="rtl"] .divider-container:not(:empty)::after {
+      margin-left: 0;
+      margin-right: .75em;
+    }
+
+    /* Social Login row */
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    html.light-theme .social-btn {
+      background: rgba(255,255,255,0.85);
+      border-color: #cbd5e1;
+      color: #475569;
+    }
+
+    .social-btn:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background: rgba(255, 0, 127, 0.05);
+      transform: translateY(-3px);
+    }
+
+    .social-btn:nth-child(2):hover {
+      color: var(--color-neon-cyan);
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      background: rgba(0, 240, 255, 0.05);
+    }
+
+    .social-btn:nth-child(3):hover {
+      color: var(--color-neon-yellow);
+      border-color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+      background: rgba(255, 183, 0, 0.05);
+    }
+
+    .social-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
+    /* Redirection links wrapper */
+    .signup-redirect-wrapper {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .signup-redirect-link {
+      color: var(--color-neon-pink);
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-left: 0.25rem;
+      transition: color var(--transition-fast), text-shadow var(--transition-fast);
+    }
+
+    html[dir="rtl"] .signup-redirect-link {
+      margin-left: 0;
+      margin-right: 0.25rem;
+    }
+
+    .signup-redirect-link:hover {
+      color: var(--color-text-primary);
+      text-shadow: var(--neon-glow-pink);
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+
+  <!-- Retro Glowing Background Grid -->
+  <div class="retro-grid-bg">
+    <div class="grid-lines"></div>
+  </div>
+
+  <div class="synth-sun"></div>
+
+  <!-- 1. TOP-RIGHT SETTINGS CONTROLS -->
+  <div class="login-header-controls" id="headerControls">
+    <!-- Dark Mode Toggle -->
+    <button class="icon-toggle-btn theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Mode">
+      <!-- Sun Icon -->
+      <svg class="sun-icon" viewBox="0 0 24 24">
+        <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+      </svg>
+      <!-- Moon Icon -->
+      <svg class="moon-icon" viewBox="0 0 24 24">
+        <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+      </svg>
+    </button>
+
+    <!-- Right to Left (RTL) Toggle -->
+    <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtn" aria-label="Toggle Text Direction" title="Toggle Layout Direction">
+      <svg class="rtl-icon" viewBox="0 0 24 24">
+        <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- 2. LOGIN CARD -->
+  <div class="login-container">
+    <div class="login-card">
+      
+      <!-- LOGO (Centered) -->
+      <div class="login-logo-container">
+        <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="primary">RETRO</span>
+            <span class="secondary">ARCADE BAR</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- FORM FIELDS -->
+      <form id="loginForm" onsubmit="event.preventDefault(); alert('LOGIN OK! Booting Game Profile...');">
+        
+        <!-- Username Field -->
+        <div class="form-group">
+          <label class="form-label" for="username">Player Handle / Email</label>
+          <div class="input-wrapper">
+            <input class="login-input" type="text" id="username" placeholder="e.g. ChronoTrigger_99" required autocomplete="username">
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label class="form-label" for="password">Security Key (Password)</label>
+          <div class="input-wrapper">
+            <input class="login-input" type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+            <!-- Eye icon to show/hide password -->
+            <button type="button" class="password-toggle-btn" id="passwordToggleBtn" aria-label="Toggle Password Visibility">
+              <!-- Eye open (hide password state) -->
+              <svg class="eye-icon" viewBox="0 0 24 24">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+              <!-- Eye off (show password state) -->
+              <svg class="eye-off-icon" viewBox="0 0 24 24">
+                <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.82l2.92 2.92c1.51-1.35 2.67-3.16 3.44-5.24-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 2.2 0 4.27-.61 6.04-1.67l.46.46 2.23 2.23 1.27-1.27L3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.17c0-1.66-1.34-3-3-3l-.17.02z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Checkbox Row -->
+        <div class="form-options-row form-group">
+          <label class="login-checkbox-wrapper">
+            <input type="checkbox" id="rememberMe">
+            <span class="custom-checkbox"></span>
+            <span>Remember Player</span>
+          </label>
+          <a href="#forgot" class="forgot-link">Forgot Key?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button class="btn-submit" type="submit" aria-label="Sign in to profile">
+          <span class="btn-text-flash">Press Start</span>
+        </button>
+
+      </form>
+
+      <!-- Continue with divider -->
+      <div class="divider-container">Or Continue With</div>
+
+      <!-- Social Logins (Google, Facebook, Apple) -->
+      <div class="social-row">
+        <!-- Google -->
+        <button class="social-btn" aria-label="Sign in with Google">
+          <svg viewBox="0 0 24 24">
+            <path d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.859-3.578-7.859-8s3.53-8 7.859-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 6.133 1 1.17 5.925 1.17 12s4.963 11 11.07 11c6.38 0 10.62-4.474 10.62-10.782 0-.727-.08-1.282-.177-1.933H12.24z"/>
+          </svg>
+        </button>
+        <!-- Facebook -->
+        <button class="social-btn" aria-label="Sign in with Facebook">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+          </svg>
+        </button>
+        <!-- Apple -->
+        <button class="social-btn" aria-label="Sign in with Apple">
+          <svg viewBox="0 0 24 24">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.17c.66-.81 1.11-1.93.99-3.06-1 .04-2.22.67-2.94 1.52-.64.74-1.2 1.88-1.05 2.99 1.11.09 2.25-.57 2.98-1.45z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Redirect to signup button -->
+      <div class="signup-redirect-wrapper">
+        <span>New Player?</span>
+        <a href="registeration.html" class="signup-redirect-link">Sign Up</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Elements ---
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+      
+      const passwordInput = document.getElementById('password');
+      const passwordToggleBtn = document.getElementById('passwordToggleBtn');
+      
+      // --- Theme (Light/Dark) Logic ---
+      function toggleTheme() {
+        const isLight = htmlEl.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      }
+
+      // Initialize Theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        htmlEl.classList.add('light-theme');
+      } else {
+        htmlEl.classList.remove('light-theme');
+      }
+
+      themeToggleBtn.addEventListener('click', toggleTheme);
+
+      // --- RTL (Right-to-Left) Logic ---
+      function toggleRTL() {
+        const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+        const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+        updateRTL(newDir);
+      }
+
+      function updateRTL(dir) {
+        htmlEl.setAttribute('dir', dir);
+        localStorage.setItem('dir', dir);
+      }
+
+      // Initialize RTL
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      updateRTL(savedDir);
+
+      rtlToggleBtn.addEventListener('click', toggleRTL);
+
+      // --- Password Show/Hide Toggle ---
+      passwordToggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        
+        if (isPassword) {
+          passwordInput.setAttribute('type', 'text');
+          passwordToggleBtn.classList.add('showing-password');
+          passwordToggleBtn.setAttribute('aria-label', 'Hide Password');
+        } else {
+          passwordInput.setAttribute('type', 'password');
+          passwordToggleBtn.classList.remove('showing-password');
+          passwordToggleBtn.setAttribute('aria-label', 'Show Password');
+        }
+      });
+      
+      // --- Press Start flash effect on submit button ---
+      const loginForm = document.getElementById('loginForm');
+      const submitBtn = document.querySelector('.btn-submit');
+      const textFlash = submitBtn.querySelector('.btn-text-flash');
+      
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const originalText = textFlash.textContent;
+        textFlash.textContent = 'BOOTING...';
+        submitBtn.style.borderColor = '#00f0ff';
+        submitBtn.style.color = '#00f0ff';
+        submitBtn.style.boxShadow = 'var(--neon-glow-cyan)';
+        
+        setTimeout(() => {
+          alert('WELCOME TO RETRO WORLD! Game Booted.');
+          textFlash.textContent = originalText;
+          submitBtn.style.borderColor = '';
+          submitBtn.style.color = '';
+          submitBtn.style.boxShadow = '';
+          loginForm.reset();
+        }, 1200);
+      });
+      
+    });
+  </script>
+</body>
+</html>

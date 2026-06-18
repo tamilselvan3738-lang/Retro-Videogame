@@ -1,0 +1,4153 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Arcade Bar & Grill - About & The Crew</title>
+  <meta name="description" content="Discover the origins of the Retro Arcade Bar in the Neon District. Explore our cabinet restoration lab, core manifesto, cyber crew select, and timeline milestones.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+
+    /* ==========================================
+       1. CSS CUSTOM PROPERTIES (DESIGN SYSTEM)
+       ========================================== */
+    :root {
+      /* Theme independent tokens */
+      --font-primary: 'Space Grotesk', sans-serif;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-retro: 'Press Start 2P', cursive;
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Dark Theme Colors (Default) */
+      --color-bg-body: #05050d;
+      --color-bg-nav: rgba(10, 10, 26, 0.75);
+      --color-border-nav: rgba(255, 0, 127, 0.15);
+      --color-text-primary: #f8fafc;
+      --color-text-secondary: #94a3b8;
+      
+      --color-neon-pink: #ff007f;
+      --color-neon-cyan: #00f0ff;
+      --color-neon-yellow: #ffb700;
+      
+      --neon-glow-pink: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+      --neon-glow-cyan: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+      --neon-glow-yellow: 0 0 8px rgba(255, 183, 0, 0.6), 0 0 20px rgba(255, 183, 0, 0.3);
+      
+      --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --grid-opacity: 0.15;
+    }
+
+    /* Light Theme Colors overrides */
+    html.light-theme {
+      --color-bg-body: #f8fafc;
+      --color-bg-nav: rgba(255, 255, 255, 0.8);
+      --color-border-nav: rgba(15, 23, 42, 0.1);
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      
+      --color-neon-pink: #d90468;
+      --color-neon-cyan: #0099ad;
+      --color-neon-yellow: #d97706;
+      
+      --neon-glow-pink: 0 0 8px rgba(217, 4, 104, 0.4);
+      --neon-glow-cyan: 0 0 8px rgba(0, 153, 173, 0.4);
+      --neon-glow-yellow: 0 0 8px rgba(217, 119, 6, 0.4);
+      
+      --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      --grid-opacity: 0.04;
+    }
+
+    /* ==========================================
+       2. RESET & BASE STYLES
+       ========================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background-color: var(--color-bg-body);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      background: none;
+      border: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* ==========================================
+       3. PREMIUM NAVIGATION BAR STYLES
+       ========================================== */
+    .header-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: var(--color-bg-nav);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      border-bottom: 2px solid var(--color-border-nav);
+      box-shadow: var(--shadow-nav);
+      transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+    }
+
+    /* Container layout: Logo (Left) | Scrollable Menu (Center) | Utilities (Right) */
+    .nav-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: relative;
+    }
+
+    /* 3.1 LOGO (Left) */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.15rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      flex-shrink: 0;
+      user-select: none;
+      transition: color var(--transition-normal);
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 6px;
+      box-shadow: var(--neon-glow-pink);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .logo-icon::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    }
+
+    .logo-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .nav-logo:hover .logo-icon {
+      transform: scale(1.08) rotate(-5deg);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text .primary {
+      font-size: 1.1rem;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(255,0,127,0.1);
+      line-height: 1;
+    }
+
+    .logo-text .secondary {
+      font-family: var(--font-retro);
+      font-size: 0.45rem;
+      color: var(--color-neon-yellow);
+      letter-spacing: 0.5px;
+      margin-top: 1px;
+      animation: neonFlash 2s infinite alternate;
+    }
+
+    /* 3.2 CENTER MENU SYSTEM (Scrollable with Masking) */
+    .nav-menu-wrapper {
+      flex-grow: 1;
+      max-width: 1100px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      min-width: 0; /* Allow the wrapper to shrink below content size and trigger scroll overflow */
+    }
+
+    /* Fading gradients at edges when overflow exists */
+    .nav-menu-wrapper::before,
+    .nav-menu-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+      opacity: 0;
+    }
+    .nav-menu-wrapper.fade-left::before {
+      left: 0;
+      background: linear-gradient(to right, var(--color-bg-body), transparent);
+      opacity: 1;
+    }
+    .nav-menu-wrapper.fade-right::after {
+      right: 0;
+      background: linear-gradient(to left, var(--color-bg-body), transparent);
+      opacity: 1;
+    }
+    
+    /* In Light mode we need different gradient overlays */
+    html.light-theme .nav-menu-wrapper.fade-left::before {
+      background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
+    }
+    html.light-theme .nav-menu-wrapper.fade-right::after {
+      background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+    }
+
+    /* Scroll buttons (Chevrons) - visible on desktop when overflow is present */
+    .scroll-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-bg-body);
+      border: 1px solid var(--color-border-nav);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      color: var(--color-neon-cyan);
+      transition: opacity var(--transition-normal), transform var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
+    }
+    .scroll-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-btn:hover {
+      background: var(--color-neon-cyan);
+      color: var(--color-bg-body);
+      box-shadow: var(--neon-glow-cyan);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .scroll-btn-left {
+      left: 2px;
+    }
+    .scroll-btn-right {
+      right: 2px;
+    }
+
+    .scroll-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* The actual horizontal scroll container */
+    .nav-menu-scroll {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      padding: 0.4rem 0.5rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Prevent links and dropdowns from shrinking and getting squished in narrow headers */
+    .nav-menu-scroll > * {
+      flex-shrink: 0;
+    }
+
+    /* Safe alignment fallback when overflow is present */
+    .nav-menu-wrapper.has-scroll-overflow .nav-menu-scroll {
+      justify-content: flex-start;
+      padding-left: 38px;
+      padding-right: 38px;
+    }
+
+    /* Perfectly center the center navigation wrapper by giving equal flex-grow allocation to left and right sidebars */
+    @media (min-width: 1200px) {
+      .nav-logo {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        min-width: max-content;
+      }
+      .nav-actions {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        min-width: max-content;
+      }
+    }
+
+    /* Chrome, Safari, Opera */
+    .nav-menu-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Menu Link Styling */
+    .nav-link {
+      padding: 0.25rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+      user-select: none;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width var(--transition-fast);
+    }
+
+    /* Hover States - Glow and visual cue */
+    .nav-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    html.light-theme .nav-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-link:hover::before {
+      width: 60%;
+    }
+
+    /* Active page state styling */
+    .nav-link.active {
+      color: var(--color-neon-cyan);
+      font-weight: 600;
+      background: rgba(0, 240, 255, 0.08);
+    }
+    
+    html.light-theme .nav-link.active {
+      background: rgba(0, 153, 173, 0.08);
+    }
+
+    .nav-link.active::before {
+      width: 80%;
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    /* 3.3 UTILITIES (Right) - Toggles & CTA */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* Switch base styling */
+    .icon-toggle-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .icon-toggle-btn:hover {
+      color: var(--color-neon-cyan);
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      background: rgba(0, 240, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .icon-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      transition: transform var(--transition-normal), opacity var(--transition-fast);
+    }
+
+    /* Dark Mode Toggle specific */
+    .theme-toggle .sun-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(90deg);
+      position: absolute;
+    }
+    .theme-toggle .moon-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    html.light-theme .theme-toggle .sun-icon {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    html.light-theme .theme-toggle .moon-icon {
+      opacity: 0;
+      transform: scale(0.5) rotate(-90deg);
+      position: absolute;
+    }
+
+    /* RTL Toggle Button with SVG flip arrow */
+    .rtl-toggle-btn svg {
+      transition: transform var(--transition-normal);
+    }
+    
+    html[dir="rtl"] .rtl-toggle-btn svg {
+      transform: rotate(180deg);
+      color: var(--color-neon-pink);
+    }
+
+    /* Login Button - Arcade Style "INSERT COIN" / "PRESS START" */
+    .btn-login {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      letter-spacing: 1.2px;
+      background: #000000;
+      color: var(--color-neon-yellow);
+      border: 3px double var(--color-neon-yellow);
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40px;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.15);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+    }
+
+    .btn-login:hover {
+      color: #000000;
+      background: var(--color-neon-yellow);
+      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    .btn-login:hover::after {
+      left: 140%;
+      opacity: 1;
+    }
+
+    .btn-login:active {
+      transform: scale(0.98) translateY(1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .coin-slot-icon {
+      width: 8px;
+      height: 11px;
+      background-color: currentColor;
+      border-radius: 2px;
+      display: inline-block;
+      position: relative;
+    }
+    .coin-slot-icon::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 3px;
+      width: 2px;
+      height: 7px;
+      background-color: #000000;
+    }
+    .btn-login:hover .coin-slot-icon::before {
+      background-color: var(--color-neon-yellow);
+    }
+
+    .btn-text-flash {
+      animation: insertCoinFlash 1.5s infinite steps(2);
+    }
+
+    /* 3.4 MOBILE MENU BUTTON (Hamburger) */
+    .mobile-menu-btn {
+      display: none; /* Hidden on desktop */
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      z-index: 1100;
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-menu-btn:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background-color: rgba(255, 0, 127, 0.05);
+    }
+
+    .hamburger-line {
+      width: 22px;
+      height: 2px;
+      background-color: var(--color-text-primary);
+      border-radius: 2px;
+      transition: transform var(--transition-normal), opacity var(--transition-normal), background-color var(--transition-fast);
+    }
+
+    /* Mobile Hamburger Active state morphing into 'X' */
+    .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background-color: var(--color-neon-pink);
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background-color: var(--color-neon-pink);
+    }
+
+    /* 3.5 MOBILE DRAWER MENU */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%; /* Hidden off-screen by default */
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background-color: var(--color-bg-body);
+      border-left: 2px solid var(--color-border-nav);
+      z-index: 1050;
+      box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      padding: 75px 1.5rem 2rem 1.5rem;
+      gap: 1.5rem;
+      transition: right var(--transition-normal), left var(--transition-normal);
+      overflow-y: auto;
+    }
+    
+    .mobile-drawer.active {
+      right: 0;
+    }
+
+    /* Overlay backing */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 1040;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    .mobile-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .mobile-drawer .nav-link {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .mobile-drawer .nav-link::before {
+      bottom: 50%;
+      left: 0;
+      transform: translateY(50%);
+      width: 3px;
+      height: 0;
+      transition: height var(--transition-fast);
+    }
+    
+    .mobile-drawer .nav-link:hover::before,
+    .mobile-drawer .nav-link.active::before {
+      height: 70%;
+      width: 3px;
+    }
+
+    .mobile-drawer-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border-nav);
+    }
+
+    .mobile-actions {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mobile-drawer .btn-login {
+      justify-content: center;
+      width: 100%;
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================
+       4. RTL LAYOUT MODIFICATIONS
+       ========================================== */
+    html[dir="rtl"] {
+      /* Flip logic for items */
+      direction: rtl;
+    }
+
+    /* Adjust margins and alignments for RTL */
+    html[dir="rtl"] .logo-text .secondary {
+      letter-spacing: 0;
+    }
+
+    html[dir="rtl"] .mobile-drawer {
+      right: auto;
+      left: -100%;
+      border-left: none;
+      border-right: 2px solid var(--color-border-nav);
+      box-shadow: 10px 0 40px rgba(0,0,0,0.8);
+    }
+
+    html[dir="rtl"] .mobile-drawer.active {
+      left: 0;
+      right: auto;
+    }
+
+    html[dir="rtl"] .mobile-drawer .nav-link::before {
+      left: auto;
+      right: 0;
+    }
+
+    /* ==========================================
+       5. SHOWCASE HERO SECTION (FOR TESTING)
+       ========================================== */
+    .hero-showcase {
+      padding-top: 120px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      padding-bottom: 60px;
+    }
+
+    /* Glowing retro neon grid background */
+    .retro-grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .grid-lines {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 200vw;
+      height: 300vh;
+      transform: translateX(-50%) perspective(500px) rotateX(60deg);
+      background-image: 
+        linear-gradient(to right, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px);
+      background-size: 50px 50px;
+      background-position: center bottom;
+      animation: gridScroll 20s linear infinite;
+      transform-origin: center bottom;
+    }
+
+    /* Sun/glow behind hero content */
+    .synth-sun {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 20%);
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(to bottom, var(--color-neon-pink), var(--color-neon-yellow));
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.18;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+    
+    html.light-theme .synth-sun {
+      opacity: 0.06;
+    }
+
+    /* Hero elements container */
+    .hero-content {
+      max-width: 1000px;
+      padding: 0 2rem;
+      z-index: 10;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-retro);
+      line-height: 1.5;
+      font-size: 0.6rem;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--color-neon-cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+      background: linear-gradient(to bottom, #ffffff 30%, #e2e8f0 70%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+    }
+    
+    html.light-theme .hero-title {
+      background: linear-gradient(to bottom, #0f172a, #334155);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-title span {
+      display: block;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.25));
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--color-text-secondary);
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+      line-height: 1.6;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--color-neon-pink), #e100ff);
+      color: #ffffff;
+      border-radius: 30px;
+      box-shadow: var(--neon-glow-pink), 0 10px 20px rgba(255, 0, 127, 0.2);
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(255, 0, 127, 0.4), var(--neon-glow-pink);
+    }
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border-nav);
+      border-radius: 30px;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-text-primary);
+      transform: translateY(-3px);
+    }
+    html.light-theme .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Floating retro details */
+    .retro-details {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.25;
+      font-family: var(--font-retro);
+      font-size: 0.8rem;
+      color: var(--color-neon-cyan);
+    }
+
+    .retro-details-right {
+      position: absolute;
+      bottom: 25%;
+      right: 12%;
+      animation: float 8s ease-in-out infinite alternate;
+      opacity: 0.25;
+      font-family: var(--font-retro);
+      font-size: 0.8rem;
+      color: var(--color-neon-pink);
+    }
+
+    /* ==========================================
+       6. ANIMATIONS
+       ========================================== */
+    @keyframes neonFlash {
+      0%, 100% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+      45%, 55% { opacity: 0.4; text-shadow: none; }
+      50% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+    }
+
+    @keyframes insertCoinFlash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.15; }
+    }
+
+    @keyframes gridScroll {
+      0% { background-position: center 0px; }
+      100% { background-position: center 1000px; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* ==========================================
+       7. RESPONSIVE MEDIA QUERIES
+       ========================================== */
+    @media (min-width: 1200px) and (max-width: 1360px) {
+      .nav-link {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.35rem;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .nav-actions {
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      .nav-container {
+        padding: 0 1.5rem;
+      }
+      .nav-logo {
+        font-size: 1.25rem;
+      }
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+      }
+      .logo-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    /* Breakpoint where center menu and utilities fold into Hamburger drawer */
+    @media (max-width: 1199.98px) {
+      .nav-menu-wrapper {
+        display: none; /* Hide center menu */
+      }
+      
+      .nav-actions {
+        display: none; /* Hide default action items */
+      }
+      
+      .mobile-menu-btn {
+        display: flex; /* Show hamburger button */
+      }
+    }
+
+    /* Modern responsive updates for mobile-first design */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Target 768px (Tablet) */
+    @media (max-width: 768px) {
+      .retro-details,
+      .retro-details-right {
+        display: none !important;
+      }
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .site-footer {
+        padding: 2.5rem 1rem 1.5rem 1rem;
+      }
+      .footer-container {
+        gap: 2rem;
+      }
+    }
+
+    /* Target 480px (Mobile Landscape) */
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 0.75rem;
+      }
+      .nav-logo {
+        font-size: 1rem;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .logo-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .footer-brand {
+        text-align: center;
+        align-items: center;
+      }
+      .footer-brand .nav-logo {
+        align-self: center;
+      }
+      .footer-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      html[dir="rtl"] .footer-title::after {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+    }
+
+    /* Target 320px (Mobile Portrait) */
+    @media (max-width: 320px) {
+      .nav-container {
+        padding: 0 0.5rem;
+        gap: 0.5rem;
+      }
+      .nav-logo {
+        font-size: 0.85rem;
+      }
+      .logo-text .secondary {
+        display: none; /* Hide secondary text to prevent wrapping on tiny screens */
+      }
+    }
+
+
+    /* ==========================================
+       8. SITE FOOTER STYLES
+       ========================================== */
+    .site-footer {
+      background-color: rgba(6, 6, 18, 0.95);
+      border-top: 3px solid var(--color-border-nav);
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+      padding: 4rem 2rem 2rem 2rem;
+      position: relative;
+      z-index: 10;
+      transition: background-color var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    html.light-theme .site-footer {
+      background-color: rgba(241, 245, 249, 0.95);
+      border-top: 3px solid var(--color-border-nav);
+      box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.03);
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-brand .nav-logo {
+      align-self: flex-start;
+    }
+
+    .footer-tagline {
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .footer-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+      border-radius: 2px;
+    }
+    
+    html[dir="rtl"] .footer-title::after {
+      left: auto;
+      right: 0;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-link {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      transition: color var(--transition-fast), padding var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .footer-link:hover {
+      color: var(--color-neon-cyan);
+      text-shadow: var(--neon-glow-cyan);
+      padding-left: 4px;
+    }
+    
+    html[dir="rtl"] .footer-link:hover {
+      padding-left: 0;
+      padding-right: 4px;
+    }
+
+    .footer-contact-info {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.88rem;
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .footer-contact-info li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .footer-contact-info svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--color-neon-pink);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 3rem auto 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    html.light-theme .footer-bottom {
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+    }
+
+    .footer-easter-egg {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      color: var(--color-neon-yellow);
+      animation: insertCoinFlash 1.5s infinite steps(2);
+      letter-spacing: 1px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+    }
+
+    .social-btn:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background: rgba(255, 0, 127, 0.05);
+      transform: translateY(-3px);
+    }
+
+    .social-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    /* ==========================================
+       9. DRAWER CLOSE & DROPDOWN MENU STYLES
+       ========================================== */
+    .drawer-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--color-border-nav);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all var(--transition-fast);
+      z-index: 10;
+    }
+
+    .drawer-close-btn:hover {
+      color: var(--color-neon-pink);
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      background: rgba(255, 0, 127, 0.05);
+      transform: scale(1.05);
+    }
+
+    .drawer-close-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    html[dir="rtl"] .drawer-close-btn {
+      right: auto;
+      left: 15px;
+    }
+
+    /* Dropdown wrapper in mobile menu */
+    .nav-item-dropdown {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* Caret indicator for dropdown */
+    .dropdown-toggle::after {
+      content: '▾';
+      font-size: 0.7rem;
+      margin-left: 0.25rem;
+      display: inline-block;
+      transition: transform var(--transition-fast);
+    }
+    
+    html[dir="rtl"] .dropdown-toggle::after {
+      margin-left: 0;
+      margin-right: 0.25rem;
+    }
+
+    .nav-item-dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+      color: var(--color-neon-cyan);
+    }
+
+    /* Submenu (hidden by default, expands on hover) */
+    .dropdown-submenu {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-left: 1.5rem;
+      transition: max-height var(--transition-normal) ease-out, opacity var(--transition-fast), margin var(--transition-fast);
+    }
+
+    html[dir="rtl"] .dropdown-submenu {
+      padding-left: 0;
+      padding-right: 1.5rem;
+    }
+
+    /* Mobile dropdown expand class (controlled via JavaScript) */
+    .mobile-drawer .dropdown-submenu.open {
+      max-height: 80px;
+      opacity: 1;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Desktop dropdown expand on hover (laptop/desktop viewports) */
+    @media (min-width: 993px) {
+      .nav-menu-wrapper:not(.has-scroll-overflow) {
+        overflow: visible !important;
+      }
+
+      .nav-menu-wrapper:not(.has-scroll-overflow) .nav-menu-scroll {
+        overflow: visible !important;
+        overflow-x: visible !important;
+      }
+
+      .desktop-dropdown {
+        position: relative;
+        width: auto !important;
+        display: inline-flex;
+      }
+
+      .desktop-submenu {
+        position: absolute;
+        top: calc(100% + 15px);
+        left: 50%;
+        transform: translateX(-50%) translateY(-5px);
+        background-color: var(--color-bg-nav);
+        backdrop-filter: blur(12px) saturate(160%);
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
+        border: 2px solid var(--color-border-nav);
+        border-radius: 8px;
+        padding: 0.4rem;
+        min-width: 110px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        box-shadow: var(--shadow-nav);
+        opacity: 0;
+        visibility: hidden;
+        max-height: none !important;
+        transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+        z-index: 100;
+      }
+
+      .desktop-dropdown:hover .desktop-submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Submenu links styling */
+    .submenu-link {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      border-radius: 6px;
+      transition: all var(--transition-fast);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      user-select: none;
+    }
+
+    .submenu-link::before {
+      content: '►';
+      font-size: 0.5rem;
+      color: var(--color-neon-pink);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all var(--transition-fast);
+    }
+
+    html[dir="rtl"] .submenu-link::before {
+      content: '◄';
+    }
+
+    .submenu-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.04);
+      padding-left: 1.2rem;
+    }
+
+    html.light-theme .submenu-link:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    html[dir="rtl"] .submenu-link:hover {
+      padding-left: 0.8rem;
+      padding-right: 1.2rem;
+    }
+
+    .submenu-link:hover::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .submenu-link.active {
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.05);
+    }
+
+    /* ==========================================
+       5. PRICING SPECIFIC COMPONENT STYLING
+       ========================================== */
+    .pricing-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 7rem 2rem 4rem 2rem;
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    .pricing-hero {
+      text-align: center;
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-retro);
+      font-size: 0.6rem;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid var(--color-neon-cyan);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .pricing-section {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      padding: 3.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    html.light-theme .pricing-section {
+      border-bottom-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .pricing-section:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .pricing-text-block {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      min-width: 0;
+    }
+
+    .pricing-visual-block {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .section-num {
+      font-family: var(--font-retro);
+      font-size: 0.8rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+      margin-bottom: 0.2rem;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: 0.5px;
+      background: linear-gradient(to right, var(--color-text-primary) 50%, var(--color-text-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html.light-theme .section-title {
+      background: linear-gradient(to right, #0f172a 50%, #475569);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .visual-frame {
+      position: relative;
+      border: 3px solid var(--color-border-nav);
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1/1;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+      transition: all var(--transition-normal);
+      background: #000;
+    }
+
+    .visual-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .visual-frame:hover {
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .visual-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    .visual-tag-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 5;
+      font-family: var(--font-retro);
+      font-size: 0.45rem;
+      color: var(--color-neon-yellow);
+      background: rgba(0, 0, 0, 0.75);
+      border: 1px solid var(--color-neon-yellow);
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    /* Card Deck layouts */
+    .card-deck {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .pricing-card {
+      background: rgba(10, 10, 26, 0.65);
+      border: 2px solid var(--color-border-nav);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      transition: all var(--transition-normal);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    html.light-theme .pricing-card {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+    }
+
+    .pricing-card:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      transform: translateY(-5px);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-family: var(--font-retro);
+      font-size: 0.45rem;
+      color: var(--color-neon-yellow);
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--color-neon-yellow);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .card-header-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .card-price {
+      font-family: var(--font-retro);
+      font-size: 1.5rem;
+      color: var(--color-neon-cyan);
+      margin: 1rem 0;
+      text-shadow: var(--neon-glow-cyan);
+    }
+
+    .card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin: 1rem 0 1.5rem 0;
+      width: 100%;
+      text-align: left;
+    }
+
+    .card-feature-item {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .card-feature-item::before {
+      content: '✓';
+      color: var(--color-neon-cyan);
+      font-weight: bold;
+    }
+
+    .card-btn {
+      width: 100%;
+      font-family: var(--font-retro);
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--color-neon-cyan);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      transition: all var(--transition-fast);
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .card-btn:hover {
+      background: var(--color-neon-cyan);
+      color: #000;
+      box-shadow: 0 0 15px var(--color-neon-cyan);
+    }
+
+    /* Highlighted card variant */
+    .pricing-card.highlighted {
+      border-color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .pricing-card.highlighted:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .pricing-card.highlighted .card-price {
+      color: var(--color-neon-yellow);
+      text-shadow: var(--neon-glow-yellow);
+    }
+
+    .pricing-card.highlighted .card-btn {
+      border-color: var(--color-neon-yellow);
+      color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .pricing-card.highlighted .card-btn:hover {
+      background: var(--color-neon-yellow);
+      color: #000;
+      box-shadow: 0 0 15px var(--color-neon-yellow);
+    }
+
+    /* Ticket-style passes section styling */
+    .ticket-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .ticket-card {
+      background: rgba(10, 10, 26, 0.7);
+      border: 2px dashed var(--color-border-nav);
+      border-radius: 12px;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      transition: all var(--transition-normal);
+      gap: 1.5rem;
+    }
+
+    html.light-theme .ticket-card {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .ticket-card:hover {
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .ticket-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 0;
+    }
+
+    .ticket-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+    }
+
+    .ticket-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .ticket-price-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+
+    .ticket-price {
+      font-family: var(--font-retro);
+      font-size: 1.4rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+    }
+
+    .ticket-badge {
+      font-family: monospace;
+      font-size: 0.7rem;
+      color: var(--color-neon-yellow);
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Scoreboard challenges styling */
+    .scoreboard-deck {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .score-panel {
+      background: #020512;
+      border: 3px double var(--color-border-nav);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      transition: all var(--transition-normal);
+    }
+
+    html.light-theme .score-panel {
+      background: #f1f5f9;
+      border-style: solid;
+      border-width: 2px;
+    }
+
+    .score-panel:hover {
+      border-color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .score-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+    }
+
+    html.light-theme .score-panel-header {
+      border-bottom-color: rgba(15, 23, 42, 0.15);
+    }
+
+    .score-panel-title {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      color: var(--color-neon-cyan);
+      text-shadow: var(--neon-glow-cyan);
+      letter-spacing: 0.5px;
+    }
+
+    .score-panel-id {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      font-weight: bold;
+    }
+
+    .score-panel-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .score-panel-heading {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+    }
+
+    .score-panel-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .score-panel-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+    }
+
+    .score-panel-price {
+      font-family: var(--font-retro);
+      font-size: 1.1rem;
+      color: var(--color-neon-yellow);
+      text-shadow: var(--neon-glow-yellow);
+    }
+
+    .score-panel-action {
+      font-family: var(--font-retro);
+      font-size: 0.45rem;
+      color: #000;
+      background: var(--color-neon-yellow);
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: var(--neon-glow-yellow);
+      transition: all var(--transition-fast);
+    }
+
+    .score-panel-action:hover {
+      background: var(--color-neon-pink);
+      color: #fff;
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    /* Special Offers Section styling */
+    .special-offer-card {
+      background: linear-gradient(135deg, rgba(255, 0, 127, 0.05), rgba(0, 240, 255, 0.05));
+      border: 2px solid var(--color-border-nav);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      box-shadow: inset 0 0 15px rgba(255, 0, 127, 0.1);
+      position: relative;
+    }
+
+    html.light-theme .special-offer-card {
+      background: linear-gradient(135deg, rgba(217, 4, 104, 0.03), rgba(0, 153, 173, 0.03));
+    }
+
+    .special-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .special-item {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: all var(--transition-fast);
+    }
+
+    html.light-theme .special-item {
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .special-item:hover {
+      border-color: var(--color-neon-cyan);
+      transform: scale(1.02);
+    }
+
+    .special-tag {
+      font-family: var(--font-retro);
+      font-size: 0.5rem;
+      color: var(--color-neon-cyan);
+      text-shadow: var(--neon-glow-cyan);
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .special-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+    }
+
+    .special-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .special-value {
+      font-family: var(--font-retro);
+      font-size: 0.72rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+      margin-top: auto;
+      padding-top: 0.5rem;
+      display: inline-block;
+      line-height: 1.6;
+    }
+
+    #special-offers .visual-frame {
+      aspect-ratio: 3/4;
+    }
+
+    @media (max-width: 992px) {
+      #special-offers .visual-frame {
+        aspect-ratio: 16/9;
+        max-width: 440px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Token bundles styling */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .token-card {
+      background: radial-gradient(circle at top, rgba(255, 183, 0, 0.08) 0%, rgba(10, 10, 26, 0.8) 100%);
+      border: 2px solid var(--color-border-nav);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    html.light-theme .token-card {
+      background: radial-gradient(circle at top, rgba(217, 119, 6, 0.04) 0%, rgba(255, 255, 255, 0.9) 100%);
+    }
+
+    .token-card:hover {
+      border-color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+      transform: translateY(-4px);
+    }
+
+    .token-icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(255, 183, 0, 0.1);
+      border: 1px solid var(--color-neon-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .token-icon-wrap svg {
+      width: 32px;
+      height: 32px;
+      fill: var(--color-neon-yellow);
+    }
+
+    .token-card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .token-count {
+      font-family: var(--font-retro);
+      font-size: 1rem;
+      color: var(--color-neon-yellow);
+      margin: 0.5rem 0;
+      text-shadow: var(--neon-glow-yellow);
+    }
+
+    .token-value-badge {
+      font-size: 0.72rem;
+      color: var(--color-neon-cyan);
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .token-price-tag {
+      font-family: var(--font-retro);
+      font-size: 1.25rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+      margin-bottom: 1rem;
+    }
+
+    .token-btn {
+      width: 100%;
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      padding: 0.6rem;
+      border: 2px solid var(--color-neon-yellow);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+      transition: all var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .token-btn:hover {
+      background: var(--color-neon-yellow);
+      color: #000;
+      box-shadow: 0 0 15px var(--color-neon-yellow);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .pricing-section {
+        flex-direction: column !important;
+        gap: 2.5rem;
+        padding: 3rem 0;
+      }
+      .pricing-text-block {
+        width: 100%;
+      }
+      .pricing-visual-block {
+        width: 100%;
+      }
+      .visual-frame {
+        max-width: 100%;
+      }
+      .ticket-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .ticket-price-block {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-wrapper {
+        padding-top: 6rem;
+        gap: 3.5rem;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+    }
+    /* ==========================================
+       NAVBAR OVERRIDES FOR DESKTOP & LAPTOP
+       ========================================== */
+    .nav-link {
+      border: 1px solid transparent;
+      transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast) !important;
+    }
+    
+    .nav-link.active {
+      color: var(--color-neon-cyan) !important;
+      font-weight: 600 !important;
+      background: rgba(0, 240, 255, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
+    }
+    
+    html.light-theme .nav-link.active {
+      background: rgba(0, 153, 173, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 8px rgba(0, 153, 173, 0.2) !important;
+    }
+
+    @media (min-width: 993px) {
+      .scroll-btn {
+        display: none !important;
+      }
+      .nav-menu-scroll {
+        overflow: visible !important;
+        overflow-x: visible !important;
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .nav-menu-wrapper {
+        overflow: visible !important;
+        max-width: none !important;
+      }
+      .nav-menu-wrapper::before,
+      .nav-menu-wrapper::after {
+        display: none !important;
+      }
+      .nav-link::before {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 993px) and (max-width: 1440px) {
+      .nav-link {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.4rem !important;
+      }
+      .nav-menu-scroll {
+        gap: 0.1rem !important;
+      }
+    }
+  
+
+    /* ==========================================
+       10. RETRO ABOUT CUSTOM STYLES (NEW)
+       ========================================== */
+       10. RETRO ABOUT CUSTOM STYLES (NEW)
+       ========================================== */
+    .about-main-content {
+      padding-top: 80px;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .ab-section {
+      padding: 6rem 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .ab-divider {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--color-neon-pink), var(--color-neon-cyan), transparent);
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      opacity: 0.3;
+    }
+
+    .ab-section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .ab-subtitle {
+      font-family: var(--font-retro);
+      font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+      color: var(--color-neon-cyan);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      display: inline-block;
+      text-shadow: var(--neon-glow-cyan);
+      text-transform: uppercase;
+      animation: insertCoinFlash 2s infinite alternate;
+    }
+
+    .ab-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    html.light-theme .ab-title {
+      background: linear-gradient(135deg, #0f172a 30%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .ab-section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    html.light-theme .ab-section-title {
+      color: #0f172a;
+    }
+
+    .ab-desc {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--color-text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* CARD SYSTEM & GLASSMORPHISM */
+    .ab-card {
+      background: rgba(10, 10, 26, 0.65);
+      border: 1px solid rgba(255, 0, 127, 0.15);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(8px);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.light-theme .ab-card {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(217, 4, 104, 0.15);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .ab-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--color-neon-cyan);
+      box-shadow: 0 15px 35px rgba(0, 240, 255, 0.15), var(--neon-glow-cyan);
+    }
+
+    /* ==========================================
+       SECTION 1: HERO BANNER
+       ========================================== */
+    .ab-hero-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ab-hero-visual {
+      margin-top: 3.5rem;
+      border: 3px double var(--color-neon-pink);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--neon-glow-pink);
+      aspect-ratio: 16 / 10;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .ab-hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ==========================================
+       SECTION 2: ORIGIN STORY
+       ========================================== */
+    .ab-story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 992px) {
+      .ab-story-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .ab-story-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .ab-paragraph {
+      color: var(--color-text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .ab-story-visual {
+      border: 3px double var(--color-neon-cyan);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--neon-glow-cyan);
+      aspect-ratio: 16 / 10;
+      width: 100%;
+    }
+
+    .ab-story-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ==========================================
+       SECTION 3: CABINET RESTORATION LAB
+       ========================================== */
+    .ab-lab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .ab-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .ab-card-icon.pink {
+      text-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-card-icon.cyan {
+      text-shadow: var(--neon-glow-cyan);
+    }
+
+    .ab-card-icon.yellow {
+      text-shadow: var(--neon-glow-yellow);
+    }
+
+    .ab-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    html.light-theme .ab-card h3 {
+      color: #0f172a;
+    }
+
+    /* ==========================================
+       SECTION 4: RETRO MANIFESTO
+       ========================================== */
+    .ab-manifesto-container {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 992px) {
+      .ab-manifesto-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .ab-manifesto-visual {
+        order: -1;
+      }
+    }
+
+    .ab-manifesto-visual {
+      border: 3px double var(--color-neon-yellow);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--neon-glow-yellow);
+      aspect-ratio: 16 / 10;
+      width: 100%;
+    }
+
+    .ab-manifesto-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ab-manifesto-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .ab-manifesto-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .ab-item-num {
+      font-family: var(--font-retro);
+      font-size: 1.15rem;
+      color: var(--color-neon-yellow);
+      text-shadow: var(--neon-glow-yellow);
+      margin-top: 0.25rem;
+      flex-shrink: 0;
+    }
+
+    .ab-manifesto-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    html.light-theme .ab-manifesto-item h3 {
+      color: #0f172a;
+    }
+
+    .ab-manifesto-item p {
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    /* ==========================================
+       SECTION 5: CYBER CREW CHARACTER SELECT
+       ========================================== */
+    .ab-crew-shelf {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 3.5rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 992px) {
+      .ab-crew-shelf {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    .ab-crew-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .ab-crew-slot {
+      background: rgba(10, 10, 26, 0.5);
+      border: 2px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+      position: relative;
+    }
+
+    html.light-theme .ab-crew-slot {
+      background: rgba(255, 255, 255, 0.5);
+      border-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .ab-crew-slot:hover {
+      border-color: var(--color-neon-pink);
+      box-shadow: 0 0 10px rgba(255, 0, 127, 0.15);
+      transform: scale(1.02);
+    }
+
+    .ab-crew-slot.active {
+      border-color: var(--color-neon-pink);
+      background: rgba(255, 0, 127, 0.05);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-slot-img {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .ab-slot-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    html.light-theme .ab-slot-name {
+      color: #0f172a;
+    }
+
+    .ab-slot-label {
+      font-family: var(--font-retro);
+      font-size: 0.55rem;
+      color: var(--color-neon-cyan);
+      margin-top: 0.35rem;
+      letter-spacing: 1px;
+    }
+
+    .ab-crew-dashboard {
+      border: 3px solid #1f2937;
+      background: #020208;
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    html.light-theme .ab-crew-dashboard {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    .ab-dash-header {
+      background: #0d0d18;
+      border-bottom: 2px dashed rgba(255, 0, 127, 0.15);
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    html.light-theme .ab-dash-header {
+      background: #f1f5f9;
+      border-bottom-color: rgba(217, 4, 104, 0.15);
+    }
+
+    .ab-dash-title {
+      font-family: var(--font-retro);
+      font-size: 0.75rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-dash-dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .ab-dash-dots .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-dash-dots .dot:nth-child(2) {
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .ab-dash-dots .dot:nth-child(3) {
+      background: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .ab-dash-content {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .ab-dash-profile {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 480px) {
+      .ab-dash-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .ab-dash-visual {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      border: 2px solid var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ab-dash-avatar-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .ab-dash-avatar {
+      font-size: 3rem;
+      z-index: 2;
+    }
+
+    .ab-dash-bio h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    html.light-theme .ab-dash-bio h3 {
+      color: #0f172a;
+    }
+
+    .ab-dash-role {
+      font-family: var(--font-retro);
+      font-size: 0.58rem;
+      color: var(--color-neon-cyan);
+      text-shadow: var(--neon-glow-cyan);
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    .ab-dash-meta {
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .ab-dash-meta strong {
+      color: var(--color-text-primary);
+      font-family: var(--font-display);
+      letter-spacing: 0.5px;
+      font-size: 0.85rem;
+    }
+
+    .ab-dash-meta code {
+      font-family: var(--font-retro);
+      font-size: 0.62rem;
+      color: var(--color-neon-yellow);
+      background: rgba(255, 183, 0, 0.08);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      display: inline-block;
+      line-height: 1.6;
+    }
+
+    .ab-dash-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .ab-stat-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 40px;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 480px) {
+      .ab-stat-row {
+        grid-template-columns: 60px 1fr 30px;
+        gap: 0.75rem;
+      }
+    }
+
+    .ab-stat-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      letter-spacing: 1px;
+    }
+
+    .ab-stat-bar-outer {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    html.light-theme .ab-stat-bar-outer {
+      background: rgba(15, 23, 42, 0.08);
+    }
+
+    .ab-stat-bar-inner {
+      height: 100%;
+      border-radius: 4px;
+      transition: width var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .ab-stat-bar-inner.pink {
+      background: var(--color-neon-pink);
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-stat-bar-inner.cyan {
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+    }
+
+    .ab-stat-bar-inner.yellow {
+      background: var(--color-neon-yellow);
+      box-shadow: var(--neon-glow-yellow);
+    }
+
+    .ab-stat-val {
+      font-family: var(--font-retro);
+      font-size: 0.68rem;
+      color: var(--color-text-primary);
+      text-align: right;
+    }
+
+    /* ==========================================
+       SECTION 6: MILESTONE TIMELINE
+       ========================================== */
+    .ab-timeline-container {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    .ab-timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--color-neon-pink), var(--color-neon-cyan), var(--color-neon-yellow));
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+
+    @media (max-width: 768px) {
+      .ab-timeline-line {
+        left: 20px;
+      }
+    }
+
+    .ab-timeline-node {
+      position: relative;
+      width: 50%;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .ab-timeline-node {
+        width: 100%;
+        padding-left: 45px;
+      }
+      .ab-timeline-node.left {
+        left: 0 !important;
+      }
+      .ab-timeline-node.right {
+        left: 0 !important;
+      }
+    }
+
+    .ab-timeline-node.left {
+      left: 0;
+      padding-right: 45px;
+    }
+
+    .ab-timeline-node.right {
+      left: 50%;
+      padding-left: 45px;
+    }
+
+    .ab-timeline-dot {
+      width: 20px;
+      height: 20px;
+      background-color: var(--color-neon-pink);
+      border-radius: 50%;
+      position: absolute;
+      top: 2.5rem;
+      z-index: 5;
+      box-shadow: var(--neon-glow-pink);
+    }
+
+    .ab-timeline-node.left .ab-timeline-dot {
+      right: -10px;
+    }
+
+    .ab-timeline-node.right .ab-timeline-dot {
+      left: -10px;
+    }
+
+    @media (max-width: 768px) {
+      .ab-timeline-node.left .ab-timeline-dot,
+      .ab-timeline-node.right .ab-timeline-dot {
+        left: 10px;
+        right: auto;
+      }
+    }
+
+    .ab-timeline-card {
+      padding: 1.75rem;
+    }
+
+    .ab-timeline-date {
+      font-family: var(--font-retro);
+      font-size: 0.65rem;
+      color: var(--color-neon-pink);
+      text-shadow: var(--neon-glow-pink);
+      margin-bottom: 0.6rem;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .ab-timeline-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ==========================================
+       SECTION 7: LOUNGE SECTORS GALLERY
+       ========================================== */
+    .ab-tour-shelf {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .ab-tour-screen {
+      border: 3px double var(--color-neon-cyan);
+      border-radius: 16px;
+      box-shadow: var(--neon-glow-cyan);
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      position: relative;
+    }
+
+    .ab-tour-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-slow), visibility var(--transition-slow);
+      z-index: 1;
+    }
+
+    .ab-tour-slide.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .ab-tour-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .ab-tour-overlay {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(2, 2, 8, 0.9) 20%, transparent 100%);
+      padding: 2.5rem 2rem 1.5rem 2rem;
+      color: #fff;
+      z-index: 5;
+    }
+
+    html.light-theme .ab-tour-overlay {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 20%, transparent 100%);
+      color: #0f172a;
+    }
+
+    .ab-tour-overlay h3 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    .ab-tour-overlay p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .ab-tour-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(2, 2, 8, 0.7);
+      border: 1px solid var(--color-neon-cyan);
+      color: var(--color-neon-cyan);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      user-select: none;
+    }
+
+    .ab-tour-arrow:hover {
+      background: var(--color-neon-cyan);
+      color: #000;
+      box-shadow: var(--neon-glow-cyan);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .ab-tour-arrow.left {
+      left: 15px;
+    }
+
+    .ab-tour-arrow.right {
+      right: 15px;
+    }
+
+    .ab-crt-scan {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 4px, 6px 100%;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    .ab-tour-nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .ab-tour-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    html.light-theme .ab-tour-dot {
+      background: rgba(15, 23, 42, 0.2);
+    }
+
+    .ab-tour-dot.active {
+      background: var(--color-neon-cyan);
+      box-shadow: var(--neon-glow-cyan);
+      transform: scale(1.2);
+    }
+
+    /* ==========================================
+       RTL LAYOUT OVERRIDES (ABOUT PAGE)
+       ========================================== */
+    html[dir="rtl"] .ab-timeline-node.left {
+      left: 50%;
+      padding-left: 45px;
+      padding-right: 0;
+    }
+
+    html[dir="rtl"] .ab-timeline-node.right {
+      left: 0;
+      padding-right: 45px;
+      padding-left: 0;
+    }
+
+    html[dir="rtl"] .ab-timeline-node.left .ab-timeline-dot {
+      left: -10px;
+      right: auto;
+    }
+
+    html[dir="rtl"] .ab-timeline-node.right .ab-timeline-dot {
+      right: -10px;
+      left: auto;
+    }
+
+    @media (max-width: 768px) {
+      html[dir="rtl"] .ab-timeline-node.left,
+      html[dir="rtl"] .ab-timeline-node.right {
+        left: 0 !important;
+        padding-left: 45px !important;
+        padding-right: 0 !important;
+      }
+      html[dir="rtl"] .ab-timeline-node.left .ab-timeline-dot,
+      html[dir="rtl"] .ab-timeline-node.right .ab-timeline-dot {
+        left: 10px !important;
+        right: auto !important;
+      }
+      html[dir="rtl"] .ab-timeline-line {
+        left: 20px !important;
+        right: auto !important;
+      }
+    }
+  </style>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+
+<body>
+
+  <!-- Retro Glowing Background Grid -->
+  <div class="retro-grid-bg">
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- 1. HEADER & PREMIUM NAVBAR -->
+  <header class="header-nav" id="headerNav">
+    <div class="nav-container">
+      
+      <!-- LEFT: Logo area -->
+      <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+        <div class="logo-icon">
+          <!-- Pixel console controller SVG -->
+          <svg viewBox="0 0 24 24">
+            <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="primary">RETRO</span>
+          <span class="secondary">ARCADE BAR</span>
+        </div>
+      </a>
+
+      <!-- CENTER: Scrollable Navigation Menu (15 items) -->
+      <nav class="nav-menu-wrapper" id="navMenuWrapper">
+        <!-- Chevron buttons for desktop scroll control -->
+        <button class="scroll-btn scroll-btn-left" id="scrollLeftBtn" aria-label="Scroll menu left">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        
+        <div class="nav-menu-scroll" id="navMenuScroll">
+          <!-- Dropdown for Home (Desktop) -->
+          <div class="nav-item-dropdown desktop-dropdown">
+            <a href="./index.html" class="nav-link dropdown-toggle">Home</a>
+            <div class="dropdown-submenu desktop-submenu">
+              <a href="./index.html" class="submenu-link">Home 1</a>
+              <a href="./home 2.html" class="submenu-link">Home 2</a>
+            </div>
+          </div>
+          <a href="./About.html" class="nav-link active">About</a>
+          <a href="./Games.html" class="nav-link">Games</a>
+          <a href="./Game Library.html" class="nav-link">Game Library</a>
+          <a href="./Live boards.html" class="nav-link">Live boards</a>
+          <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+          <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+          <a href="./Events.html" class="nav-link">Events</a>
+          <a href="./Parties.html" class="nav-link">Parties</a>
+          <a href="./Membership.html" class="nav-link">Membership</a>
+          <a href="./Gallery.html" class="nav-link">Gallery</a>
+          <a href="./Guides.html" class="nav-link">Guides</a>
+          <a href="./Pricing.html" class="nav-link">Pricing</a>
+          <a href="./Reviews.html" class="nav-link">Reviews</a>
+          <a href="./Contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <button class="scroll-btn scroll-btn-right" id="scrollRightBtn" aria-label="Scroll menu right">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </nav>
+
+      <!-- RIGHT: Interactive Utility Actions -->
+      <div class="nav-actions">
+        <!-- Dark Mode Toggle -->
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Mode">
+          <!-- Sun Icon -->
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+          </svg>
+        </button>
+
+        <!-- Right to Left (RTL) Toggle -->
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtn" aria-label="Toggle Text Direction" title="Toggle Layout Direction">
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+          </svg>
+        </button>
+
+        <!-- Login Button ("SIGN IN") -->
+        <button class="btn-login" id="loginBtn" aria-label="Sign in to profile">
+          <span class="btn-text-flash">Login</span>
+        </button>
+      </div>
+
+      <!-- Hamburger Button (Mobile Only) -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- 2. MOBILE SLIDE-OUT DRAWER MENU -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    
+    <!-- Back / Close Button -->
+    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation menu" title="Close Menu">
+      <svg viewBox="0 0 24 24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+      </svg>
+    </button>
+    
+    <!-- Vertical Menu links -->
+    <nav class="mobile-menu-links">
+      <!-- Dropdown for Home -->
+      <div class="nav-item-dropdown">
+        <a href="./index.html" class="nav-link dropdown-toggle" id="mobileHomeToggle">Home</a>
+        <div class="dropdown-submenu" id="mobileHomeSubmenu">
+          <a href="./index.html" class="submenu-link">Home 1</a>
+          <a href="./home 2.html" class="submenu-link">Home 2</a>
+        </div>
+      </div>
+        <a href="./About.html" class="nav-link active">About</a>
+        <a href="./Games.html" class="nav-link">Games</a>
+        <a href="./Game Library.html" class="nav-link">Game Library</a>
+        <a href="./Live boards.html" class="nav-link">Live boards</a>
+        <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+        <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+        <a href="./Events.html" class="nav-link">Events</a>
+        <a href="./Parties.html" class="nav-link">Parties</a>
+        <a href="./Membership.html" class="nav-link">Membership</a>
+        <a href="./Gallery.html" class="nav-link">Gallery</a>
+        <a href="./Guides.html" class="nav-link">Guides</a>
+        <a href="./Pricing.html" class="nav-link">Pricing</a>
+        <a href="./Reviews.html" class="nav-link">Reviews</a>
+        <a href="./Contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <!-- Utility Toggles in Mobile Footer -->
+    <div class="mobile-drawer-footer">
+      <div class="mobile-actions">
+        <!-- Dark Mode Toggle (Mobile) -->
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtnMobile" aria-label="Toggle Dark/Light Mode">
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+          </svg>
+        </button>
+
+        <!-- RTL Toggle (Mobile) -->
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtnMobile" aria-label="Toggle Text Direction">
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Login CTA (Mobile) -->
+      <button class="btn-login" id="loginBtnMobile" aria-label="Sign in to profile">
+        <span class="btn-text-flash">Login</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ABOUT MAIN CONTENT CONTAINER -->
+  <main class="about-main-content">
+    
+    <!-- SECTION 1: HERO BANNER -->
+    <section class="ab-section" id="home">
+      <div class="ab-hero-container">
+        <span class="ab-subtitle">SYSTEM LOGS: ONLINE</span>
+        <h1 class="ab-title">THE NEON ARCADE SANCTUARY</h1>
+        <p class="ab-desc">
+          Enter the grid. We are a vintage gaming sanctuary, a craft beverage laboratory, and a pixel-drenched social portal located in the heart of the Neon District.
+        </p>
+        <div class="ab-hero-visual">
+          <img src="images/arcade_neon_bar.png" alt="Neon glowing retro arcade bar display screen" loading="lazy">
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 2: ORIGIN STORY -->
+    <section class="ab-section" id="about">
+      <div class="ab-story-grid">
+        <div class="ab-story-text">
+          <span class="ab-subtitle">ESTABLISHED 198X / 202X</span>
+          <h2 class="ab-section-title">THE FIRST COIN INSERTED</h2>
+          <p class="ab-paragraph">
+            It started with a single, flickering *Pac-Man* cabinet rescued from a damp warehouse basement. Three retro gaming enthusiasts spent months restoring its CRT monitor, recapping the chassis, and repairing its wooden joints.
+          </p>
+          <p class="ab-paragraph">
+            That rescue grew into a collection, and that collection grew into a dream: a cyberpunk social hub where vintage gaming culture fuses with premium craft cocktails. We rebuilt this grid so you could play games the way they were meant to be played—on genuine glass screens with mechanical joysticks.
+          </p>
+        </div>
+        <div class="ab-story-visual">
+          <img src="images/arcade_lobby.png" alt="A look at the vintage lobby arcade layout" loading="lazy">
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 3: CABINET RESTORATION LAB -->
+    <section class="ab-section" id="cabinet-sanctuary">
+      <div class="ab-section-header">
+        <span class="ab-subtitle">PRESERVATION HUB</span>
+        <h2 class="ab-section-title">THE RESTORATION LAB</h2>
+        <p class="ab-desc">How we maintain authentic cathode-ray screen visuals and retro hardware inputs.</p>
+      </div>
+      
+      <div class="ab-lab-grid">
+        <!-- Card 1 -->
+        <div class="ab-card">
+          <div class="ab-card-icon pink">📺</div>
+          <h3>CRT Recapping</h3>
+          <p>We source authentic vintage capacitors to rebuild monitor boards, correcting colors, focus, and scanning lines for true 240p gaming warmth.</p>
+        </div>
+        
+        <!-- Card 2 -->
+        <div class="ab-card" style="border-color: rgba(0, 240, 255, 0.25);">
+          <div class="ab-card-icon cyan">🕹️</div>
+          <h3>Joystick Calibration</h3>
+          <p>Standard buttons are swapped for authentic Japanese Sanwa and Seimitsu joysticks, ensuring pixel-perfect combat responsiveness.</p>
+        </div>
+        
+        <!-- Card 3 -->
+        <div class="ab-card" style="border-color: rgba(255, 183, 0, 0.25);">
+          <div class="ab-card-icon yellow">💾</div>
+          <h3>ROM Preservation</h3>
+          <p>Original circuit boards are kept clean and functional. We preserve game chips to safeguard gaming history and high-score boards.</p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 4: RETRO MANIFESTO -->
+    <section class="ab-section" id="retro-manifesto">
+      <div class="ab-manifesto-container">
+        <div class="ab-manifesto-visual">
+          <img src="images/highscore_challenges.png" alt="Arcade cabinet highscore neon challenge interface" loading="lazy">
+        </div>
+        
+        <div class="ab-manifesto-content">
+          <span class="ab-subtitle">CORE CODE</span>
+          <h2 class="ab-section-title">THE RETRO MANIFESTO</h2>
+          
+          <div class="ab-manifesto-item">
+            <span class="ab-item-num">01</span>
+            <div>
+              <h3>Authentic Hardware Only</h3>
+              <p>No software-based emulation boxes. Every cabinet runs on real arcade PCBs, displaying on true CRT tube monitors.</p>
+            </div>
+          </div>
+          
+          <div class="ab-manifesto-item">
+            <span class="ab-item-num">02</span>
+            <div>
+              <h3>Craft Beverage Calibration</h3>
+              <p>Our kitchen and bar are as premium as our gaming libraries, featuring house-brewed craft beers and gourmet sliders.</p>
+            </div>
+          </div>
+          
+          <div class="ab-manifesto-item">
+            <span class="ab-item-num">03</span>
+            <div>
+              <h3>Community Co-Op</h3>
+              <p>We are a community-focused hub. Local tournaments, leaderboards, and co-op campaigns are at the heart of our operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 5: CYBER CREW CHARACTER SELECT -->
+    <section class="ab-section" id="about-crew">
+      <div class="ab-section-header">
+        <span class="ab-subtitle">PLAYER SELECT</span>
+        <h2 class="ab-section-title">THE CYBER CREW</h2>
+        <p class="ab-desc">Select an admin to review their gameplay stats and comms nodes.</p>
+      </div>
+      
+      <div class="ab-crew-shelf">
+        <!-- Grid Area -->
+        <div class="ab-crew-grid">
+          <!-- Character 1 -->
+          <div class="ab-crew-slot active" data-char="rex">
+            <div class="ab-slot-img">👨‍🔧</div>
+            <div class="ab-slot-name">REX</div>
+            <div class="ab-slot-label">ADMIN 01</div>
+          </div>
+          
+          <!-- Character 2 -->
+          <div class="ab-crew-slot" data-char="neona">
+            <div class="ab-slot-img">👩‍🔬</div>
+            <div class="ab-slot-name">NEONA</div>
+            <div class="ab-slot-label">ALCHEMIST</div>
+          </div>
+          
+          <!-- Character 3 -->
+          <div class="ab-crew-slot" data-char="gridlock">
+            <div class="ab-slot-img">👨‍💻</div>
+            <div class="ab-slot-name">GRIDLOCK</div>
+            <div class="ab-slot-label">SYS_ADMIN</div>
+          </div>
+          
+          <!-- Character 4 -->
+          <div class="ab-crew-slot" data-char="toxic">
+            <div class="ab-slot-img">👩‍🎤</div>
+            <div class="ab-slot-name">TOXIC</div>
+            <div class="ab-slot-label">CASTER</div>
+          </div>
+        </div>
+        
+        <!-- Dashboard Area -->
+        <div class="ab-crew-dashboard">
+          <!-- Screen Header -->
+          <div class="ab-dash-header">
+            <span class="ab-dash-title">> INVENTORY_STATISTICS</span>
+            <div class="ab-dash-dots">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+          </div>
+          
+          <!-- Screen Content -->
+          <div class="ab-dash-content">
+            <div class="ab-dash-profile">
+              <div class="ab-dash-visual">
+                <img src="images/fighting_games.png" alt="CRT Screen overlaying game interface" class="ab-dash-avatar-bg">
+                <div class="ab-dash-avatar" id="dashAvatar">👨‍🔧</div>
+              </div>
+              
+              <div class="ab-dash-bio">
+                <h3 id="dashName">REX</h3>
+                <span class="ab-dash-role" id="dashRole">CHIEF RESTORATION ENGINEER</span>
+                <div class="ab-dash-meta">
+                  <strong>FAVORITE ROM:</strong> <span id="dashFavGame">STREET FIGHTER II</span>
+                </div>
+                <div class="ab-dash-meta">
+                  <strong>SPECIAL COMMAND:</strong> <code id="dashSpecial">↓ ↘ → + Joystick Twist</code>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ab-dash-stats">
+              <!-- Stat 1 -->
+              <div class="ab-stat-row">
+                <span class="ab-stat-name">POWER</span>
+                <div class="ab-stat-bar-outer">
+                  <div class="ab-stat-bar-inner pink" id="statPower" style="width: 90%;"></div>
+                </div>
+                <span class="ab-stat-val" id="valPower">90%</span>
+              </div>
+              
+              <!-- Stat 2 -->
+              <div class="ab-stat-row">
+                <span class="ab-stat-name">DEFENSE</span>
+                <div class="ab-stat-bar-outer">
+                  <div class="ab-stat-bar-inner cyan" id="statDefense" style="width: 80%;"></div>
+                </div>
+                <span class="ab-stat-val" id="valDefense">80%</span>
+              </div>
+              
+              <!-- Stat 3 -->
+              <div class="ab-stat-row">
+                <span class="ab-stat-name">SPEED</span>
+                <div class="ab-stat-bar-outer">
+                  <div class="ab-stat-bar-inner yellow" id="statSpeed" style="width: 70%;"></div>
+                </div>
+                <span class="ab-stat-val" id="valSpeed">70%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 6: MILESTONE TIMELINE -->
+    <section class="ab-section" id="timeline-matrix">
+      <div class="ab-section-header">
+        <span class="ab-subtitle">GRID HISTORY</span>
+        <h2 class="ab-section-title">THE MILESTONE MATRIX</h2>
+        <p class="ab-desc">System logs detailing our expansion and upgrades over the years.</p>
+      </div>
+      
+      <div class="ab-timeline-container">
+        <div class="ab-timeline-line"></div>
+        
+        <!-- Node 1 -->
+        <div class="ab-timeline-node left">
+          <div class="ab-timeline-dot"></div>
+          <div class="ab-card ab-timeline-card">
+            <div class="ab-timeline-date">YEAR 1 (BOOT)</div>
+            <h3>Grid Inception</h3>
+            <p>Launched in a small basement lounge with 8 cabinet units, restoring classic 80s titles for a dedicated underground local crew.</p>
+          </div>
+        </div>
+        
+        <!-- Node 2 -->
+        <div class="ab-timeline-node right">
+          <div class="ab-timeline-dot" style="background-color: var(--color-neon-cyan); box-shadow: var(--neon-glow-cyan);"></div>
+          <div class="ab-card ab-timeline-card" style="border-color: rgba(0, 240, 255, 0.25);">
+            <div class="ab-timeline-date" style="color: var(--color-neon-cyan); text-shadow: var(--neon-glow-cyan);">YEAR 3 (UPGRADE)</div>
+            <h3>Neon District Expansion</h3>
+            <p>Relocated to Level 99 of the gaming district. Scaled the inventory up to 35 fully-restored cabinets and established the craft beverage lounge.</p>
+          </div>
+        </div>
+        
+        <!-- Node 3 -->
+        <div class="ab-timeline-node left">
+          <div class="ab-timeline-dot" style="background-color: var(--color-neon-yellow); box-shadow: var(--neon-glow-yellow);"></div>
+          <div class="ab-card ab-timeline-card" style="border-color: rgba(255, 183, 0, 0.25);">
+            <div class="ab-timeline-date" style="color: var(--color-neon-yellow); text-shadow: var(--neon-glow-yellow);">YEAR 5 (MAX LIMIT)</div>
+            <h3>Global Comms Online</h3>
+            <p>Hosted the first local fighting game tournament. Integrated live scoreboard screens and updated the private VIP Cabin lounges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="ab-divider"></div>
+
+    <!-- SECTION 7: LOUNGE SECTORS GALLERY -->
+    <section class="ab-section" id="gallery">
+      <div class="ab-section-header">
+        <span class="ab-subtitle">VIRTUAL SECTORS</span>
+        <h2 class="ab-section-title">SECTOR TOUR CONSOLE</h2>
+        <p class="ab-desc">Cycle through our physical facility zones in the main arcade bar lobby.</p>
+      </div>
+      
+      <div class="ab-tour-shelf">
+        <div class="ab-tour-screen">
+          <!-- Slide 1 -->
+          <div class="ab-tour-slide active" data-slide="0">
+            <img src="images/vip_lounge.png" alt="VIP console cabin zone lounge layout" class="ab-tour-img">
+            <div class="ab-tour-overlay">
+              <h3>Sector 01: VIP Lounge Cabins</h3>
+              <p>Book private console couches equipped with retro systems and sliders service delivery.</p>
+            </div>
+          </div>
+          
+          <!-- Slide 2 -->
+          <div class="ab-tour-slide" data-slide="1">
+            <img src="images/arcade_lobby.png" alt="Arcade cabinet row main floor layout" class="ab-tour-img">
+            <div class="ab-tour-overlay">
+              <h3>Sector 02: Classic Cabinet Row</h3>
+              <p>50+ classic standing cabinets restored to original CRT display specs.</p>
+            </div>
+          </div>
+          
+          <!-- Slide 3 -->
+          <div class="ab-tour-slide" data-slide="2">
+            <img src="images/beverage_menu.png" alt="Glow beer tap craft beverage bar layout" class="ab-tour-img">
+            <div class="ab-tour-overlay">
+              <h3>Sector 03: Craft Cocktail Deck</h3>
+              <p>Recharge your health stats with house signature mocktails and retro beers.</p>
+            </div>
+          </div>
+          
+          <!-- CRT Scanning overlay -->
+          <div class="ab-crt-scan"></div>
+          
+          <!-- Controls -->
+          <button class="ab-tour-arrow left" id="tourPrevBtn" aria-label="Previous Sector">◀</button>
+          <button class="ab-tour-arrow right" id="tourNextBtn" aria-label="Next Sector">▶</button>
+        </div>
+        
+        <div class="ab-tour-nav" id="tourNavDots">
+          <span class="ab-tour-dot active" data-slide="0"></span>
+          <span class="ab-tour-dot" data-slide="1"></span>
+          <span class="ab-tour-dot" data-slide="2"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 4. SITE FOOTER -->
+  <footer class="site-footer">
+
+    <div class="footer-container">
+
+      
+
+      <!-- Column 1: Brand & Logo -->
+
+      <div class="footer-col">
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+
+            <div class="logo-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+
+              </svg>
+
+            </div>
+
+            <div class="logo-text">
+
+              <span class="primary">RETRO</span>
+
+              <span class="secondary">ARCADE BAR</span>
+
+            </div>
+
+          </a>
+
+          <p class="footer-tagline">
+
+            Eat. Drink. Play. Repeat. The ultimate gaming lounge featuring classic arcade cabinets, high-tech pinball, craft beverages, and gourmet sliders.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Column 2: Navigation -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Navigation</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="navbar.html#home" class="footer-link">Home</a></li>
+
+          <li><a href="navbar.html#about" class="footer-link">About Us</a></li>
+
+          <li><a href="Games.html" class="footer-link">Arcade Cabinets</a></li>
+
+          <li><a href="Game%20Library.html" class="footer-link">Game Library</a></li>
+
+          <li><a href="Live boards.html" class="footer-link">Live Leaderboards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 3: Menu & Events -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Menu & Play</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="Craft Beer.html" class="footer-link">Craft Beer & Drinks</a></li>
+
+          <li><a href="Food Menu.html" class="footer-link">Food Menu</a></li>
+
+          <li><a href="Events.html" class="footer-link">Events & Tournaments</a></li>
+
+          <li><a href="Parties.html" class="footer-link">Private Parties</a></li>
+
+          <li><a href="navbar.html#rewards" class="footer-link">Membership Rewards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 4: Contact & Hours -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Hours & Location</h2>
+
+        <ul class="footer-contact-info">
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+
+            <span>8 Bit Boulevard, Neon District, Level 99</span>
+
+          </li>
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M22 5.72l-4.24 4.24a8.953 8.953 0 0 0-2.73-2.73L19.28 3H22v2.72zM2 18.28l4.24-4.24a8.953 8.953 0 0 0 2.73 2.73L4.72 21H2v-2.72zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+
+            <span>Mon - Thu: 4 PM - 12 AM<br>Fri - Sat: 12 PM - 2 AM<br>Sun: 12 PM - 11 PM</span>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+      <p class="footer-copyright">&copy; 2026 Retro Arcade Bar. All rights reserved.</p>
+
+      <div class="footer-easter-egg">INSERT COIN TO CONTINUE - PLAYER 1 READY</div>
+
+      <div class="footer-socials">
+
+        <a href="#" class="social-btn" aria-label="Twitter">
+
+          <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Discord">
+
+          <svg viewBox="0 0 24 24"><path d="M19.27 4.73a16.14 16.14 0 0 0-3.97-1.23.08.08 0 0 0-.08.04c-.17.31-.36.71-.49 1.03a14.88 14.88 0 0 0-4.46 0c-.13-.32-.33-.72-.51-1.03a.08.08 0 0 0-.08-.04 16.09 16.09 0 0 0-3.97 1.23.08.08 0 0 0-.04.03C2.86 8.96 1.94 13.08 2.37 17.15a.08.08 0 0 0 .03.06 16.27 16.27 0 0 0 4.9 2.48.08.08 0 0 0 .09-.03c.38-.52.72-1.08 1.01-1.67a.08.08 0 0 0-.04-.11 10.63 10.63 0 0 1-1.54-.73.08.08 0 0 1-.01-.13c.1-.07.2-.15.3-.22a.08.08 0 0 1 .08-.01c3.2 1.46 6.67 1.46 9.82 0a.08.08 0 0 1 .08.01c.1.07.2.15.3.22a.08.08 0 0 1-.01.13c-.48.29-.99.53-1.54.73a.08.08 0 0 0-.04.11c.29.59.63 1.15.98 1.67a.08.08 0 0 0 .09.03 16.2 16.2 0 0 0 4.9-2.48.08.08 0 0 0 .03-.06c.52-4.75-.87-8.83-3.44-12.39a.08.08 0 0 0-.04-.03zM8.52 14.85c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98zm6.96 0c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Instagram">
+
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Twitch">
+
+          <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+  <!-- ==========================================
+       9. JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Elements ---
+      const htmlEl = document.documentElement;
+      
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeToggleBtnMobile = document.getElementById('themeToggleBtnMobile');
+      
+      const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+      const rtlToggleBtnMobile = document.getElementById('rtlToggleBtnMobile');
+      
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+      
+      const navMenuWrapper = document.getElementById('navMenuWrapper');
+      const navMenuScroll = document.getElementById('navMenuScroll');
+      const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+      const scrollRightBtn = document.getElementById('scrollRightBtn');
+      
+      const loginButtons = [document.getElementById('loginBtn'), document.getElementById('loginBtnMobile')];
+      const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+      
+      // --- Theme (Light/Dark) Logic ---
+      function toggleTheme() {
+        const isLight = htmlEl.classList.toggle('light-theme');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      }
+
+      // Initialize Theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        htmlEl.classList.add('light-theme');
+      } else {
+        htmlEl.classList.remove('light-theme');
+      }
+
+      themeToggleBtn.addEventListener('click', toggleTheme);
+      themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+      // --- RTL (Right-to-Left) Logic ---
+      function toggleRTL() {
+        const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+        const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+        updateRTL(newDir);
+      }
+
+      function updateRTL(dir) {
+        htmlEl.setAttribute('dir', dir);
+        localStorage.setItem('dir', dir);
+        
+        const isRTL = dir === 'rtl';
+        
+        // Relocate mobile drawer animation side dynamically based on direction
+        if (isRTL) {
+          mobileDrawer.style.left = '';
+          mobileDrawer.style.right = '';
+          mobileMenuBtn.style.order = '-1'; // Place menu button correctly in RTL
+        } else {
+          mobileDrawer.style.left = '';
+          mobileDrawer.style.right = '';
+          mobileMenuBtn.style.order = '0';
+        }
+        
+        // Re-calculate menu boundaries for arrows in new direction
+        checkScrollOverflow();
+      }
+
+      // Initialize RTL
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+      updateRTL(savedDir);
+
+      rtlToggleBtn.addEventListener('click', toggleRTL);
+      rtlToggleBtnMobile.addEventListener('click', toggleRTL);
+
+      // --- Mobile Menu Toggle ---
+      function toggleMobileMenu() {
+        const isActive = mobileMenuBtn.classList.toggle('active');
+        mobileDrawer.classList.toggle('active', isActive);
+        mobileOverlay.classList.toggle('active', isActive);
+      }
+
+      function closeMobileMenu() {
+        mobileMenuBtn.classList.remove('active');
+        mobileDrawer.classList.remove('active');
+        mobileOverlay.classList.remove('active');
+      }
+
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+      drawerCloseBtn.addEventListener('click', closeMobileMenu);
+      
+      // Close drawer when clicking a mobile link (excluding dropdown toggles)
+      mobileDrawer.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          // If this is a dropdown toggle, do not close the menu
+          if (link.classList.contains('dropdown-toggle')) {
+            return;
+          }
+
+          // Update active link classes
+          document.querySelectorAll('.nav-link, .submenu-link').forEach(nl => nl.classList.remove('active'));
+          
+          const targetHref = link.getAttribute('href');
+          if (targetHref) {
+            const selector = `a[href="${targetHref}"]`;
+            document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+          }
+          
+          closeMobileMenu();
+        });
+      });
+
+      // Mobile drawer Home dropdown click toggle
+      const mobileHomeToggle = document.getElementById('mobileHomeToggle');
+      const mobileHomeSubmenu = document.getElementById('mobileHomeSubmenu');
+
+      if (mobileHomeToggle && mobileHomeSubmenu) {
+        mobileHomeToggle.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent default link navigation
+          e.stopPropagation(); // Prevent event bubbling
+          
+          const isOpen = mobileHomeSubmenu.classList.toggle('open');
+          mobileHomeToggle.classList.toggle('caret-rotated', isOpen);
+        });
+      }
+
+      // --- Desktop Horizontal Menu Scroll & Arrow Controls ---
+      function checkScrollOverflow() {
+        const clientWidth = navMenuScroll.clientWidth;
+        if (clientWidth === 0) return;
+        
+        let contentWidth = 0;
+        const children = navMenuScroll.children;
+        for (let i = 0; i < children.length; i++) {
+          contentWidth += children[i].offsetWidth;
+        }
+        if (children.length > 1) {
+          contentWidth += (children.length - 1) * 4; // gap spacing (~4px)
+        }
+        
+        const hasOverflow = contentWidth > clientWidth;
+        
+        if (!hasOverflow) {
+          scrollLeftBtn.classList.remove('visible');
+          scrollRightBtn.classList.remove('visible');
+          navMenuWrapper.classList.remove('fade-left', 'fade-right', 'has-scroll-overflow');
+          return;
+        }
+
+        navMenuWrapper.classList.add('has-scroll-overflow');
+
+        // Show/hide arrows depending on scroll position
+        const scrollLeft = Math.abs(navMenuScroll.scrollLeft);
+        const scrollWidth = navMenuScroll.scrollWidth;
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const buffer = 8;
+        
+        let atStart, atEnd;
+        
+        if (!isRTL) {
+          atStart = scrollLeft <= buffer;
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+          
+          scrollLeftBtn.classList.toggle('visible', !atStart);
+          scrollRightBtn.classList.toggle('visible', !atEnd);
+          
+          navMenuWrapper.classList.toggle('fade-left', !atStart);
+          navMenuWrapper.classList.toggle('fade-right', !atEnd);
+        } else {
+          atStart = scrollLeft <= buffer;
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+          
+          scrollLeftBtn.classList.toggle('visible', !atEnd);
+          scrollRightBtn.classList.toggle('visible', !atStart);
+          
+          navMenuWrapper.classList.toggle('fade-left', !atEnd);
+          navMenuWrapper.classList.toggle('fade-right', !atStart);
+        }
+      }
+
+      scrollLeftBtn.addEventListener('click', () => {
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const scrollAmount = 250;
+        navMenuScroll.scrollBy({
+          left: isRTL ? scrollAmount : -scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      scrollRightBtn.addEventListener('click', () => {
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+        const scrollAmount = 250;
+        navMenuScroll.scrollBy({
+          left: isRTL ? -scrollAmount : scrollAmount,
+          behavior: 'smooth'
+        });
+      });
+
+      navMenuScroll.addEventListener('scroll', checkScrollOverflow);
+      window.addEventListener('resize', checkScrollOverflow);
+      
+      // Call initial check
+      setTimeout(checkScrollOverflow, 200);
+
+      // Desktop Link Clicks Active Indicator
+      navMenuScroll.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelectorAll('.nav-link').forEach(nl => nl.classList.remove('active'));
+          const selector = `a[href="${link.getAttribute('href')}"]`;
+          document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+        });
+      });
+
+      // --- Coin insertion effect for login buttons ---
+      loginButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Flash animation trigger
+          const textEl = btn.querySelector('.btn-text-flash');
+          const originalText = textEl.textContent;
+          
+          textEl.textContent = 'COIN OK!';
+          textEl.style.color = '#00f0ff';
+          btn.style.borderColor = '#00f0ff';
+          btn.style.boxShadow = 'var(--neon-glow-cyan)';
+          
+          // Play a retro synth coin sound if web audio API allows or simulated delay
+          setTimeout(() => {
+            textEl.textContent = 'LOADING...';
+            setTimeout(() => {
+              window.location.href = 'login.html';
+              textEl.textContent = originalText;
+              textEl.style.color = '';
+              btn.style.borderColor = '';
+              btn.style.boxShadow = '';
+            }, 1000);
+          }, 800);
+        });
+      });
+
+      // --- Crew Select Handler ---
+      const crewData = {
+        rex: {
+          name: "REX",
+          role: "CHIEF RESTORATION ENGINEER",
+          favGame: "STREET FIGHTER II",
+          special: "↓ ↘ → + Joystick Twist",
+          avatar: "👨‍🔧",
+          power: "90%",
+          defense: "80%",
+          speed: "70%"
+        },
+        neona: {
+          name: "NEONA",
+          role: "HEAD ALCHEMIST / COCKTAILS",
+          favGame: "PAC-MAN",
+          special: "→ ↓ ↘ + Shaker Shake",
+          avatar: "👩‍🔬",
+          power: "60%",
+          defense: "70%",
+          speed: "95%"
+        },
+        gridlock: {
+          name: "GRIDLOCK",
+          role: "LEAD DEVELOPER / SYS_ADMIN",
+          favGame: "DOOM (1993)",
+          special: "↓ ↓ + Admin Override",
+          avatar: "👨‍💻",
+          power: "80%",
+          defense: "90%",
+          speed: "60%"
+        },
+        toxic: {
+          name: "TOXIC",
+          role: "EVENT HOST / TOURNAMENT CASTER",
+          favGame: "MORTAL KOMBAT II",
+          special: "← → + Mic Drop",
+          avatar: "👩‍🎤",
+          power: "75%",
+          defense: "65%",
+          speed: "90%"
+        }
+      };
+
+      const crewSlots = document.querySelectorAll('.ab-crew-slot');
+      const dashAvatar = document.getElementById('dashAvatar');
+      const dashName = document.getElementById('dashName');
+      const dashRole = document.getElementById('dashRole');
+      const dashFavGame = document.getElementById('dashFavGame');
+      const dashSpecial = document.getElementById('dashSpecial');
+      const statPower = document.getElementById('statPower');
+      const statDefense = document.getElementById('statDefense');
+      const statSpeed = document.getElementById('statSpeed');
+      const valPower = document.getElementById('valPower');
+      const valDefense = document.getElementById('valDefense');
+      const valSpeed = document.getElementById('valSpeed');
+
+      if (crewSlots && crewSlots.length > 0) {
+        crewSlots.forEach(slot => {
+          slot.addEventListener('click', () => {
+            crewSlots.forEach(s => s.classList.remove('active'));
+            slot.classList.add('active');
+            
+            const char = slot.getAttribute('data-char');
+            const data = crewData[char];
+            if (data) {
+              dashAvatar.textContent = data.avatar;
+              dashName.textContent = data.name;
+              dashRole.textContent = data.role;
+              dashFavGame.textContent = data.favGame;
+              dashSpecial.textContent = data.special;
+              
+              statPower.style.width = data.power;
+              statDefense.style.width = data.defense;
+              statSpeed.style.width = data.speed;
+              
+              valPower.textContent = data.power;
+              valDefense.textContent = data.defense;
+              valSpeed.textContent = data.speed;
+            }
+          });
+        });
+      }
+
+      // --- Lounge Sector Slider handler ---
+      const slides = document.querySelectorAll('.ab-tour-slide');
+      const dots = document.querySelectorAll('.ab-tour-dot');
+      const prevBtn = document.getElementById('tourPrevBtn');
+      const nextBtn = document.getElementById('tourNextBtn');
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        if (!slides || slides.length === 0) return;
+        
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        slides[currentSlide].classList.add('active');
+        const activeDot = document.querySelector(`.ab-tour-dot[data-slide="${currentSlide}"]`);
+        if (activeDot) activeDot.classList.add('active');
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          showSlide(currentSlide - 1);
+        });
+        nextBtn.addEventListener('click', () => {
+          showSlide(currentSlide + 1);
+        });
+      }
+
+      if (dots && dots.length > 0) {
+        dots.forEach(dot => {
+          dot.addEventListener('click', () => {
+            const slideIndex = parseInt(dot.getAttribute('data-slide'));
+            showSlide(slideIndex);
+          });
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>

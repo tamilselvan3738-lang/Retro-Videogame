@@ -1,0 +1,4909 @@
+<!DOCTYPE html>
+
+<html lang="en" class="dark-theme">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Retro Arcade Bar & Grill - Play Experience</title>
+
+  
+
+  <!-- Google Fonts -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  
+
+  <style>
+
+    /* ==========================================
+
+       1. CSS CUSTOM PROPERTIES (DESIGN SYSTEM)
+
+       ========================================== */
+
+    :root {
+
+      /* Theme independent tokens */
+
+      --font-primary: 'Space Grotesk', sans-serif;
+
+      --font-display: 'Chakra Petch', sans-serif;
+
+      --font-retro: 'Press Start 2P', cursive;
+
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+      --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+      
+
+      /* Dark Theme Colors (Default) */
+
+      --color-bg-body: #05050d;
+
+      --color-bg-nav: rgba(10, 10, 26, 0.75);
+
+      --color-border-nav: rgba(255, 0, 127, 0.15);
+
+      --color-text-primary: #f8fafc;
+
+      --color-text-secondary: #94a3b8;
+
+      
+
+      --color-neon-pink: #ff007f;
+
+      --color-neon-cyan: #00f0ff;
+
+      --color-neon-yellow: #ffb700;
+
+      
+
+      --neon-glow-pink: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 20px rgba(255, 0, 127, 0.3);
+
+      --neon-glow-cyan: 0 0 8px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
+
+      --neon-glow-yellow: 0 0 8px rgba(255, 183, 0, 0.6), 0 0 20px rgba(255, 183, 0, 0.3);
+
+      
+
+      --shadow-nav: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+      --grid-opacity: 0.15;
+
+    }
+
+
+
+    /* Light Theme Colors overrides */
+
+    html.light-theme {
+
+      --color-bg-body: #f8fafc;
+
+      --color-bg-nav: rgba(255, 255, 255, 0.8);
+
+      --color-border-nav: rgba(15, 23, 42, 0.1);
+
+      --color-text-primary: #0f172a;
+
+      --color-text-secondary: #475569;
+
+      
+
+      --color-neon-pink: #d90468;
+
+      --color-neon-cyan: #0099ad;
+
+      --color-neon-yellow: #d97706;
+
+      
+
+      --neon-glow-pink: 0 0 8px rgba(217, 4, 104, 0.4);
+
+      --neon-glow-cyan: 0 0 8px rgba(0, 153, 173, 0.4);
+
+      --neon-glow-yellow: 0 0 8px rgba(217, 119, 6, 0.4);
+
+      
+
+      --shadow-nav: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+      --grid-opacity: 0.04;
+
+    }
+
+
+
+    /* ==========================================
+
+       2. RESET & BASE STYLES
+
+       ========================================== */
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+
+    html {
+
+      scroll-behavior: smooth;
+
+      font-size: 16px;
+
+      scroll-padding-top: 80px;
+
+    }
+
+
+
+    body {
+
+      background-color: var(--color-bg-body);
+
+      color: var(--color-text-primary);
+
+      font-family: var(--font-primary);
+
+      overflow-x: hidden;
+
+      min-height: 100vh;
+
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+
+    }
+
+
+
+    a {
+
+      text-decoration: none;
+
+      color: inherit;
+
+    }
+
+
+
+    button {
+
+      background: none;
+
+      border: none;
+
+      font: inherit;
+
+      color: inherit;
+
+      cursor: pointer;
+
+    }
+
+
+
+    /* ==========================================
+
+       3. PREMIUM NAVIGATION BAR STYLES
+
+       ========================================== */
+
+    .header-nav {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      z-index: 1000;
+
+      background-color: var(--color-bg-nav);
+
+      backdrop-filter: blur(12px) saturate(160%);
+
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+
+      border-bottom: 2px solid var(--color-border-nav);
+
+      box-shadow: var(--shadow-nav);
+
+      transition: background-color var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+
+    }
+
+
+
+    /* Container layout: Logo (Left) | Scrollable Menu (Center) | Utilities (Right) */
+
+    .nav-container {
+
+      max-width: 1600px;
+
+      margin: 0 auto;
+
+      padding: 0 1.5rem;
+
+      height: 64px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 1rem;
+
+      position: relative;
+
+    }
+
+
+
+    /* 3.1 LOGO (Left) */
+
+    .nav-logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.5rem;
+
+      font-family: var(--font-display);
+
+      font-weight: 900;
+
+      font-size: 1.15rem;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      color: var(--color-text-primary);
+
+      flex-shrink: 0;
+
+      user-select: none;
+
+      transition: color var(--transition-normal);
+
+    }
+
+
+
+    .logo-icon {
+
+      width: 32px;
+
+      height: 32px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      background: linear-gradient(135deg, var(--color-neon-pink), var(--color-neon-cyan));
+
+      border-radius: 6px;
+
+      box-shadow: var(--neon-glow-pink);
+
+      position: relative;
+
+      overflow: hidden;
+
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+
+    }
+
+
+
+    .logo-icon::before {
+
+      content: '';
+
+      position: absolute;
+
+      width: 100%;
+
+      height: 100%;
+
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+
+    }
+
+
+
+    .logo-icon svg {
+
+      width: 18px;
+
+      height: 18px;
+
+      fill: #ffffff;
+
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+
+    }
+
+
+
+    .nav-logo:hover .logo-icon {
+
+      transform: scale(1.08) rotate(-5deg);
+
+      box-shadow: var(--neon-glow-cyan);
+
+    }
+
+
+
+    .logo-text {
+
+      display: flex;
+
+      flex-direction: column;
+
+    }
+
+
+
+    .logo-text .primary {
+
+      font-size: 1.1rem;
+
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      text-shadow: 0 0 15px rgba(255,0,127,0.1);
+
+      line-height: 1;
+
+    }
+
+
+
+    .logo-text .secondary {
+
+      font-family: var(--font-retro);
+
+      font-size: 0.45rem;
+
+      color: var(--color-neon-yellow);
+
+      letter-spacing: 0.5px;
+
+      margin-top: 1px;
+
+      animation: neonFlash 2s infinite alternate;
+
+    }
+
+
+
+    /* 3.2 CENTER MENU SYSTEM (Scrollable with Masking) */
+
+    .nav-menu-wrapper {
+
+      flex-grow: 1;
+
+      max-width: 1100px;
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow: hidden;
+
+      min-width: 0; /* Allow the wrapper to shrink below content size and trigger scroll overflow */
+
+    }
+
+
+
+    /* Fading gradients at edges when overflow exists */
+
+    .nav-menu-wrapper::before,
+
+    .nav-menu-wrapper::after {
+
+      content: '';
+
+      position: absolute;
+
+      top: 0;
+
+      bottom: 0;
+
+      width: 40px;
+
+      z-index: 2;
+
+      pointer-events: none;
+
+      transition: opacity var(--transition-normal);
+
+      opacity: 0;
+
+    }
+
+    .nav-menu-wrapper.fade-left::before {
+
+      left: 0;
+
+      background: linear-gradient(to right, var(--color-bg-body), transparent);
+
+      opacity: 1;
+
+    }
+
+    .nav-menu-wrapper.fade-right::after {
+
+      right: 0;
+
+      background: linear-gradient(to left, var(--color-bg-body), transparent);
+
+      opacity: 1;
+
+    }
+
+    
+
+    /* In Light mode we need different gradient overlays */
+
+    html.light-theme .nav-menu-wrapper.fade-left::before {
+
+      background: linear-gradient(to right, rgba(255,255,255,0.9), transparent);
+
+    }
+
+    html.light-theme .nav-menu-wrapper.fade-right::after {
+
+      background: linear-gradient(to left, rgba(255,255,255,0.9), transparent);
+
+    }
+
+
+
+    /* Scroll buttons (Chevrons) - visible on desktop when overflow is present */
+
+    .scroll-btn {
+
+      position: absolute;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      background: var(--color-bg-body);
+
+      border: 1px solid var(--color-border-nav);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 5;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+      color: var(--color-neon-cyan);
+
+      transition: opacity var(--transition-normal), transform var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
+
+    }
+
+    .scroll-btn.visible {
+
+      opacity: 1;
+
+      pointer-events: auto;
+
+    }
+
+    .scroll-btn:hover {
+
+      background: var(--color-neon-cyan);
+
+      color: var(--color-bg-body);
+
+      box-shadow: var(--neon-glow-cyan);
+
+      transform: translateY(-50%) scale(1.1);
+
+    }
+
+    .scroll-btn-left {
+
+      left: 2px;
+
+    }
+
+    .scroll-btn-right {
+
+      right: 2px;
+
+    }
+
+
+
+    .scroll-btn svg {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: currentColor;
+
+    }
+
+
+
+    /* The actual horizontal scroll container */
+
+    .nav-menu-scroll {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.2rem;
+
+      overflow-x: auto;
+
+      scroll-behavior: smooth;
+
+      scrollbar-width: none; /* Firefox */
+
+      padding: 0.4rem 0.5rem;
+
+      width: 100%;
+
+      justify-content: center;
+
+    }
+
+
+
+    /* Prevent links and dropdowns from shrinking and getting squished in narrow headers */
+
+    .nav-menu-scroll > * {
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    /* Safe alignment fallback when overflow is present */
+
+    .nav-menu-wrapper.has-scroll-overflow .nav-menu-scroll {
+
+      justify-content: flex-start;
+
+      padding-left: 38px;
+
+      padding-right: 38px;
+
+    }
+
+
+
+    /* Perfectly center the center navigation wrapper by giving equal flex-grow allocation to left and right sidebars */
+
+    @media (min-width: 1200px) {
+
+      .nav-logo {
+
+        flex: 1 0 auto;
+
+        display: flex;
+
+        justify-content: flex-start;
+
+        min-width: max-content;
+
+      }
+
+      .nav-actions {
+
+        flex: 1 0 auto;
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        min-width: max-content;
+
+      }
+
+    }
+
+
+
+    /* Chrome, Safari, Opera */
+
+    .nav-menu-scroll::-webkit-scrollbar {
+
+      display: none;
+
+    }
+
+
+
+    /* Menu Link Styling */
+
+    .nav-link {
+
+      padding: 0.25rem 0.5rem;
+
+      border-radius: 20px;
+
+      font-size: 0.74rem;
+
+      font-weight: 500;
+
+      color: var(--color-text-secondary);
+
+      white-space: nowrap;
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.15rem;
+
+      transition: color var(--transition-fast), background-color var(--transition-fast);
+
+      user-select: none;
+
+    }
+
+
+
+    .nav-link::before {
+
+      content: '';
+
+      position: absolute;
+
+      bottom: 0;
+
+      left: 50%;
+
+      width: 0;
+
+      height: 2px;
+
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+
+      border-radius: 2px;
+
+      transform: translateX(-50%);
+
+      transition: width var(--transition-fast);
+
+    }
+
+
+
+    /* Hover States - Glow and visual cue */
+
+    .nav-link:hover {
+
+      color: var(--color-text-primary);
+
+      background: rgba(255, 255, 255, 0.04);
+
+    }
+
+
+
+    html.light-theme .nav-link:hover {
+
+      background: rgba(0, 0, 0, 0.04);
+
+    }
+
+
+
+    .nav-link:hover::before {
+
+      width: 60%;
+
+    }
+
+
+
+    /* Active page state styling */
+
+    .nav-link.active {
+
+      color: var(--color-neon-cyan);
+
+      font-weight: 600;
+
+      background: rgba(0, 240, 255, 0.08);
+
+    }
+
+    
+
+    html.light-theme .nav-link.active {
+
+      background: rgba(0, 153, 173, 0.08);
+
+    }
+
+
+
+    .nav-link.active::before {
+
+      width: 80%;
+
+      background: var(--color-neon-cyan);
+
+      box-shadow: var(--neon-glow-cyan);
+
+    }
+
+
+
+    /* 3.3 UTILITIES (Right) - Toggles & CTA */
+
+    .nav-actions {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.75rem;
+
+      flex-shrink: 0;
+
+    }
+
+
+
+    /* Switch base styling */
+
+    .icon-toggle-btn {
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--color-border-nav);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--color-text-secondary);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      transition: all var(--transition-fast);
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .icon-toggle-btn:hover {
+
+      color: var(--color-neon-cyan);
+
+      border-color: var(--color-neon-cyan);
+
+      box-shadow: var(--neon-glow-cyan);
+
+      background: rgba(0, 240, 255, 0.05);
+
+      transform: translateY(-2px);
+
+    }
+
+
+
+    .icon-toggle-btn svg {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: currentColor;
+
+      transition: transform var(--transition-normal), opacity var(--transition-fast);
+
+    }
+
+
+
+    /* Dark Mode Toggle specific */
+
+    .theme-toggle .sun-icon {
+
+      opacity: 0;
+
+      transform: scale(0.5) rotate(90deg);
+
+      position: absolute;
+
+    }
+
+    .theme-toggle .moon-icon {
+
+      opacity: 1;
+
+      transform: scale(1) rotate(0deg);
+
+    }
+
+
+
+    html.light-theme .theme-toggle .sun-icon {
+
+      opacity: 1;
+
+      transform: scale(1) rotate(0deg);
+
+    }
+
+    html.light-theme .theme-toggle .moon-icon {
+
+      opacity: 0;
+
+      transform: scale(0.5) rotate(-90deg);
+
+      position: absolute;
+
+    }
+
+
+
+    /* RTL Toggle Button with SVG flip arrow */
+
+    .rtl-toggle-btn svg {
+
+      transition: transform var(--transition-normal);
+
+    }
+
+    
+
+    html[dir="rtl"] .rtl-toggle-btn svg {
+
+      transform: rotate(180deg);
+
+      color: var(--color-neon-pink);
+
+    }
+
+
+
+    /* Login Button - Arcade Style "INSERT COIN" / "PRESS START" */
+
+    .btn-login {
+
+      font-family: var(--font-retro);
+
+      font-size: 0.55rem;
+
+      letter-spacing: 1.2px;
+
+      background: #000000;
+
+      color: var(--color-neon-yellow);
+
+      border: 3px double var(--color-neon-yellow);
+
+      padding: 0.5rem 0.8rem;
+
+      border-radius: 4px;
+
+      text-transform: uppercase;
+
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+
+      transition: all var(--transition-fast);
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.4rem;
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    .btn-login::after {
+
+      content: '';
+
+      position: absolute;
+
+      top: -50%;
+
+      left: -60%;
+
+      width: 40px;
+
+      height: 200%;
+
+      background: rgba(255, 255, 255, 0.15);
+
+      transform: rotate(45deg);
+
+      transition: all 0.5s ease;
+
+      opacity: 0;
+
+    }
+
+
+
+    .btn-login:hover {
+
+      color: #000000;
+
+      background: var(--color-neon-yellow);
+
+      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+
+      transform: scale(1.05) translateY(-2px);
+
+    }
+
+
+
+    .btn-login:hover::after {
+
+      left: 140%;
+
+      opacity: 1;
+
+    }
+
+
+
+    .btn-login:active {
+
+      transform: scale(0.98) translateY(1px);
+
+      box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+
+    }
+
+
+
+    .coin-slot-icon {
+
+      width: 8px;
+
+      height: 11px;
+
+      background-color: currentColor;
+
+      border-radius: 2px;
+
+      display: inline-block;
+
+      position: relative;
+
+    }
+
+    .coin-slot-icon::before {
+
+      content: '';
+
+      position: absolute;
+
+      top: 2px;
+
+      left: 3px;
+
+      width: 2px;
+
+      height: 7px;
+
+      background-color: #000000;
+
+    }
+
+    .btn-login:hover .coin-slot-icon::before {
+
+      background-color: var(--color-neon-yellow);
+
+    }
+
+
+
+    .btn-text-flash {
+
+      animation: insertCoinFlash 1.5s infinite steps(2);
+
+    }
+
+
+
+    /* 3.4 MOBILE MENU BUTTON (Hamburger) */
+
+    .mobile-menu-btn {
+
+      display: none; /* Hidden on desktop */
+
+      width: 44px;
+
+      height: 44px;
+
+      border-radius: 8px;
+
+      border: 1px solid var(--color-border-nav);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      flex-direction: column;
+
+      justify-content: center;
+
+      align-items: center;
+
+      gap: 5px;
+
+      z-index: 1100;
+
+      transition: all var(--transition-fast);
+
+    }
+
+
+
+    .mobile-menu-btn:hover {
+
+      border-color: var(--color-neon-pink);
+
+      box-shadow: var(--neon-glow-pink);
+
+      background-color: rgba(255, 0, 127, 0.05);
+
+    }
+
+
+
+    .hamburger-line {
+
+      width: 22px;
+
+      height: 2px;
+
+      background-color: var(--color-text-primary);
+
+      border-radius: 2px;
+
+      transition: transform var(--transition-normal), opacity var(--transition-normal), background-color var(--transition-fast);
+
+    }
+
+
+
+    /* Mobile Hamburger Active state morphing into 'X' */
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(1) {
+
+      transform: translateY(7px) rotate(45deg);
+
+      background-color: var(--color-neon-pink);
+
+    }
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(2) {
+
+      opacity: 0;
+
+    }
+
+    .mobile-menu-btn.active .hamburger-line:nth-child(3) {
+
+      transform: translateY(-7px) rotate(-45deg);
+
+      background-color: var(--color-neon-pink);
+
+    }
+
+
+
+    /* 3.5 MOBILE DRAWER MENU */
+
+    .mobile-drawer {
+
+      position: fixed;
+
+      top: 0;
+
+      right: -100%; /* Hidden off-screen by default */
+
+      width: 320px;
+
+      max-width: 85%;
+
+      height: 100vh;
+
+      background-color: var(--color-bg-body);
+
+      border-left: 2px solid var(--color-border-nav);
+
+      z-index: 1050;
+
+      box-shadow: -10px 0 40px rgba(0,0,0,0.8);
+
+      display: flex;
+
+      flex-direction: column;
+
+      padding: 75px 1.5rem 2rem 1.5rem;
+
+      gap: 1.5rem;
+
+      transition: right var(--transition-normal), left var(--transition-normal);
+
+      overflow-y: auto;
+
+    }
+
+    
+
+    .mobile-drawer.active {
+
+      right: 0;
+
+    }
+
+
+
+    /* Overlay backing */
+
+    .mobile-overlay {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100vw;
+
+      height: 100vh;
+
+      background-color: rgba(0, 0, 0, 0.7);
+
+      backdrop-filter: blur(4px);
+
+      z-index: 1040;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: opacity var(--transition-normal);
+
+    }
+
+    .mobile-overlay.active {
+
+      opacity: 1;
+
+      pointer-events: auto;
+
+    }
+
+
+
+    .mobile-menu-links {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.5rem;
+
+    }
+
+
+
+    .mobile-drawer .nav-link {
+
+      font-size: 1.1rem;
+
+      padding: 0.8rem 1.2rem;
+
+      border-radius: 8px;
+
+      width: 100%;
+
+    }
+
+
+
+    .mobile-drawer .nav-link::before {
+
+      bottom: 50%;
+
+      left: 0;
+
+      transform: translateY(50%);
+
+      width: 3px;
+
+      height: 0;
+
+      transition: height var(--transition-fast);
+
+    }
+
+    
+
+    .mobile-drawer .nav-link:hover::before,
+
+    .mobile-drawer .nav-link.active::before {
+
+      height: 70%;
+
+      width: 3px;
+
+    }
+
+
+
+    .mobile-drawer-footer {
+
+      margin-top: auto;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1.25rem;
+
+      padding-top: 1.5rem;
+
+      border-top: 1px solid var(--color-border-nav);
+
+    }
+
+
+
+    .mobile-actions {
+
+      display: flex;
+
+      justify-content: space-around;
+
+      align-items: center;
+
+      gap: 1rem;
+
+    }
+
+
+
+    .mobile-drawer .btn-login {
+
+      justify-content: center;
+
+      width: 100%;
+
+      font-size: 0.8rem;
+
+    }
+
+
+
+    /* ==========================================
+
+       4. RTL LAYOUT MODIFICATIONS
+
+       ========================================== */
+
+    html[dir="rtl"] {
+
+      /* Flip logic for items */
+
+      direction: rtl;
+
+    }
+
+
+
+    /* Adjust margins and alignments for RTL */
+
+    html[dir="rtl"] .logo-text .secondary {
+
+      letter-spacing: 0;
+
+    }
+
+
+
+    html[dir="rtl"] .mobile-drawer {
+
+      right: auto;
+
+      left: -100%;
+
+      border-left: none;
+
+      border-right: 2px solid var(--color-border-nav);
+
+      box-shadow: 10px 0 40px rgba(0,0,0,0.8);
+
+    }
+
+
+
+    html[dir="rtl"] .mobile-drawer.active {
+
+      left: 0;
+
+      right: auto;
+
+    }
+
+
+
+    html[dir="rtl"] .mobile-drawer .nav-link::before {
+
+      left: auto;
+
+      right: 0;
+
+    }
+
+
+
+    /* ==========================================
+
+       5. HERO SHOWCASE SECTION
+
+       ========================================== */
+
+    .hero-showcase {
+
+      padding-top: 110px;
+
+      min-height: 50vh;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      text-align: center;
+
+      position: relative;
+
+      z-index: 10;
+
+      padding-bottom: 40px;
+
+    }
+
+
+
+    .retro-grid-bg {
+
+      position: fixed;
+
+      top: 0;
+
+      left: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      z-index: 1;
+
+      overflow: hidden;
+
+      pointer-events: none;
+
+    }
+
+
+
+    .grid-lines {
+
+      position: absolute;
+
+      bottom: 0;
+
+      left: 50%;
+
+      width: 200vw;
+
+      height: 300vh;
+
+      transform: translateX(-50%) perspective(500px) rotateX(60deg);
+
+      background-image: 
+
+        linear-gradient(to right, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px),
+
+        linear-gradient(to bottom, rgba(255, 0, 127, var(--grid-opacity)) 1px, transparent 1px);
+
+      background-size: 50px 50px;
+
+      background-position: center bottom;
+
+      animation: gridScroll 20s linear infinite;
+
+      transform-origin: center bottom;
+
+    }
+
+
+
+    .synth-sun {
+
+      position: absolute;
+
+      bottom: 40%;
+
+      left: 50%;
+
+      transform: translate(-50%, 20%);
+
+      width: 450px;
+
+      height: 450px;
+
+      background: linear-gradient(to bottom, var(--color-neon-pink), var(--color-neon-yellow));
+
+      border-radius: 50%;
+
+      filter: blur(100px);
+
+      opacity: 0.15;
+
+      z-index: -1;
+
+      pointer-events: none;
+
+      transition: opacity var(--transition-normal);
+
+    }
+
+    
+
+    html.light-theme .synth-sun {
+
+      opacity: 0.05;
+
+    }
+
+
+
+    .hero-content {
+
+      max-width: 1100px;
+
+      padding: 0 2rem;
+
+      z-index: 10;
+
+    }
+
+
+
+    .hero-badge {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 0.5rem;
+
+      font-family: var(--font-retro);
+      line-height: 1.5;
+
+      font-size: 0.6rem;
+
+      color: var(--color-neon-cyan);
+
+      background: rgba(0, 240, 255, 0.08);
+
+      border: 1px solid var(--color-neon-cyan);
+
+      padding: 0.5rem 1rem;
+
+      border-radius: 20px;
+
+      margin-bottom: 1.5rem;
+
+      box-shadow: var(--neon-glow-cyan);
+
+    }
+
+
+
+    .game-badge {
+
+      align-self: flex-start;
+
+      font-family: var(--font-retro);
+
+      font-size: 0.55rem;
+
+      letter-spacing: 1px;
+
+      color: var(--color-neon-cyan);
+
+      background: rgba(0, 240, 255, 0.08);
+
+      border: 1px solid var(--color-neon-cyan);
+
+      padding: 0.4rem 0.8rem;
+
+      border-radius: 20px;
+
+      box-shadow: var(--neon-glow-cyan);
+
+      display: inline-block;
+
+      line-height: 1.5;
+
+    }
+
+
+
+    .hero-title {
+
+      font-family: var(--font-display);
+
+      font-size: clamp(2.2rem, 5vw, 4rem);
+
+      font-weight: 600;
+
+      line-height: 1.1;
+
+      text-transform: uppercase;
+
+      letter-spacing: -1px;
+
+      margin-bottom: 1rem;
+
+      background: linear-gradient(to bottom, #ffffff 30%, #e2e8f0 70%);
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5));
+
+    }
+
+    
+
+    html.light-theme .hero-title {
+
+      background: linear-gradient(to bottom, #0f172a, #334155);
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+    }
+
+
+
+    .hero-title span {
+
+      display: block;
+
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+
+      -webkit-background-clip: text;
+
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.2));
+
+    }
+
+
+
+    .hero-desc {
+
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+
+      color: var(--color-text-secondary);
+
+      max-width: 700px;
+
+      margin: 0 auto 2rem auto;
+
+      line-height: 1.6;
+
+    }
+
+
+
+    /* Floating indicators */
+
+    .retro-details {
+
+      position: absolute;
+
+      top: 15%;
+
+      left: 5%;
+
+      animation: float 6s ease-in-out infinite;
+
+      opacity: 0.25;
+
+      font-family: var(--font-retro);
+
+      font-size: 0.75rem;
+
+      color: var(--color-neon-cyan);
+
+    }
+
+
+
+    .retro-details-right {
+
+      position: absolute;
+
+      bottom: 20%;
+
+      right: 7%;
+
+      animation: float 8s ease-in-out infinite alternate;
+
+      opacity: 0.25;
+
+      font-family: var(--font-retro);
+
+      font-size: 0.75rem;
+
+      color: var(--color-neon-pink);
+
+    }
+
+
+
+    /* ==========================================
+
+       6. SITE FOOTER STYLES
+
+       ========================================== */
+
+    .site-footer {
+
+      background-color: rgba(6, 6, 18, 0.95);
+
+      border-top: 3px solid var(--color-border-nav);
+
+      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+
+      padding: 4rem 2rem 2rem 2rem;
+
+      position: relative;
+
+      z-index: 10;
+
+      transition: background-color var(--transition-normal), border-color var(--transition-normal);
+
+    }
+
+
+
+    html.light-theme .site-footer {
+
+      background-color: rgba(241, 245, 249, 0.95);
+
+      border-top: 3px solid var(--color-border-nav);
+
+      box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.03);
+
+    }
+
+
+
+    .footer-container {
+
+      max-width: 1400px;
+
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      gap: 3rem;
+
+    }
+
+
+
+    .footer-col {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1.25rem;
+
+    }
+
+
+
+    .footer-brand {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.75rem;
+
+    }
+
+
+
+    .footer-brand .nav-logo {
+
+      align-self: flex-start;
+
+    }
+
+
+
+    .footer-tagline {
+
+      font-size: 0.88rem;
+
+      color: var(--color-text-secondary);
+
+      line-height: 1.6;
+
+    }
+
+
+
+    .footer-title {
+
+      font-family: var(--font-display);
+
+      font-size: 0.95rem;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+      color: var(--color-text-primary);
+
+      position: relative;
+
+      padding-bottom: 0.5rem;
+
+      margin-bottom: 0.25rem;
+
+    }
+
+
+
+    .footer-title::after {
+
+      content: '';
+
+      position: absolute;
+
+      bottom: 0;
+
+      left: 0;
+
+      width: 40px;
+
+      height: 2px;
+
+      background: linear-gradient(to right, var(--color-neon-pink), var(--color-neon-cyan));
+
+      border-radius: 2px;
+
+    }
+
+    
+
+    html[dir="rtl"] .footer-title::after {
+
+      left: auto;
+
+      right: 0;
+
+    }
+
+
+
+    .footer-links-list {
+
+      list-style: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.75rem;
+
+    }
+
+
+
+    .footer-link {
+
+      font-size: 0.85rem;
+
+      color: var(--color-text-secondary);
+
+      transition: color var(--transition-fast), padding var(--transition-fast);
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 0.4rem;
+
+    }
+
+
+
+    .footer-link:hover {
+
+      color: var(--color-neon-cyan);
+
+      text-shadow: var(--neon-glow-cyan);
+
+      padding-left: 4px;
+
+    }
+
+    
+
+    html[dir="rtl"] .footer-link:hover {
+
+      padding-left: 0;
+
+      padding-right: 4px;
+
+    }
+
+
+
+    .footer-contact-info {
+
+      list-style: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.88rem;
+
+      font-size: 0.85rem;
+
+      color: var(--color-text-secondary);
+
+      line-height: 1.5;
+
+    }
+
+
+
+    .footer-contact-info li {
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 0.5rem;
+
+    }
+
+
+
+    .footer-contact-info svg {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: var(--color-neon-pink);
+
+      flex-shrink: 0;
+
+      margin-top: 2px;
+
+    }
+
+
+
+    .footer-bottom {
+
+      max-width: 1400px;
+
+      margin: 3rem auto 0 auto;
+
+      padding-top: 1.5rem;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 1.5rem;
+
+    }
+
+
+
+    html.light-theme .footer-bottom {
+
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+
+    }
+
+
+
+    .footer-copyright {
+
+      font-size: 0.8rem;
+
+      color: var(--color-text-secondary);
+
+    }
+
+
+
+    .footer-easter-egg {
+
+      font-family: var(--font-retro);
+
+      font-size: 0.55rem;
+
+      color: var(--color-neon-yellow);
+
+      animation: insertCoinFlash 1.5s infinite steps(2);
+
+      letter-spacing: 1px;
+
+    }
+
+
+
+    .footer-socials {
+
+      display: flex;
+
+      gap: 0.75rem;
+
+    }
+
+
+
+    .social-btn {
+
+      width: 36px;
+
+      height: 36px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--color-border-nav);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--color-text-secondary);
+
+      transition: all var(--transition-fast);
+
+    }
+
+
+
+    .social-btn:hover {
+
+      color: var(--color-neon-pink);
+
+      border-color: var(--color-neon-pink);
+
+      box-shadow: var(--neon-glow-pink);
+
+      background: rgba(255, 0, 127, 0.05);
+
+      transform: translateY(-3px);
+
+    }
+
+
+
+    .social-btn svg {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: currentColor;
+
+    }
+
+
+
+    /* ==========================================
+
+       9. DRAWER CLOSE & DROPDOWN MENU STYLES
+
+       ========================================== */
+
+    .drawer-close-btn {
+
+      position: absolute;
+
+      top: 15px;
+
+      right: 15px;
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--color-border-nav);
+
+      background: rgba(255, 255, 255, 0.02);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      color: var(--color-text-secondary);
+
+      transition: all var(--transition-fast);
+
+      z-index: 10;
+
+    }
+
+
+
+    .drawer-close-btn:hover {
+
+      color: var(--color-neon-pink);
+
+      border-color: var(--color-neon-pink);
+
+      box-shadow: var(--neon-glow-pink);
+
+      background: rgba(255, 0, 127, 0.05);
+
+      transform: scale(1.05);
+
+    }
+
+
+
+    .drawer-close-btn svg {
+
+      width: 16px;
+
+      height: 16px;
+
+      fill: currentColor;
+
+    }
+
+
+
+    html[dir="rtl"] .drawer-close-btn {
+
+      right: auto;
+
+      left: 15px;
+
+    }
+
+
+
+    /* Dropdown wrapper in mobile menu */
+
+    .nav-item-dropdown {
+
+      position: relative;
+
+      display: flex;
+
+      flex-direction: column;
+
+      width: 100%;
+
+    }
+
+
+
+    /* Caret indicator for dropdown */
+
+    .dropdown-toggle::after {
+
+      content: '▾';
+
+      font-size: 0.7rem;
+
+      margin-left: 0.25rem;
+
+      display: inline-block;
+
+      transition: transform var(--transition-fast);
+
+    }
+
+    
+
+    html[dir="rtl"] .dropdown-toggle::after {
+
+      margin-left: 0;
+
+      margin-right: 0.25rem;
+
+    }
+
+
+
+    .nav-item-dropdown:hover .dropdown-toggle::after {
+
+      transform: rotate(180deg);
+
+      color: var(--color-neon-cyan);
+
+    }
+
+
+
+    /* Submenu (hidden by default, expands on hover) */
+
+    .dropdown-submenu {
+
+      max-height: 0;
+
+      opacity: 0;
+
+      overflow: hidden;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 0.25rem;
+
+      padding-left: 1.5rem;
+
+      transition: max-height var(--transition-normal) ease-out, opacity var(--transition-fast), margin var(--transition-fast);
+
+    }
+
+
+
+    html[dir="rtl"] .dropdown-submenu {
+
+      padding-left: 0;
+
+      padding-right: 1.5rem;
+
+    }
+
+
+
+    /* Mobile dropdown expand class (controlled via JavaScript) */
+
+    .mobile-drawer .dropdown-submenu.open {
+
+      max-height: 80px;
+
+      opacity: 1;
+
+      margin-top: 0.25rem;
+
+      margin-bottom: 0.25rem;
+
+    }
+
+
+
+    /* Desktop dropdown expand on hover (laptop/desktop viewports) */
+
+    @media (min-width: 993px) {
+
+      .nav-menu-wrapper:not(.has-scroll-overflow) {
+
+        overflow: visible !important;
+
+      }
+
+
+
+      .nav-menu-wrapper:not(.has-scroll-overflow) .nav-menu-scroll {
+
+        overflow: visible !important;
+
+        overflow-x: visible !important;
+
+      }
+
+
+
+      .desktop-dropdown {
+
+        position: relative;
+
+        width: auto !important;
+
+        display: inline-flex;
+
+      }
+
+
+
+      .desktop-submenu {
+
+        position: absolute;
+
+        top: calc(100% + 15px);
+
+        left: 50%;
+
+        transform: translateX(-50%) translateY(-5px);
+
+        background-color: var(--color-bg-nav);
+
+        backdrop-filter: blur(12px) saturate(160%);
+
+        -webkit-backdrop-filter: blur(12px) saturate(160%);
+
+        border: 2px solid var(--color-border-nav);
+
+        border-radius: 8px;
+
+        padding: 0.4rem;
+
+        min-width: 110px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 0.2rem;
+
+        box-shadow: var(--shadow-nav);
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        max-height: none !important;
+
+        transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+
+        z-index: 100;
+
+      }
+
+
+
+      .desktop-dropdown:hover .desktop-submenu {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: translateX(-50%) translateY(0);
+
+      }
+
+    }
+
+
+
+    /* Submenu links styling */
+
+    .submenu-link {
+
+      padding: 0.4rem 0.8rem;
+
+      font-size: 0.82rem;
+
+      color: var(--color-text-secondary);
+
+      border-radius: 6px;
+
+      transition: all var(--transition-fast);
+
+      position: relative;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 0.35rem;
+
+      user-select: none;
+
+    }
+
+
+
+    .submenu-link::before {
+
+      content: '►';
+
+      font-size: 0.5rem;
+
+      color: var(--color-neon-pink);
+
+      opacity: 0;
+
+      transform: scale(0.5);
+
+      transition: all var(--transition-fast);
+
+    }
+
+
+
+    html[dir="rtl"] .submenu-link::before {
+
+      content: '◄';
+
+    }
+
+
+
+    .submenu-link:hover {
+
+      color: var(--color-text-primary);
+
+      background: rgba(255, 255, 255, 0.04);
+
+      padding-left: 1.2rem;
+
+    }
+
+
+
+    html.light-theme .submenu-link:hover {
+
+      background: rgba(0, 0, 0, 0.04);
+
+    }
+
+
+
+    html[dir="rtl"] .submenu-link:hover {
+
+      padding-left: 0.8rem;
+
+      padding-right: 1.2rem;
+
+    }
+
+
+
+    .submenu-link:hover::before {
+
+      opacity: 1;
+
+      transform: scale(1);
+
+    }
+
+
+
+    .submenu-link.active {
+
+      color: var(--color-neon-cyan);
+
+      background: rgba(0, 240, 255, 0.05);
+
+    }
+
+  
+
+/* ==========================================
+
+       10. GAMES SECTION SHOWCASE STYLES
+
+       ========================================== */
+
+    .games-showcase-container {
+
+      max-width: 1400px;
+
+      margin: 0 auto;
+
+      padding: 4rem 2rem;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 6rem;
+
+      position: relative;
+
+      z-index: 10;
+
+    }
+
+
+
+    .game-section-card {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 4rem;
+
+      background: rgba(10, 10, 26, 0.55);
+
+      border: 2px solid var(--color-border-nav);
+
+      border-radius: 16px;
+
+      padding: 3rem;
+
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+
+      transition: all var(--transition-normal);
+
+      position: relative;
+
+      overflow: hidden;
+
+    }
+
+
+
+    html.light-theme .game-section-card {
+
+      background: rgba(255, 255, 255, 0.65);
+
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.05);
+
+    }
+
+
+
+    .game-section-card:hover {
+
+      border-color: var(--color-neon-pink);
+
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(0, 0, 0, 0.6);
+
+      transform: translateY(-5px);
+
+    }
+
+
+
+    html.light-theme .game-section-card:hover {
+
+      box-shadow: var(--neon-glow-pink), 0 20px 50px rgba(15, 23, 42, 0.05);
+
+    }
+
+
+
+    /* Alternating layout order */
+
+    .game-section-card.alternate {
+
+      flex-direction: row-reverse;
+
+    }
+
+
+
+    .game-image-wrapper {
+
+      width: 50%;
+
+      flex-shrink: 0;
+
+      border-radius: 12px;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+
+      position: relative;
+
+      aspect-ratio: 16/9;
+
+    }
+
+    
+
+    html.light-theme .game-image-wrapper {
+
+      border: 1px solid rgba(15, 23, 42, 0.1);
+
+    }
+
+
+
+    .game-image-wrapper img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      transition: transform var(--transition-slow);
+
+    }
+
+
+
+    .game-section-card:hover .game-image-wrapper img {
+
+      transform: scale(1.05) rotate(1deg);
+
+    }
+
+
+
+    .game-info-wrapper {
+
+      flex-grow: 1;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 1.5rem;
+
+    }
+
+
+
+    .game-badge {
+
+      align-self: flex-start;
+
+      font-family: var(--font-retro);
+
+      font-size: 0.55rem;
+
+      letter-spacing: 1px;
+
+      color: var(--color-neon-cyan);
+
+      background: rgba(0, 240, 255, 0.08);
+
+      border: 1px solid var(--color-neon-cyan);
+
+      padding: 0.4rem 0.8rem;
+
+      border-radius: 20px;
+
+      box-shadow: var(--neon-glow-cyan);
+
+      display: inline-block;
+
+      line-height: 1.5;
+
+}
+
+
+
+    .game-title {
+
+      font-family: var(--font-display);
+
+      font-size: 2.2rem;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      color: var(--color-text-primary);
+
+      letter-spacing: -0.5px;
+
+    }
+
+
+
+    .game-desc {
+
+      font-size: 0.95rem;
+
+      color: var(--color-text-secondary);
+
+      line-height: 1.6;
+
+    }
+
+
+
+    .game-specs-table {
+
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-top: 0.5rem;
+
+    }
+
+
+
+    .game-specs-table th, 
+
+    .game-specs-table td {
+
+      padding: 0.6rem 0;
+
+      font-size: 0.85rem;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      text-align: left;
+
+    }
+
+    
+
+    html.light-theme .game-specs-table th, 
+
+    html.light-theme .game-specs-table td {
+
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+
+    }
+
+
+
+    html[dir="rtl"] .game-specs-table th, 
+
+    html[dir="rtl"] .game-specs-table td {
+
+      text-align: right;
+
+    }
+
+
+
+    .game-specs-table th {
+
+      font-family: var(--font-display);
+
+      font-weight: 700;
+
+      color: var(--color-neon-yellow);
+
+      width: 35%;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+
+    }
+
+
+
+    .game-specs-table td {
+
+      color: var(--color-text-primary);
+
+    }
+
+
+
+    /* Category lobby navigator cards */
+
+    .lobby-navigation-grid {
+
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+      gap: 1rem;
+
+      width: 100%;
+
+      margin-top: 2rem;
+
+    }
+
+
+
+    .lobby-card {
+
+      background: rgba(10, 10, 26, 0.45);
+
+      border: 1px solid var(--color-border-nav);
+
+      border-radius: 8px;
+
+      padding: 1rem;
+
+      text-align: center;
+
+      transition: all var(--transition-fast);
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 0.5rem;
+
+      cursor: pointer;
+
+    }
+
+
+
+    html.light-theme .lobby-card {
+
+      background: rgba(255, 255, 255, 0.55);
+
+    }
+
+
+
+    .lobby-card:hover {
+
+      border-color: var(--color-neon-cyan);
+
+      box-shadow: var(--neon-glow-cyan);
+
+      transform: translateY(-3px);
+
+    }
+
+
+
+    .lobby-card-icon {
+
+      font-size: 1.5rem;
+
+      color: var(--color-neon-cyan);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      width: 48px;
+
+      height: 48px;
+
+      margin-bottom: 0.25rem;
+
+    }
+
+
+
+    .lobby-card-icon svg {
+
+      width: 32px;
+
+      height: 32px;
+
+    }
+
+
+
+    .lobby-card-title {
+
+      font-family: var(--font-display);
+
+      font-size: 0.75rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+
+      color: var(--color-text-primary);
+
+    }
+
+
+
+    /* Responsive layouts for Game showcase */
+
+    @media (max-width: 1199.98px) {
+
+      .game-section-card,
+
+      .game-section-card.alternate {
+
+        flex-direction: column;
+
+        padding: 2rem;
+
+        gap: 2rem;
+
+      }
+
+      .game-image-wrapper {
+
+        width: 100%;
+
+      }
+
+      .game-title {
+
+        font-size: 1.8rem;
+
+      }
+
+    }
+
+
+
+    /* ==========================================
+
+       Animations
+
+       ========================================== */
+
+    @keyframes neonFlash {
+
+      0%, 100% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+
+      45%, 55% { opacity: 0.4; text-shadow: none; }
+
+      50% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+
+    }
+
+
+
+    @keyframes insertCoinFlash {
+
+      0%, 100% { opacity: 1; }
+
+      50% { opacity: 0.15; }
+
+    }
+
+
+
+    @keyframes gridScroll {
+
+      0% { background-position: center 0px; }
+
+      100% { background-position: center 1000px; }
+
+    }
+
+
+
+    @keyframes float {
+
+      0%, 100% { transform: translateY(0px); }
+
+      50% { transform: translateY(-20px); }
+
+    }
+
+
+
+    @media (min-width: 1200px) and (max-width: 1360px) {
+
+      .nav-link {
+
+        font-size: 0.7rem;
+
+        padding: 0.25rem 0.35rem;
+
+      }
+
+      .nav-container {
+
+        padding: 0 1rem;
+
+      }
+
+      .nav-actions {
+
+        gap: 0.5rem;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 1150px) {
+
+      .nav-container {
+
+        padding: 0 1.5rem;
+
+      }
+
+      .nav-logo {
+
+        font-size: 1.25rem;
+
+      }
+
+      .logo-icon {
+
+        width: 36px;
+
+        height: 36px;
+
+      }
+
+      .logo-icon svg {
+
+        width: 20px;
+
+        height: 20px;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 1199.98px) {
+
+      .nav-menu-wrapper {
+
+        display: none;
+
+      }
+
+      .nav-actions {
+
+        display: none;
+
+      }
+
+      .mobile-menu-btn {
+
+        display: flex;
+
+      }
+
+    }
+
+
+
+    /* ==========================================
+       NAVBAR OVERRIDES FOR DESKTOP & LAPTOP
+       ========================================== */
+.lobby-card-icon svg {
+
+      width: 32px;
+
+      height: 32px;
+
+    }
+
+
+
+    .lobby-card-title {
+
+      font-family: var(--font-display);
+
+      font-size: 0.75rem;
+
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.5px;
+
+      color: var(--color-text-primary);
+
+    }
+
+
+
+    /* Responsive layouts for Game showcase */
+
+    @media (max-width: 1199.98px) {
+
+      .game-section-card,
+
+      .game-section-card.alternate {
+
+        flex-direction: column;
+
+        padding: 2rem;
+
+        gap: 2rem;
+
+      }
+
+      .game-image-wrapper {
+
+        width: 100%;
+
+      }
+
+      .game-title {
+
+        font-size: 1.8rem;
+
+      }
+
+    }
+
+
+
+    /* ==========================================
+
+       Animations
+
+       ========================================== */
+
+    @keyframes neonFlash {
+
+      0%, 100% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+
+      45%, 55% { opacity: 0.4; text-shadow: none; }
+
+      50% { opacity: 1; text-shadow: var(--neon-glow-yellow); }
+
+    }
+
+
+
+    @keyframes insertCoinFlash {
+
+      0%, 100% { opacity: 1; }
+
+      50% { opacity: 0.15; }
+
+    }
+
+
+
+    @keyframes gridScroll {
+
+      0% { background-position: center 0px; }
+
+      100% { background-position: center 1000px; }
+
+    }
+
+
+
+    @keyframes float {
+
+      0%, 100% { transform: translateY(0px); }
+
+      50% { transform: translateY(-20px); }
+
+    }
+
+
+
+    @media (min-width: 1200px) and (max-width: 1360px) {
+
+      .nav-link {
+
+        font-size: 0.7rem;
+
+        padding: 0.25rem 0.35rem;
+
+      }
+
+      .nav-container {
+
+        padding: 0 1rem;
+
+      }
+
+      .nav-actions {
+
+        gap: 0.5rem;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 1150px) {
+
+      .nav-container {
+
+        padding: 0 1.5rem;
+
+      }
+
+      .nav-logo {
+
+        font-size: 1.25rem;
+
+      }
+
+      .logo-icon {
+
+        width: 36px;
+
+        height: 36px;
+
+      }
+
+      .logo-icon svg {
+
+        width: 20px;
+
+        height: 20px;
+
+      }
+
+    }
+
+
+
+    @media (max-width: 1199.98px) {
+
+      .nav-menu-wrapper {
+
+        display: none;
+
+      }
+
+      .nav-actions {
+
+        display: none;
+
+      }
+
+      .mobile-menu-btn {
+
+        display: flex;
+
+      }
+
+    }
+
+
+
+    /* ==========================================
+       NAVBAR OVERRIDES FOR DESKTOP & LAPTOP
+       ========================================== */
+    .nav-link {
+      border: 1px solid transparent;
+      transition: color var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast) !important;
+    }
+    
+    .nav-link.active {
+      color: var(--color-neon-cyan) !important;
+      font-weight: 600 !important;
+      background: rgba(0, 240, 255, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3) !important;
+    }
+
+    html.light-theme .nav-link.active {
+      background: rgba(0, 153, 173, 0.08) !important;
+      border-color: var(--color-neon-cyan) !important;
+      box-shadow: 0 0 8px rgba(0, 153, 173, 0.2) !important;
+    }
+
+    @media (min-width: 993px) {
+      .scroll-btn {
+        display: none !important;
+      }
+      .nav-menu-scroll {
+        overflow: visible !important;
+        overflow-x: visible !important;
+        justify-content: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .nav-menu-wrapper {
+        overflow: visible !important;
+        max-width: none !important;
+      }
+      .nav-menu-wrapper::before,
+      .nav-menu-wrapper::after {
+        display: none !important;
+      }
+      .nav-link::before {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 993px) and (max-width: 1440px) {
+      .nav-link {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.4rem !important;
+      }
+      .nav-menu-scroll {
+        gap: 0.1rem !important;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-showcase {
+        padding-top: 100px;
+        padding-bottom: 30px;
+      }
+      .games-showcase-container {
+        gap: 4.5rem;
+        padding: 3rem 1.5rem;
+      }
+      .game-section-card {
+        gap: 3rem;
+        padding: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        padding: 0 1rem;
+      }
+      .site-footer {
+        padding: 2.5rem 1rem 1.5rem 1rem;
+      }
+      .retro-details,
+      .retro-details-right {
+        display: none !important;
+      }
+      .games-showcase-container {
+        padding: 2.5rem 1.25rem;
+        gap: 3.5rem;
+      }
+      .game-section-card {
+        padding: 1.75rem;
+        gap: 2rem;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .footer-brand {
+        text-align: center;
+        align-items: center;
+      }
+      .footer-brand .nav-logo {
+        align-self: center;
+      }
+      .footer-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      html[dir="rtl"] .footer-title::after {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-container {
+        padding: 0 0.75rem;
+      }
+      .nav-logo {
+        font-size: 1rem;
+      }
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+      }
+      .logo-icon svg {
+        width: 16px;
+        height: 16px;
+      }
+      .hero-showcase {
+        padding-top: 90px;
+        padding-bottom: 25px;
+      }
+      .hero-content {
+        padding: 0 1rem;
+      }
+      .hero-title {
+        font-size: 2rem !important;
+      }
+      .hero-desc {
+        font-size: 0.88rem;
+      }
+      .lobby-navigation-grid {
+        margin-top: 1.5rem;
+        gap: 0.75rem;
+      }
+      .games-showcase-container {
+        padding: 2rem 1rem;
+        gap: 2.5rem;
+      }
+      .game-section-card {
+        padding: 1.25rem;
+        gap: 1.25rem;
+        border-radius: 12px;
+      }
+      .game-title {
+        font-size: 1.4rem !important;
+      }
+      .game-desc {
+        font-size: 0.88rem;
+      }
+      .game-specs-table th, 
+      .game-specs-table td {
+        padding: 0.5rem 0;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Modern responsive updates for mobile-first design */
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Target 320px (Mobile Portrait) */
+    @media (max-width: 320px) {
+      .nav-container {
+        padding: 0 0.5rem;
+        gap: 0.5rem;
+      }
+      .nav-logo {
+        font-size: 0.85rem;
+      }
+      .logo-text .secondary {
+        display: none; /* Hide secondary text to prevent wrapping on tiny screens */
+      }
+    }
+  </style>
+
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+
+<body>
+
+  <!-- Retro Glowing Background Grid -->
+
+  <div class="retro-grid-bg">
+
+    <div class="grid-lines"></div>
+
+  </div>
+
+  <header class="header-nav" id="headerNav">
+
+    <div class="nav-container">
+
+      <!-- LEFT: Logo area -->
+
+      <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+
+        <div class="logo-icon">
+
+          <!-- Pixel console controller SVG -->
+
+          <svg viewBox="0 0 24 24">
+
+            <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+
+          </svg>
+
+        </div>
+
+        <div class="logo-text">
+
+          <span class="primary">RETRO</span>
+
+          <span class="secondary">ARCADE BAR</span>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- CENTER: Scrollable Navigation Menu (15 items) -->
+
+      <nav class="nav-menu-wrapper" id="navMenuWrapper">
+        <!-- Chevron buttons for desktop scroll control -->
+        <button class="scroll-btn scroll-btn-left" id="scrollLeftBtn" aria-label="Scroll menu left">
+          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+        
+        <div class="nav-menu-scroll" id="navMenuScroll">
+          <!-- Dropdown for Home (Desktop) -->
+          <div class="nav-item-dropdown desktop-dropdown">
+            <a href="./index.html" class="nav-link dropdown-toggle">Home</a>
+            <div class="dropdown-submenu desktop-submenu">
+              <a href="./index.html" class="submenu-link">Home 1</a>
+              <a href="./home 2.html" class="submenu-link">Home 2</a>
+            </div>
+          </div>
+          <a href="./About.html" class="nav-link">About</a>
+          <a href="./Games.html" class="nav-link active">Games</a>
+          <a href="./Game Library.html" class="nav-link">Game Library</a>
+          <a href="./Live boards.html" class="nav-link">Live boards</a>
+          <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+          <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+          <a href="./Events.html" class="nav-link">Events</a>
+          <a href="./Parties.html" class="nav-link">Parties</a>
+          <a href="./Membership.html" class="nav-link">Membership</a>
+          <a href="./Gallery.html" class="nav-link">Gallery</a>
+          <a href="./Guides.html" class="nav-link">Guides</a>
+          <a href="./Pricing.html" class="nav-link">Pricing</a>
+          <a href="./Reviews.html" class="nav-link">Reviews</a>
+          <a href="./Contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <button class="scroll-btn scroll-btn-right" id="scrollRightBtn" aria-label="Scroll menu right">
+          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </nav>
+
+
+
+      <!-- RIGHT: Interactive Utility Actions -->
+
+      <div class="nav-actions">
+
+        <!-- Dark Mode Toggle -->
+
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode" title="Toggle Mode">
+
+          <!-- Sun Icon -->
+
+          <svg class="sun-icon" viewBox="0 0 24 24">
+
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+
+          </svg>
+
+          <!-- Moon Icon -->
+
+          <svg class="moon-icon" viewBox="0 0 24 24">
+
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+
+          </svg>
+
+        </button>
+
+
+
+        <!-- Right to Left (RTL) Toggle -->
+
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtn" aria-label="Toggle Text Direction" title="Toggle Layout Direction">
+
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+
+          </svg>
+
+        </button>
+
+
+
+        <!-- Login Button ("SIGN IN") -->
+
+        <button class="btn-login" id="loginBtn" aria-label="Sign in to profile">
+
+          <span class="btn-text-flash">Login</span>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- Hamburger Button (Mobile Only) -->
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open navigation menu">
+
+        <span class="hamburger-line"></span>
+
+        <span class="hamburger-line"></span>
+
+        <span class="hamburger-line"></span>
+
+      </button>
+
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- 2. MOBILE SLIDE-OUT DRAWER MENU -->
+
+  <!-- 2. MOBILE SLIDE-OUT DRAWER MENU -->
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <aside class="mobile-drawer" id="mobileDrawer">
+
+    
+
+    <!-- Back / Close Button -->
+
+    <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation menu" title="Close Menu">
+
+      <svg viewBox="0 0 24 24">
+
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+
+      </svg>
+
+    </button>
+
+    
+
+    <!-- Vertical Menu links -->
+
+    <nav class="mobile-menu-links">
+      <!-- Dropdown for Home -->
+      <div class="nav-item-dropdown">
+        <a href="./index.html" class="nav-link dropdown-toggle" id="mobileHomeToggle">Home</a>
+        <div class="dropdown-submenu" id="mobileHomeSubmenu">
+          <a href="./index.html" class="submenu-link">Home 1</a>
+          <a href="./home 2.html" class="submenu-link">Home 2</a>
+        </div>
+      </div>
+        <a href="./About.html" class="nav-link">About</a>
+        <a href="./Games.html" class="nav-link active">Games</a>
+        <a href="./Game Library.html" class="nav-link">Game Library</a>
+        <a href="./Live boards.html" class="nav-link">Live boards</a>
+        <a href="./Craft Beer.html" class="nav-link">Craft Beer</a>
+        <a href="./Food Menu.html" class="nav-link">Food Menu</a>
+        <a href="./Events.html" class="nav-link">Events</a>
+        <a href="./Parties.html" class="nav-link">Parties</a>
+        <a href="./Membership.html" class="nav-link">Membership</a>
+        <a href="./Gallery.html" class="nav-link">Gallery</a>
+        <a href="./Guides.html" class="nav-link">Guides</a>
+        <a href="./Pricing.html" class="nav-link">Pricing</a>
+        <a href="./Reviews.html" class="nav-link">Reviews</a>
+        <a href="./Contact.html" class="nav-link">Contact</a>
+    </nav>
+
+
+
+    <!-- Utility Toggles in Mobile Footer -->
+
+    <div class="mobile-drawer-footer">
+
+      <div class="mobile-actions">
+
+        <!-- Dark Mode Toggle (Mobile) -->
+
+        <button class="icon-toggle-btn theme-toggle" id="themeToggleBtnMobile" aria-label="Toggle Dark/Light Mode">
+
+          <svg class="sun-icon" viewBox="0 0 24 24">
+
+            <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9h-2v3h2V1.5zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.75l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zm-12.5-1.8l-1.79 1.8 1.41 1.41 1.8-1.79-1.42-1.42zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm1 4h-2v3h2v-3zm7.04-6.5h3v-2h-3v2z"/>
+
+          </svg>
+
+          <svg class="moon-icon" viewBox="0 0 24 24">
+
+            <path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.7 3.3-8.8 8.1-9.7.5-.1 1 .3.8.8-.9 2.5-.2 5.3 1.7 7.2 1.9 1.9 4.7 2.6 7.2 1.7.5-.2.9.3.8.8-.9 4.8-5 8.1-9.7 8.1-2.9.1-5.7-1-7.8-3.1-2.1-2.1-3.2-4.9-3.1-7.8-.1 4.7 3.2 8.7 7.9 9.6 1.8.4 3.7.2 5.4-.5.4-.1.8.2.8.6 0 1.2-.6 2.3-1.6 3-1-.6-2-.9-3.2-.9z"/>
+
+          </svg>
+
+        </button>
+
+
+
+        <!-- RTL Toggle (Mobile) -->
+
+        <button class="icon-toggle-btn rtl-toggle-btn" id="rtlToggleBtnMobile" aria-label="Toggle Text Direction">
+
+          <svg class="rtl-icon" viewBox="0 0 24 24">
+
+            <path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+
+          </svg>
+
+        </button>
+
+      </div>
+
+
+
+      <!-- Login CTA (Mobile) -->
+
+      <button class="btn-login" id="loginBtnMobile" aria-label="Sign in to profile">
+
+        <span class="btn-text-flash">Login</span>
+
+      </button>
+
+    </div>
+
+
+
+  </aside>
+
+
+
+  <!-- 3. HERO SHOWCASE INTRO SECTION -->
+
+  <main class="hero-showcase">
+
+    <div class="synth-sun"></div>
+
+    <div class="retro-details">SCORE: 888888</div>
+
+    <div class="retro-details-right">STAGE 02</div>
+
+    
+
+    <div class="hero-content">
+
+      <div class="hero-badge">
+
+        <svg viewBox="0 0 24 24" class="play-class-icon" fill="currentColor">
+
+          <path d="M4 2h2v2H4V2zm14 0h2v2h-2V2zm-12 4h12v2H6V6zm-2 2h16v2H4V8zm0 2h3v2H4v-2zm5 0h6v2H9v-2zm7 0h4v2h-4v-2zm-7 4h6v2H9v-2zM2 16h2v4H2v-4zm18 0h2v4h-2v-4z"/>
+
+        </svg>
+
+        CHOOSE YOUR PLAY CLASS
+
+      </div>
+
+      <h1 class="hero-title">
+
+        The Arcade <span>Catalog</span>
+
+      </h1>
+
+      <p class="hero-desc">
+
+        Explore our curated collection of vintage entertainment rigs. From original microswitch cabinet joysticks to restored home consoles and mechanical pinball flippers.
+
+      </p>
+
+      
+
+      <!-- Quick Navigation Grid -->
+
+      <div class="lobby-navigation-grid">
+
+        <div class="lobby-card" onclick="document.getElementById('classic-cabinets').scrollIntoView({ behavior: 'smooth' })">
+
+          <span class="lobby-card-icon">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+              <circle cx="12" cy="6" r="3" fill="currentColor"/>
+
+              <path d="M12 9v7M6 16h12l2 4H4l2-4z"/>
+
+            </svg>
+
+          </span>
+
+          <span class="lobby-card-title">Classic Cabinets</span>
+
+        </div>
+
+        <div class="lobby-card" onclick="document.getElementById('console-games').scrollIntoView({ behavior: 'smooth' })">
+
+          <span class="lobby-card-icon">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+              <rect x="2" y="6" width="20" height="12" rx="3"/>
+
+              <path d="M6 12h4M8 10v4"/>
+
+              <circle cx="15" cy="12" r="1.2" fill="currentColor"/>
+
+              <circle cx="18" cy="12" r="1.2" fill="currentColor"/>
+
+              <line x1="11" y1="14" x2="13" y2="14"/>
+
+            </svg>
+
+          </span>
+
+          <span class="lobby-card-title">Retro Consoles</span>
+
+        </div>
+
+        <div class="lobby-card" onclick="document.getElementById('pinball-machines').scrollIntoView({ behavior: 'smooth' })">
+
+          <span class="lobby-card-icon">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+              <rect x="5" y="2" width="14" height="20" rx="1.5"/>
+
+              <circle cx="9" cy="7" r="1.5" fill="currentColor"/>
+
+              <circle cx="15" cy="7" r="1.5" fill="currentColor"/>
+
+              <circle cx="12" cy="11" r="1.2"/>
+
+              <line x1="6" y1="18" x2="10" y2="17"/>
+
+              <line x1="18" y1="18" x2="14" y2="17"/>
+
+              <circle cx="12" cy="15" r="1" fill="currentColor"/>
+
+            </svg>
+
+          </span>
+
+          <span class="lobby-card-title">Pinball Rigs</span>
+
+        </div>
+
+        <div class="lobby-card" onclick="document.getElementById('racing-games').scrollIntoView({ behavior: 'smooth' })">
+
+          <span class="lobby-card-icon">
+
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+              <circle cx="12" cy="12" r="9"/>
+
+              <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+
+              <line x1="12" y1="14.5" x2="12" y2="21"/>
+
+              <line x1="9.5" y1="12" x2="3" y2="12"/>
+
+              <line x1="14.5" y1="12" x2="21" y2="12"/>
+
+            </svg>
+
+          </span>
+
+          <span class="lobby-card-title">Racing Cockpits</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- 4. DETAILED CABINET CATEGORIES CONTAINER -->
+
+  <section class="games-showcase-container">
+
+    
+
+    <!-- Section 1: Classic Arcade Cabinets -->
+
+    <div class="game-section-card" id="classic-cabinets">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/classic_cabinets.png" alt="Classic Arcade Cabinets row with retro glow" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 01 - PIXEL LEGENDS</span>
+
+        <h2 class="game-title">Classic Arcade Cabinets</h2>
+
+        <p class="game-desc">
+
+          Step back into the golden era of pixel supremacy. Our arcade features fully restored, original upright wood cabinets from the 1980s and 90s. Experience the authentic weight of arcade joystick microswitches, vertical CRT shadow-mask monitors, and standard cabinet side art. Play legends like retro Pac-Man, original Galaga, Donkey Kong, and Space Invaders.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Display Rig</th>
+
+            <td>19\" Raster CRT Shadow-Mask Monitor</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Control Board</th>
+
+            <td>Authentic 4-Way Joysticks & Concave Buttons</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Audio Out</th>
+
+            <td>Mono Retro Cabinet Speaker with Subwoofer</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Section 2: Retro Console Games -->
+
+    <div class="game-section-card alternate" id="console-games">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/console_games.png" alt="Retro consoles connected to CRT tv in cozy retro lounge" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 02 - CARTRIDGE LOUNGE</span>
+
+        <h2 class="game-title">Retro Console Games</h2>
+
+        <p class="game-desc">
+
+          Rest your feet in our comfortable retro lounge. We have set up vintage wood-grain CRT televisions connected to fully restored vintage home consoles. Select a cartridge from our physical library, blow on the contacts, and snap it in. Systems include the NES, SNES, Sega Genesis, and Atari 2600.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Hardware</th>
+
+            <td>Restored Original NES, SNES & Sega Genesis Consoles</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Monitor</th>
+
+            <td>20\" Sony Trinitron CRT Color Television</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Amenities</th>
+
+            <td>Velvet Couches, Retro Beanbags, and Cartridge Racks</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Section 3: Pinball Machines -->
+
+    <div class="game-section-card" id="pinball-machines">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/pinball_machines.png" alt="Flashing neon retro mechanical pinball table" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 03 - STEEL BALL FURY</span>
+
+        <h2 class="game-title">Pinball Machines</h2>
+
+        <p class="game-desc">
+
+          Feel the mechanical feedback and hear the chime reels ring. We feature a collection of fully restored solid-state and mechanical pinball machines from Bally, Williams, and Stern. Bright retrofitted LED bulbs, zero-friction playfields, and sensitive tilt plumb-bobs provide an authentic arcade flipper experience.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Table Build</th>
+
+            <td>Tempered Playfield Glass, High-Flux Flippers & Bumpers</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Tilt System</th>
+
+            <td>Plumb Bob Tilt Sensor with Warning LED Indicators</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Audio</th>
+
+            <td>Original Chime Box Reels & Multi-Speaker Digital Tracks</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Section 4: Racing Games -->
+
+    <div class="game-section-card alternate" id="racing-games">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/racing_games.png" alt="Arcade racing cabinet cockpit cockpit dashboard view" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 04 - NITRO SPEEDWAY</span>
+
+        <h2 class="game-title">Racing Games</h2>
+
+        <p class="game-desc">
+
+          Get behind the wheel and shift into high gear. Our linked racing cockpits put you in the driver's seat with physical force-feedback steering wheels, active steel throttle/brake assemblies, and four-speed manual shifters. Challenge your friends to head-to-head tracks in Daytona USA, OutRun, and Hydro Thunder.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Cabinet Type</th>
+
+            <td>Linked Sit-Down Cockpits with Stereo Headrests</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Controls</th>
+
+            <td>Force-Feedback Wheel, H-Pattern Shifter, Steel Pedals</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Display</th>
+
+            <td>Twin 32\" High-Resolution CRT Displays</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Section 5: Fighting Games -->
+
+    <div class="game-section-card" id="fighting-games">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/fighting_games.png" alt="Arcade fightstick buttons controllers face to face" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 05 - FIGHT CLUB</span>
+
+        <h2 class="game-title">Fighting Games</h2>
+
+        <p class="game-desc">
+
+          Head-to-head rivalry, zero-latency inputs, and quarter-circle punches. Our fighting cabinet lineup utilizes face-to-face configurations (preventing screen-peeking) and premium Japanese Sanwa arcade components. Prove your combos and execution in Street Fighter II: Turbo, Mortal Kombat II, and Tekken 3.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Lever / Button</th>
+
+            <td>Sanwa JLF Joysticks & OBSF-30 Convex Buttons</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Cabinet Build</th>
+
+            <td>Face-to-Face Dual Cabinet Link System</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Input latency</th>
+
+            <td>Zero-Latency PCB Wiring for Competitive Play</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Section 6: Multiplayer Arcade Games -->
+
+    <div class="game-section-card alternate" id="multiplayer-games">
+
+      <div class="game-image-wrapper">
+
+        <img src="images/multiplayer_cabinets.png" alt="4 player cooperative retro beat em up arcade cabinet" loading="lazy">
+
+      </div>
+
+      <div class="game-info-wrapper">
+
+        <span class="game-badge">STAGE 06 - FOUR-PLAYER CO-OP</span>
+
+        <h2 class="game-title">Multiplayer Arcade Games</h2>
+
+        <p class="game-desc">
+
+          Gather your squad and conquer the streets together. Our large-format multiplayer cabinets support up to 4 simultaneous players. Work together to rescue the city and defeat high-difficulty bosses. Rigs are preloaded with Teenage Mutant Ninja Turtles, X-Men, and The Simpsons Arcade Game.
+
+        </p>
+
+        <table class="game-specs-table">
+
+          <tr>
+
+            <th>Control Layout</th>
+
+            <td>Wide-Angle 4-Player simultaneous Control Deck</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Cabinet Width</th>
+
+            <td>42\" Custom Hardwood Cabinet Chassis</td>
+
+          </tr>
+
+          <tr>
+
+            <th>Display</th>
+
+            <td>37\" High-Definition Presentation Monitor</td>
+
+          </tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+
+  </section>
+
+
+
+  <!-- 5. SITE FOOTER -->
+
+  <footer class="site-footer">
+
+    <div class="footer-container">
+
+      
+
+      <!-- Column 1: Brand & Logo -->
+
+      <div class="footer-col">
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="nav-logo" aria-label="Retro Arcade Home">
+
+            <div class="logo-icon">
+
+              <svg viewBox="0 0 24 24">
+
+                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM6 13H5v2H4v-2H2v-2h2V9h1v2h1v2zm4.5 1c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3.5-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5 4c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+
+              </svg>
+
+            </div>
+
+            <div class="logo-text">
+
+              <span class="primary">RETRO</span>
+
+              <span class="secondary">ARCADE BAR</span>
+
+            </div>
+
+          </a>
+
+          <p class="footer-tagline">
+
+            Eat. Drink. Play. Repeat. The ultimate gaming lounge featuring classic arcade cabinets, high-tech pinball, craft beverages, and gourmet sliders.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Column 2: Navigation -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Navigation</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="navbar.html#home" class="footer-link">Home</a></li>
+
+          <li><a href="navbar.html#about" class="footer-link">About Us</a></li>
+
+          <li><a href="Games.html" class="footer-link">Arcade Cabinets</a></li>
+
+          <li><a href="Game%20Library.html" class="footer-link">Game Library</a></li>
+
+          <li><a href="Live boards.html" class="footer-link">Live Leaderboards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 3: Menu & Events -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Menu & Play</h2>
+
+        <ul class="footer-links-list">
+
+          <li><a href="Craft Beer.html" class="footer-link">Craft Beer & Drinks</a></li>
+
+          <li><a href="Food Menu.html" class="footer-link">Food Menu</a></li>
+
+          <li><a href="Events.html" class="footer-link">Events & Tournaments</a></li>
+
+          <li><a href="Parties.html" class="footer-link">Private Parties</a></li>
+
+          <li><a href="navbar.html#rewards" class="footer-link">Membership Rewards</a></li>
+
+        </ul>
+
+      </div>
+
+
+
+      <!-- Column 4: Contact & Hours -->
+
+      <div class="footer-col">
+
+        <h2 class="footer-title">Hours & Location</h2>
+
+        <ul class="footer-contact-info">
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+
+            <span>8 Bit Boulevard, Neon District, Level 99</span>
+
+          </li>
+
+          <li>
+
+            <svg viewBox="0 0 24 24"><path d="M22 5.72l-4.24 4.24a8.953 8.953 0 0 0-2.73-2.73L19.28 3H22v2.72zM2 18.28l4.24-4.24a8.953 8.953 0 0 0 2.73 2.73L4.72 21H2v-2.72zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+
+            <span>Mon - Thu: 4 PM - 12 AM<br>Fri - Sat: 12 PM - 2 AM<br>Sun: 12 PM - 11 PM</span>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+      <p class="footer-copyright">&copy; 2026 Retro Arcade Bar. All rights reserved.</p>
+
+      <div class="footer-easter-egg">INSERT COIN TO CONTINUE - PLAYER 1 READY</div>
+
+      <div class="footer-socials">
+
+        <a href="#" class="social-btn" aria-label="Twitter">
+
+          <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Discord">
+
+          <svg viewBox="0 0 24 24"><path d="M19.27 4.73a16.14 16.14 0 0 0-3.97-1.23.08.08 0 0 0-.08.04c-.17.31-.36.71-.49 1.03a14.88 14.88 0 0 0-4.46 0c-.13-.32-.33-.72-.51-1.03a.08.08 0 0 0-.08-.04 16.09 16.09 0 0 0-3.97 1.23.08.08 0 0 0-.04.03C2.86 8.96 1.94 13.08 2.37 17.15a.08.08 0 0 0 .03.06 16.27 16.27 0 0 0 4.9 2.48.08.08 0 0 0 .09-.03c.38-.52.72-1.08 1.01-1.67a.08.08 0 0 0-.04-.11 10.63 10.63 0 0 1-1.54-.73.08.08 0 0 1-.01-.13c.1-.07.2-.15.3-.22a.08.08 0 0 1 .08-.01c3.2 1.46 6.67 1.46 9.82 0a.08.08 0 0 1 .08.01c.1.07.2.15.3.22a.08.08 0 0 1-.01.13c-.48.29-.99.53-1.54.73a.08.08 0 0 0-.04.11c.29.59.63 1.15.98 1.67a.08.08 0 0 0 .09.03 16.2 16.2 0 0 0 4.9-2.48.08.08 0 0 0 .03-.06c.52-4.75-.87-8.83-3.44-12.39a.08.08 0 0 0-.04-.03zM8.52 14.85c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98zm6.96 0c-.96 0-1.75-.89-1.75-1.98s.77-1.98 1.75-1.98c.99 0 1.77.89 1.75 1.98 0 1.09-.76 1.98-1.75 1.98z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Instagram">
+
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+
+        </a>
+
+        <a href="#" class="social-btn" aria-label="Twitch">
+
+          <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- ==========================================
+
+       9. JAVASCRIPT LOGIC
+
+       ========================================== -->
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Elements ---
+
+      const htmlEl = document.documentElement;
+
+      
+
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+      const themeToggleBtnMobile = document.getElementById('themeToggleBtnMobile');
+
+      
+
+      const rtlToggleBtn = document.getElementById('rtlToggleBtn');
+
+      const rtlToggleBtnMobile = document.getElementById('rtlToggleBtnMobile');
+
+      
+
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+      const mobileDrawer = document.getElementById('mobileDrawer');
+
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      
+
+      const navMenuWrapper = document.getElementById('navMenuWrapper');
+
+      const navMenuScroll = document.getElementById('navMenuScroll');
+
+      const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+
+      const scrollRightBtn = document.getElementById('scrollRightBtn');
+
+      
+
+      const loginButtons = [document.getElementById('loginBtn'), document.getElementById('loginBtnMobile')];
+
+      const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+      
+
+      // --- Theme (Light/Dark) Logic ---
+
+      function toggleTheme() {
+
+        const isLight = htmlEl.classList.toggle('light-theme');
+
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+
+      }
+
+
+
+      // Initialize Theme
+
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+
+      if (savedTheme === 'light') {
+
+        htmlEl.classList.add('light-theme');
+
+      } else {
+
+        htmlEl.classList.remove('light-theme');
+
+      }
+
+
+
+      themeToggleBtn.addEventListener('click', toggleTheme);
+
+      themeToggleBtnMobile.addEventListener('click', toggleTheme);
+
+
+
+      // --- RTL (Right-to-Left) Logic ---
+
+      function toggleRTL() {
+
+        const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+
+        const newDir = currentDir === 'ltr' ? 'rtl' : 'ltr';
+
+        updateRTL(newDir);
+
+      }
+
+
+
+      function updateRTL(dir) {
+
+        htmlEl.setAttribute('dir', dir);
+
+        localStorage.setItem('dir', dir);
+
+        
+
+        const isRTL = dir === 'rtl';
+
+        
+
+        // Relocate mobile drawer animation side dynamically based on direction
+
+        if (isRTL) {
+
+          mobileDrawer.style.left = '';
+
+          mobileDrawer.style.right = '';
+
+          mobileMenuBtn.style.order = '-1'; // Place menu button correctly in RTL
+
+        } else {
+
+          mobileDrawer.style.left = '';
+
+          mobileDrawer.style.right = '';
+
+          mobileMenuBtn.style.order = '0';
+
+        }
+
+        
+
+        // Re-calculate menu boundaries for arrows in new direction
+
+        checkScrollOverflow();
+
+      }
+
+
+
+      // Initialize RTL
+
+      const savedDir = localStorage.getItem('dir') || 'ltr';
+
+      updateRTL(savedDir);
+
+
+
+      rtlToggleBtn.addEventListener('click', toggleRTL);
+
+      rtlToggleBtnMobile.addEventListener('click', toggleRTL);
+
+
+
+      // --- Mobile Menu Toggle ---
+
+      function toggleMobileMenu() {
+
+        const isActive = mobileMenuBtn.classList.toggle('active');
+
+        mobileDrawer.classList.toggle('active', isActive);
+
+        mobileOverlay.classList.toggle('active', isActive);
+
+      }
+
+
+
+      function closeMobileMenu() {
+
+        mobileMenuBtn.classList.remove('active');
+
+        mobileDrawer.classList.remove('active');
+
+        mobileOverlay.classList.remove('active');
+
+      }
+
+
+
+      mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+
+      drawerCloseBtn.addEventListener('click', closeMobileMenu);
+
+      
+
+      // Close drawer when clicking a mobile link (excluding dropdown toggles)
+
+      mobileDrawer.querySelectorAll('.nav-link, .submenu-link').forEach(link => {
+
+        link.addEventListener('click', (e) => {
+
+          // If this is a dropdown toggle, do not close the menu
+
+          if (link.classList.contains('dropdown-toggle')) {
+
+            return;
+
+          }
+
+
+
+          // Update active link classes
+
+          document.querySelectorAll('.nav-link, .submenu-link').forEach(nl => nl.classList.remove('active'));
+
+          
+
+          const targetHref = link.getAttribute('href');
+
+          if (targetHref) {
+
+            const selector = `a[href="${targetHref}"]`;
+
+            document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+
+          }
+
+          
+
+          closeMobileMenu();
+
+        });
+
+      });
+
+
+
+      // Mobile drawer Home dropdown click toggle
+
+      const mobileHomeToggle = document.getElementById('mobileHomeToggle');
+
+      const mobileHomeSubmenu = document.getElementById('mobileHomeSubmenu');
+
+
+
+      if (mobileHomeToggle && mobileHomeSubmenu) {
+
+        mobileHomeToggle.addEventListener('click', (e) => {
+
+          e.preventDefault(); // Prevent default link navigation
+
+          e.stopPropagation(); // Prevent event bubbling
+
+          
+
+          const isOpen = mobileHomeSubmenu.classList.toggle('open');
+
+          mobileHomeToggle.classList.toggle('caret-rotated', isOpen);
+
+        });
+
+      }
+
+
+
+      // --- Desktop Horizontal Menu Scroll & Arrow Controls ---
+
+      function checkScrollOverflow() {
+
+        const clientWidth = navMenuScroll.clientWidth;
+
+        if (clientWidth === 0) return;
+
+        
+
+        let contentWidth = 0;
+
+        const children = navMenuScroll.children;
+
+        for (let i = 0; i < children.length; i++) {
+
+          contentWidth += children[i].offsetWidth;
+
+        }
+
+        if (children.length > 1) {
+
+          contentWidth += (children.length - 1) * 4; // gap spacing (~4px)
+
+        }
+
+        
+
+        const hasOverflow = contentWidth > clientWidth;
+
+        
+
+        if (!hasOverflow) {
+
+          scrollLeftBtn.classList.remove('visible');
+
+          scrollRightBtn.classList.remove('visible');
+
+          navMenuWrapper.classList.remove('fade-left', 'fade-right', 'has-scroll-overflow');
+
+          return;
+
+        }
+
+
+
+        navMenuWrapper.classList.add('has-scroll-overflow');
+
+
+
+        // Show/hide arrows depending on scroll position
+
+        const scrollLeft = Math.abs(navMenuScroll.scrollLeft);
+
+        const scrollWidth = navMenuScroll.scrollWidth;
+
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+
+        const buffer = 8;
+
+        
+
+        let atStart, atEnd;
+
+        
+
+        if (!isRTL) {
+
+          atStart = scrollLeft <= buffer;
+
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+
+          
+
+          scrollLeftBtn.classList.toggle('visible', !atStart);
+
+          scrollRightBtn.classList.toggle('visible', !atEnd);
+
+          
+
+          navMenuWrapper.classList.toggle('fade-left', !atStart);
+
+          navMenuWrapper.classList.toggle('fade-right', !atEnd);
+
+        } else {
+
+          atStart = scrollLeft <= buffer;
+
+          atEnd = (scrollLeft + clientWidth) >= (scrollWidth - buffer);
+
+          
+
+          scrollLeftBtn.classList.toggle('visible', !atEnd);
+
+          scrollRightBtn.classList.toggle('visible', !atStart);
+
+          
+
+          navMenuWrapper.classList.toggle('fade-left', !atEnd);
+
+          navMenuWrapper.classList.toggle('fade-right', !atStart);
+
+        }
+
+      }
+
+
+
+      scrollLeftBtn.addEventListener('click', () => {
+
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+
+        const scrollAmount = 250;
+
+        navMenuScroll.scrollBy({
+
+          left: isRTL ? scrollAmount : -scrollAmount,
+
+          behavior: 'smooth'
+
+        });
+
+      });
+
+
+
+      scrollRightBtn.addEventListener('click', () => {
+
+        const isRTL = htmlEl.getAttribute('dir') === 'rtl';
+
+        const scrollAmount = 250;
+
+        navMenuScroll.scrollBy({
+
+          left: isRTL ? -scrollAmount : scrollAmount,
+
+          behavior: 'smooth'
+
+        });
+
+      });
+
+
+
+      navMenuScroll.addEventListener('scroll', checkScrollOverflow);
+
+      window.addEventListener('resize', checkScrollOverflow);
+
+      
+
+      // Call initial check
+
+      setTimeout(checkScrollOverflow, 200);
+
+
+
+      // Desktop Link Clicks Active Indicator
+
+      navMenuScroll.querySelectorAll('.nav-link').forEach(link => {
+
+        link.addEventListener('click', () => {
+
+          document.querySelectorAll('.nav-link').forEach(nl => nl.classList.remove('active'));
+
+          const selector = `a[href="${link.getAttribute('href')}"]`;
+
+          document.querySelectorAll(selector).forEach(nl => nl.classList.add('active'));
+
+        });
+
+      });
+
+
+
+      // --- Coin insertion effect for login buttons ---
+
+      loginButtons.forEach(btn => {
+
+        btn.addEventListener('click', () => {
+
+          // Flash animation trigger
+
+          const textEl = btn.querySelector('.btn-text-flash');
+
+          const originalText = textEl.textContent;
+
+          
+
+          textEl.textContent = 'COIN OK!';
+
+          textEl.style.color = '#00f0ff';
+
+          btn.style.borderColor = '#00f0ff';
+
+          btn.style.boxShadow = 'var(--neon-glow-cyan)';
+
+          
+
+          // Play a retro synth coin sound if web audio API allows or simulated delay
+
+          setTimeout(() => {
+
+            textEl.textContent = 'LOADING...';
+
+            setTimeout(() => {
+
+              window.location.href = 'login.html';
+
+              textEl.textContent = originalText;
+
+              textEl.style.color = '';
+
+              btn.style.borderColor = '';
+
+              btn.style.boxShadow = '';
+
+            }, 1000);
+
+          }, 800);
+
+        });
+
+      });
+
+      
+
+
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
