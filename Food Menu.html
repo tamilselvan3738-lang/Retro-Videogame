@@ -2515,7 +2515,7 @@
   </aside>
 
   <!-- 3. HERO SHOWCASE SECTION -->
-  <main class="hero-showcase" style="background: radial-gradient(circle at center, rgba(255, 0, 127, 0.08) 0%, transparent 80%), url('images/food_menu.png') no-repeat center center; background-size: cover; width: 100%; min-height: 50vh; display: flex; align-items: center; justify-content: center; position: relative;">
+  <main class="hero-showcase" style="background: radial-gradient(circle at center, rgba(255, 0, 127, 0.08) 0%, transparent 80%), url('images/food_menu.webp') no-repeat center center; background-size: cover; width: 100%; min-height: 50vh; display: flex; align-items: center; justify-content: center; position: relative;">
     <div class="synth-sun" style="position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 50%); width: 160px; height: 80px; background: linear-gradient(to top, var(--color-neon-pink), transparent); border-radius: 80px 80px 0 0; box-shadow: var(--neon-glow-pink); opacity: 0.6; z-index: 2;"></div>
     <div class="retro-details">LEVEL: 42</div>
     <div class="retro-details-right">KITCHEN_REF: RATIO_DECK</div>
@@ -2547,7 +2547,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/appetizers.png" alt="Platter of glowing pixel french fries and onion rings in metal basket" loading="lazy">
+        <img src="images/appetizers.webp" alt="Platter of glowing pixel french fries and onion rings in metal basket" loading="eager" fetchpriority="high">
       </div>
 
       <div class="menu-items-grid">
@@ -2615,7 +2615,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/burgers_sandwiches.png" alt="Futuristic double burger with neon yellow cheese on grid digital terminal" loading="lazy">
+        <img src="images/burgers_sandwiches.webp" alt="Futuristic double burger with neon yellow cheese on grid digital terminal" loading="lazy">
       </div>
 
       <div class="burger-grid">
@@ -2673,7 +2673,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/pizza_snacks.png" alt="Neon glowing pepperoni pizza disk with pink and blue lines on dark background" loading="lazy">
+        <img src="images/pizza_snacks.webp" alt="Neon glowing pepperoni pizza disk with pink and blue lines on dark background" loading="lazy">
       </div>
 
       <div class="menu-items-grid">
@@ -2728,7 +2728,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/shareable_platters.png" alt="Multiplayer co-op food platter with slider burgers, wings, and chips in neon lounge" loading="lazy">
+        <img src="images/shareable_platters.webp" alt="Multiplayer co-op food platter with slider burgers, wings, and chips in neon lounge" loading="lazy">
       </div>
 
       <div class="menu-items-grid">
@@ -2770,7 +2770,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/desserts.png" alt="Chocolate lava cake with glowing pixel heart rising from it" loading="lazy">
+        <img src="images/desserts.webp" alt="Chocolate lava cake with glowing pixel heart rising from it" loading="lazy">
       </div>
 
       <div class="potion-desserts">
@@ -2820,7 +2820,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/special_combos.png" alt="Golden glowing retro loot box bundle with burger, fries, and coin" loading="lazy">
+        <img src="images/special_combos.webp" alt="Golden glowing retro loot box bundle with burger, fries, and coin" loading="lazy">
       </div>
 
       <div class="loot-box-showcase">
@@ -3295,12 +3295,12 @@
         categoriesList.className = 'inventory-categories-list';
         
         const categoryNames = [
-          { name: '⚔ STARTER LOOT', id: 'appetizers', img: 'images/appetizers.png' },
-          { name: '🛡 HEAVY MECHS', id: 'burgers-sandwiches', img: 'images/burgers_sandwiches.png' },
-          { name: '💿 RELIC DISCS', id: 'pizza-snacks', img: 'images/pizza_snacks.png' },
-          { name: '👥 PARTY QUESTS', id: 'shareables', img: 'images/shareable_platters.png' },
-          { name: '🧪 POWER-UPS', id: 'desserts', img: 'images/desserts.png' },
-          { name: '📦 LOOT BOXES', id: 'special-combos', img: 'images/special_combos.png' }
+          { name: '⚔ STARTER LOOT', id: 'appetizers', img: 'images/appetizers.webp' },
+          { name: '🛡 HEAVY MECHS', id: 'burgers-sandwiches', img: 'images/burgers_sandwiches.webp' },
+          { name: '💿 RELIC DISCS', id: 'pizza-snacks', img: 'images/pizza_snacks.webp' },
+          { name: '👥 PARTY QUESTS', id: 'shareables', img: 'images/shareable_platters.webp' },
+          { name: '🧪 POWER-UPS', id: 'desserts', img: 'images/desserts.webp' },
+          { name: '📦 LOOT BOXES', id: 'special-combos', img: 'images/special_combos.webp' }
         ];
         
         const mainContent = document.createElement('div');
@@ -3311,7 +3311,7 @@
         inspector.innerHTML = `
           <div class="inspector-title">[ INSPECT ITEM ]</div>
           <div class="inspector-image-frame">
-            <img id="inspect-image" src="images/appetizers.png" alt="Inspection graphic">
+            <img id="inspect-image" src="images/appetizers.webp" alt="Inspection graphic">
           </div>
           <div class="inspector-details">
             <div id="inspect-name" class="inspector-name">SELECT ITEM</div>
@@ -3414,7 +3414,7 @@
           if (card) {
             const panel = card.closest('.food-panel');
             const catInfo = categoryNames.find(c => c.id === panel.id);
-            const catImg = catInfo ? catInfo.img : 'images/appetizers.png';
+            const catImg = catInfo ? catInfo.img : 'images/appetizers.webp';
             inspectItem(card, catImg);
           }
         });
@@ -3431,7 +3431,7 @@
         
         const initialCard = document.querySelector('#appetizers .menu-item-card');
         if (initialCard) {
-          inspectItem(initialCard, 'images/appetizers.png');
+          inspectItem(initialCard, 'images/appetizers.webp');
         }
       }
     });
