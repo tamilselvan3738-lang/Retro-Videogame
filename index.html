@@ -9,7 +9,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/classics_1980s.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -2628,7 +2630,7 @@
           </div>
         </div>
         <div class="hm-hero-visual">
-          <img src="images/classics_1980s.webp" alt="Restored classic 1980s arcade cabinet rows glowing in neon light" loading="eager" fetchpriority="high">
+          <img src="images/classics_1980s.webp" alt="Restored classic 1980s arcade cabinet rows glowing in neon light" loading="eager" fetchpriority="high" decoding="async">
           <div class="crt-overlay"></div>
         </div>
       </div>
@@ -2667,7 +2669,7 @@
           </div>
           <div class="hm-dash-content">
             <div class="hm-dash-game-info">
-              <img id="challengeGameImg" class="hm-dash-img" src="images/highscore_challenges.webp" alt="Pac-Man challenge cabinet marquee badge">
+              <img id="challengeGameImg" class="hm-dash-img" src="images/highscore_challenges.webp" alt="Pac-Man challenge cabinet marquee badge" loading="eager" decoding="async">
               <div class="hm-dash-game-details">
                 <h3 id="challengeGameName">Pac-Man (1980)</h3>
                 <p id="challengeGameRules">Goal: Reach Split Screen (Level 256) on a single coin run. No cabinet resets allowed.</p>
@@ -2713,7 +2715,7 @@
           </div>
         </div>
         <div class="hm-tournaments-img">
-          <img src="images/event_retro_night.webp" alt="A dense crowd of arcade players cheering during a competitive retro gaming tournament under pink and purple spot lights" loading="lazy">
+          <img src="images/event_retro_night.webp" alt="A dense crowd of arcade players cheering during a competitive retro gaming tournament under pink and purple spot lights" loading="eager" decoding="async">
           <div class="crt-overlay"></div>
         </div>
       </div>
@@ -2725,7 +2727,7 @@
     <section class="hm-section" id="home-diner">
       <div class="hm-diner-shelf">
         <div class="hm-diner-img">
-          <img src="images/arcade_neon_bar.webp" alt="Sleek neon lit bar counter showing craft beers tap handles and gamer burgers" loading="lazy">
+          <img src="images/arcade_neon_bar.webp" alt="Sleek neon lit bar counter showing craft beers tap handles and gamer burgers" loading="eager" decoding="async">
           <div class="crt-overlay"></div>
         </div>
         
@@ -2820,7 +2822,7 @@
       </div>
 
       <div class="hm-stream-visual">
-        <img src="images/video_teaser_thumb.webp" alt="A high resolution screenshot of a gamer playing street fighter on a cabinet with twitch chat overlaid on the right">
+        <img src="images/video_teaser_thumb.webp" alt="A high resolution screenshot of a gamer playing street fighter on a cabinet with twitch chat overlaid on the right" loading="eager" decoding="async">
         <div class="crt-overlay"></div>
         <div class="crt-live-tag">LIVE STAGE BROADCAST</div>
         
@@ -2852,7 +2854,7 @@
         <!-- Pack 1 -->
         <div class="hm-token-card">
           <div class="hm-token-image">
-            <img src="images/reward_tokens.webp" alt="Gold arcade tokens pile" loading="lazy">
+            <img src="images/reward_tokens.webp" alt="Gold arcade tokens pile" loading="eager" decoding="async">
           </div>
           <span class="hm-token-badge">COMMUNITY PLAYER</span>
           <h3 class="hm-token-title">40 TOKENS</h3>
@@ -2868,7 +2870,7 @@
         <!-- Pack 2 -->
         <div class="hm-token-card" style="border-color: var(--color-neon-cyan); box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);">
           <div class="hm-token-image" style="border-color: var(--color-neon-cyan); box-shadow: var(--neon-glow-cyan);">
-            <img src="images/reward_tokens.webp" alt="Glow arcade tokens pile" loading="lazy">
+            <img src="images/reward_tokens.webp" alt="Glow arcade tokens pile" loading="eager" decoding="async">
           </div>
           <span class="hm-token-badge" style="border-color: var(--color-neon-cyan); color: var(--color-neon-cyan); background: rgba(0, 240, 255, 0.05);">POPULAR CHOICES</span>
           <h3 class="hm-token-title">100 TOKENS</h3>
@@ -2884,7 +2886,7 @@
         <!-- Pack 3 -->
         <div class="hm-token-card" style="border-color: var(--color-neon-pink); box-shadow: 0 0 10px rgba(255, 0, 127, 0.1);">
           <div class="hm-token-image" style="border-color: var(--color-neon-pink); box-shadow: var(--neon-glow-pink);">
-            <img src="images/reward_tokens.webp" alt="Heap of gold shiny arcade tokens" loading="lazy">
+            <img src="images/reward_tokens.webp" alt="Heap of gold shiny arcade tokens" loading="eager" decoding="async">
           </div>
           <span class="hm-token-badge" style="border-color: var(--color-neon-pink); color: var(--color-neon-pink); background: rgba(255, 0, 127, 0.05);">ELITE VIP RUNNER</span>
           <h3 class="hm-token-title">250 TOKENS</h3>

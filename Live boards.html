@@ -8,7 +8,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/monthly_rankings.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -3040,7 +3042,7 @@
               <div class="cabinet-marquee">2ND PLACE</div>
               <div class="cabinet-monitor">
                 <div class="cabinet-avatar-frame" style="color: var(--color-neon-cyan);">
-                  <img src="images/multiplayer_cabinets.webp" alt="Avatar">
+                  <img src="images/multiplayer_cabinets.webp" alt="Avatar" loading="eager" decoding="async">
                 </div>
                 <span class="cabinet-gamer-tag">XOR_PILOT</span>
                 <span class="cabinet-score">984.5K</span>
@@ -3058,7 +3060,7 @@
               <div class="cabinet-marquee">1ST PLACE</div>
               <div class="cabinet-monitor">
                 <div class="cabinet-avatar-frame" style="color: var(--color-neon-yellow);">
-                  <img src="images/arcade_lobby.webp" alt="Avatar">
+                  <img src="images/arcade_lobby.webp" alt="Avatar" loading="eager" decoding="async">
                 </div>
                 <span class="cabinet-gamer-tag">ARCADE_QUEEN</span>
                 <span class="cabinet-score">1.45M</span>
@@ -3076,7 +3078,7 @@
               <div class="cabinet-marquee">3RD PLACE</div>
               <div class="cabinet-monitor">
                 <div class="cabinet-avatar-frame" style="color: var(--color-neon-pink);">
-                  <img src="images/fighting_games.webp" alt="Avatar">
+                  <img src="images/fighting_games.webp" alt="Avatar" loading="eager" decoding="async">
                 </div>
                 <span class="cabinet-gamer-tag">NEON_COWBOY</span>
                 <span class="cabinet-score">812.3K</span>
@@ -3179,7 +3181,7 @@
               <div class="license-portrait-col">
                 <span class="license-active-dot">● ONLINE</span>
                 <div class="license-avatar-border" style="color: var(--color-neon-pink);">
-                  <img src="images/arcade_lobby.webp" alt="Avatar">
+                  <img src="images/arcade_lobby.webp" alt="Avatar" loading="eager" decoding="async">
                 </div>
               </div>
               <div class="license-info-col">
@@ -3211,7 +3213,7 @@
               <div class="license-portrait-col">
                 <span class="license-active-dot" style="color: var(--color-neon-yellow);">● IN GAME</span>
                 <div class="license-avatar-border" style="color: var(--color-neon-cyan);">
-                  <img src="images/racing_games.webp" alt="Avatar">
+                  <img src="images/racing_games.webp" alt="Avatar" loading="eager" decoding="async">
                 </div>
               </div>
               <div class="license-info-col">

@@ -8,7 +8,10 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/food_menu.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="images/appetizers.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -2547,7 +2550,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/appetizers.webp" alt="Platter of glowing pixel french fries and onion rings in metal basket" loading="eager" fetchpriority="high">
+        <img src="images/appetizers.webp" alt="Platter of glowing pixel french fries and onion rings in metal basket" loading="eager" fetchpriority="high" decoding="async">
       </div>
 
       <div class="menu-items-grid">
@@ -2615,7 +2618,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/burgers_sandwiches.webp" alt="Futuristic double burger with neon yellow cheese on grid digital terminal" loading="lazy">
+        <img src="images/burgers_sandwiches.webp" alt="Futuristic double burger with neon yellow cheese on grid digital terminal" loading="eager" decoding="async">
       </div>
 
       <div class="burger-grid">
@@ -2673,7 +2676,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/pizza_snacks.webp" alt="Neon glowing pepperoni pizza disk with pink and blue lines on dark background" loading="lazy">
+        <img src="images/pizza_snacks.webp" alt="Neon glowing pepperoni pizza disk with pink and blue lines on dark background" loading="eager" decoding="async">
       </div>
 
       <div class="menu-items-grid">
@@ -2728,7 +2731,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/shareable_platters.webp" alt="Multiplayer co-op food platter with slider burgers, wings, and chips in neon lounge" loading="lazy">
+        <img src="images/shareable_platters.webp" alt="Multiplayer co-op food platter with slider burgers, wings, and chips in neon lounge" loading="eager" decoding="async">
       </div>
 
       <div class="menu-items-grid">
@@ -2770,7 +2773,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/desserts.webp" alt="Chocolate lava cake with glowing pixel heart rising from it" loading="lazy">
+        <img src="images/desserts.webp" alt="Chocolate lava cake with glowing pixel heart rising from it" loading="eager" decoding="async">
       </div>
 
       <div class="potion-desserts">
@@ -2820,7 +2823,7 @@
       </div>
 
       <div class="section-image-wrapper">
-        <img src="images/special_combos.webp" alt="Golden glowing retro loot box bundle with burger, fries, and coin" loading="lazy">
+        <img src="images/special_combos.webp" alt="Golden glowing retro loot box bundle with burger, fries, and coin" loading="eager" decoding="async">
       </div>
 
       <div class="loot-box-showcase">
@@ -3311,7 +3314,7 @@
         inspector.innerHTML = `
           <div class="inspector-title">[ INSPECT ITEM ]</div>
           <div class="inspector-image-frame">
-            <img id="inspect-image" src="images/appetizers.webp" alt="Inspection graphic">
+            <img id="inspect-image" src="images/appetizers.webp" alt="Inspection graphic" loading="eager" fetchpriority="high" decoding="async">
           </div>
           <div class="inspector-details">
             <div id="inspect-name" class="inspector-name">SELECT ITEM</div>

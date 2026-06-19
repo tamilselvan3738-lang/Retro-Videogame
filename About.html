@@ -9,7 +9,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/arcade_neon_bar.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
 
@@ -3338,7 +3340,7 @@
           Enter the grid. We are a vintage gaming sanctuary, a craft beverage laboratory, and a pixel-drenched social portal located in the heart of the Neon District.
         </p>
         <div class="ab-hero-visual">
-          <img src="images/arcade_neon_bar.webp" alt="Neon glowing retro arcade bar display screen" loading="eager" fetchpriority="high">
+          <img src="images/arcade_neon_bar.webp" alt="Neon glowing retro arcade bar display screen" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -3359,7 +3361,7 @@
           </p>
         </div>
         <div class="ab-story-visual">
-          <img src="images/arcade_lobby.webp" alt="A look at the vintage lobby arcade layout" loading="lazy">
+          <img src="images/arcade_lobby.webp" alt="A look at the vintage lobby arcade layout" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -3427,7 +3429,7 @@
     <section class="ab-section" id="retro-manifesto">
       <div class="ab-manifesto-container">
         <div class="ab-manifesto-visual">
-          <img src="images/highscore_challenges.webp" alt="Arcade cabinet highscore neon challenge interface" loading="lazy">
+          <img src="images/highscore_challenges.webp" alt="Arcade cabinet highscore neon challenge interface" loading="eager" decoding="async">
         </div>
         
         <div class="ab-manifesto-content">
@@ -3525,7 +3527,7 @@
           <div class="ab-dash-content">
             <div class="ab-dash-profile">
               <div class="ab-dash-visual">
-                <img src="images/fighting_games.webp" alt="CRT Screen overlaying game interface" class="ab-dash-avatar-bg">
+                <img src="images/fighting_games.webp" alt="CRT Screen overlaying game interface" class="ab-dash-avatar-bg" loading="eager" decoding="async">
                 <div class="ab-dash-avatar" id="dashAvatar">
                   <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
@@ -3635,7 +3637,7 @@
         <div class="ab-tour-screen">
           <!-- Slide 1 -->
           <div class="ab-tour-slide active" data-slide="0">
-            <img src="images/vip_lounge.webp" alt="VIP console cabin zone lounge layout" class="ab-tour-img">
+            <img src="images/vip_lounge.webp" alt="VIP console cabin zone lounge layout" class="ab-tour-img" loading="eager" decoding="async">
             <div class="ab-tour-overlay">
               <h3>Sector 01: VIP Lounge Cabins</h3>
               <p>Book private console couches equipped with retro systems and sliders service delivery.</p>
@@ -3644,7 +3646,7 @@
           
           <!-- Slide 2 -->
           <div class="ab-tour-slide" data-slide="1">
-            <img src="images/arcade_lobby.webp" alt="Arcade cabinet row main floor layout" class="ab-tour-img">
+            <img src="images/arcade_lobby.webp" alt="Arcade cabinet row main floor layout" class="ab-tour-img" loading="eager" decoding="async">
             <div class="ab-tour-overlay">
               <h3>Sector 02: Classic Cabinet Row</h3>
               <p>50+ classic standing cabinets restored to original CRT display specs.</p>
@@ -3653,7 +3655,7 @@
           
           <!-- Slide 3 -->
           <div class="ab-tour-slide" data-slide="2">
-            <img src="images/beverage_menu.webp" alt="Glow beer tap craft beverage bar layout" class="ab-tour-img">
+            <img src="images/beverage_menu.webp" alt="Glow beer tap craft beverage bar layout" class="ab-tour-img" loading="eager" decoding="async">
             <div class="ab-tour-overlay">
               <h3>Sector 03: Craft Cocktail Deck</h3>
               <p>Recharge your health stats with house signature mocktails and retro beers.</p>

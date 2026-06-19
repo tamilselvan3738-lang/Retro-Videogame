@@ -8,7 +8,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/guide_leaderboard_rules.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -2187,7 +2189,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">TACTICAL GUIDE</span>
-          <img src="images/guide_classic_gameplay.webp" alt="Arcade controller hands gameplay" loading="eager" fetchpriority="high">
+          <img src="images/guide_classic_gameplay.webp" alt="Arcade controller hands gameplay" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -2227,7 +2229,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">VERIFICATION PROTOCOL</span>
-          <img src="images/guide_leaderboard_rules.webp" alt="Neon retro scoreboard details" loading="lazy">
+          <img src="images/guide_leaderboard_rules.webp" alt="Neon retro scoreboard details" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -2264,7 +2266,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">BRACKET CODES</span>
-          <img src="images/guide_tournament_bracket.webp" alt="Fight deck arena brackets" loading="lazy">
+          <img src="images/guide_tournament_bracket.webp" alt="Fight deck arena brackets" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -2301,7 +2303,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">CHRONOLOGY FILE</span>
-          <img src="images/guide_retro_history.webp" alt="Atari arcade cabinet detail" loading="lazy">
+          <img src="images/guide_retro_history.webp" alt="Atari arcade cabinet detail" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -2338,7 +2340,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">BEZEL QUARTERS</span>
-          <img src="images/guide_arcade_etiquette.webp" alt="Gamers playing politely at arcade" loading="lazy">
+          <img src="images/guide_arcade_etiquette.webp" alt="Gamers playing politely at arcade" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -2378,7 +2380,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">CRT HARDWARE</span>
-          <img src="images/guide_crt_calibration.webp" alt="CRT monitor screen grid" loading="lazy">
+          <img src="images/guide_crt_calibration.webp" alt="CRT monitor screen grid" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -2418,7 +2420,7 @@
       <div class="guide-visual-block">
         <div class="visual-frame">
           <span class="visual-tag-badge">FAQ SYSTEM</span>
-          <img src="images/guide_faq_terminal.webp" alt="Retro console question mark screen" loading="lazy">
+          <img src="images/guide_faq_terminal.webp" alt="Retro console question mark screen" loading="eager" decoding="async">
         </div>
       </div>
     </section>

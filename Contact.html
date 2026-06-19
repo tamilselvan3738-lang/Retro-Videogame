@@ -9,7 +9,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/arcade_lobby.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -2529,7 +2531,7 @@
         </div>
         
         <div class="con-form-img">
-          <img src="images/reviews_feedback_form.webp" alt="Cabinet screen showing feedback form prompt" loading="eager" fetchpriority="high">
+          <img src="images/reviews_feedback_form.webp" alt="Cabinet screen showing feedback form prompt" loading="eager" fetchpriority="high" decoding="async">
         </div>
       </div>
     </section>
@@ -2546,7 +2548,7 @@
       
       <div class="con-map-shelf">
         <div class="con-map-visual">
-          <img src="images/arcade_lobby.webp" alt="Lobby view of Retro arcade bar location" loading="lazy">
+          <img src="images/arcade_lobby.webp" alt="Lobby view of Retro arcade bar location" loading="eager" fetchpriority="high" decoding="async">
         </div>
         
         <div class="con-map-info">
@@ -2622,7 +2624,7 @@
         </div>
         
         <div class="con-hours-img">
-          <img src="images/status_availability.webp" alt="Operational Uptime and Status cabinet graphics" loading="lazy">
+          <img src="images/status_availability.webp" alt="Operational Uptime and Status cabinet graphics" loading="eager" decoding="async">
         </div>
       </div>
     </section>
@@ -2639,7 +2641,7 @@
       
       <div class="con-faq-img-layout">
         <div class="con-faq-img">
-          <img src="images/guide_faq_terminal.webp" alt="Retro terminal interface visual for support database" loading="lazy">
+          <img src="images/guide_faq_terminal.webp" alt="Retro terminal interface visual for support database" loading="eager" decoding="async">
         </div>
         
         <div class="con-faq-accordion">
@@ -2702,7 +2704,7 @@
       
       <div class="con-vip-shelf">
         <div class="con-vip-img">
-          <img src="images/vip_lounge.webp" alt="VIP arcade sofa layout console zone" loading="lazy">
+          <img src="images/vip_lounge.webp" alt="VIP arcade sofa layout console zone" loading="eager" decoding="async">
         </div>
         
         <div class="con-vip-info">

@@ -8,7 +8,9 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="preload" href="images/membership_hero.webp" as="image" fetchpriority="high">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Press+Start+2P&display=swap"></noscript>
   
   <style>
     /* ==========================================
@@ -3249,7 +3251,7 @@
         </div>
 
         <div class="vip-lounge-image-wrapper">
-          <img src="images/vip_lounge.webp" alt="VIP HUD Lounge" loading="eager" fetchpriority="high">
+          <img src="images/vip_lounge.webp" alt="VIP HUD Lounge" loading="eager" fetchpriority="high" decoding="async">
           <div class="scanlines"></div>
           <div class="vip-lounge-badge">> VIP HUD ACCESS LOCKED</div>
         </div>
@@ -3267,7 +3269,7 @@
         <!-- Event 1 -->
         <div class="event-poster">
           <div class="event-img-box">
-            <img src="images/member_tournament.webp" alt="Speedrun Showdown" loading="lazy">
+            <img src="images/member_tournament.webp" alt="Speedrun Showdown" loading="eager" decoding="async">
             <div class="event-badge">Guild Event</div>
           </div>
           <div class="event-details">
@@ -3287,7 +3289,7 @@
         <!-- Event 2 -->
         <div class="event-poster">
           <div class="event-img-box">
-            <img src="images/arcade_championships.webp" alt="Fighter Guild" loading="lazy">
+            <img src="images/arcade_championships.webp" alt="Fighter Guild" loading="eager" decoding="async">
             <div class="event-badge">Championship</div>
           </div>
           <div class="event-details">
@@ -3307,7 +3309,7 @@
         <!-- Event 3 -->
         <div class="event-poster">
           <div class="event-img-box">
-            <img src="images/brewery_partners.webp" alt="Craft tasting" loading="lazy">
+            <img src="images/brewery_partners.webp" alt="Craft tasting" loading="eager" decoding="async">
             <div class="event-badge">VIP Exclusive</div>
           </div>
           <div class="event-details">
@@ -3424,7 +3426,7 @@
         <!-- Item 1 -->
         <div class="reward-item-card">
           <div class="reward-item-img">
-            <img src="images/reward_tokens.webp" alt="Retro tokens" loading="lazy">
+            <img src="images/reward_tokens.webp" alt="Retro tokens" loading="eager" decoding="async">
             <div class="reward-cost-tag">1,000 XP</div>
           </div>
           <div class="reward-item-details">
@@ -3437,7 +3439,7 @@
         <!-- Item 2 -->
         <div class="reward-item-card">
           <div class="reward-item-img">
-            <img src="images/signature_cocktails.webp" alt="Custom Pint" loading="lazy">
+            <img src="images/signature_cocktails.webp" alt="Custom Pint" loading="eager" decoding="async">
             <div class="reward-cost-tag">2,500 XP</div>
           </div>
           <div class="reward-item-details">
@@ -3450,7 +3452,7 @@
         <!-- Item 3 -->
         <div class="reward-item-card">
           <div class="reward-item-img">
-            <img src="images/food_menu.webp" alt="Loaded Nachos" loading="lazy">
+            <img src="images/food_menu.webp" alt="Loaded Nachos" loading="eager" decoding="async">
             <div class="reward-cost-tag">3,000 XP</div>
           </div>
           <div class="reward-item-details">
@@ -3463,7 +3465,7 @@
         <!-- Item 4 -->
         <div class="reward-item-card">
           <div class="reward-item-img">
-            <img src="images/rare_titles.webp" alt="Retro Cartridge" loading="lazy">
+            <img src="images/rare_titles.webp" alt="Retro Cartridge" loading="eager" decoding="async">
             <div class="reward-cost-tag">8,000 XP</div>
           </div>
           <div class="reward-item-details">
