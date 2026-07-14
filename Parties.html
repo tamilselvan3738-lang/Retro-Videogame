@@ -479,7 +479,7 @@
       padding: 0.5rem 0.8rem;
       border-radius: 4px;
       text-transform: uppercase;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transition: all var(--transition-fast);
       display: flex;
       align-items: center;
@@ -504,7 +504,7 @@
     .btn-login:hover {
       color: #000000;
       background: var(--color-neon-yellow);
-      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transform: scale(1.05) translateY(-2px);
     }
 
@@ -795,7 +795,6 @@
       padding: 0.5rem 1rem;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      box-shadow: var(--neon-glow-cyan);
     }
 
     .hero-title {
@@ -854,7 +853,7 @@
       background: linear-gradient(135deg, var(--color-neon-pink), #e100ff);
       color: #ffffff;
       border-radius: 30px;
-      box-shadow: var(--neon-glow-pink), 0 10px 20px rgba(255, 0, 127, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       transition: all var(--transition-fast);
       display: inline-flex;
       align-items: center;
@@ -863,7 +862,7 @@
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(255, 0, 127, 0.4), var(--neon-glow-pink);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
     .btn-primary:active {
       transform: translateY(-1px);
@@ -2020,7 +2019,7 @@
 
     /* SVG Blueprint Animations */
     .blueprint-zone-group {
-      opacity: 0.2;
+      opacity: 0.55;
       transition: opacity 0.5s ease, filter 0.5s ease;
       cursor: pointer;
     }
@@ -3016,7 +3015,6 @@
       padding: 1.1rem;
       border-radius: 4px;
       cursor: pointer;
-      box-shadow: var(--neon-glow-pink);
       transition: all var(--transition-fast);
       text-transform: uppercase;
       text-align: center;
@@ -3025,7 +3023,6 @@
     .btn-submit-booking:hover {
       background: transparent;
       color: var(--color-neon-pink);
-      box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
       transform: translateY(-2px);
     }
 
@@ -3387,6 +3384,16 @@
 
     html.light-theme .diagnostics-view-screen .diag-spec-lbl {
       color: #007700;
+    }
+
+    html.light-theme .diagnostics-view-screen .diag-badge {
+      color: #006600;
+      border-color: #006600;
+      background: rgba(0, 102, 0, 0.05);
+    }
+
+    html.light-theme .diagnostics-view-screen .diag-reward-lbl {
+      color: #006600;
     }
 
     html.light-theme .diagnostics-view-screen .diag-reward-val {

@@ -481,7 +481,7 @@
       padding: 0.5rem 0.8rem;
       border-radius: 4px;
       text-transform: uppercase;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transition: all var(--transition-fast);
       display: flex;
       align-items: center;
@@ -506,7 +506,7 @@
     .btn-login:hover {
       color: #000000;
       background: var(--color-neon-yellow);
-      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transform: scale(1.05) translateY(-2px);
     }
 
@@ -797,7 +797,6 @@
       padding: 0.5rem 1rem;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      box-shadow: var(--neon-glow-cyan);
     }
 
     .hero-title {
@@ -856,7 +855,7 @@
       background: linear-gradient(135deg, var(--color-neon-pink), #e100ff);
       color: #ffffff;
       border-radius: 30px;
-      box-shadow: var(--neon-glow-pink), 0 10px 20px rgba(255, 0, 127, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       transition: all var(--transition-fast);
       display: inline-flex;
       align-items: center;
@@ -865,7 +864,7 @@
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(255, 0, 127, 0.4), var(--neon-glow-pink);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
     .btn-primary:active {
       transform: translateY(-1px);
@@ -1496,7 +1495,6 @@
       padding: 0.5rem 1.2rem;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      box-shadow: var(--neon-glow-cyan);
     }
 
     .pricing-section {
@@ -3019,15 +3017,10 @@
       left: 0;
       bottom: 0;
       right: 0;
-      background: linear-gradient(to top, rgba(2, 2, 8, 0.9) 20%, transparent 100%);
+      background: linear-gradient(to top, rgba(2, 2, 8, 0.95) 40%, rgba(2, 2, 8, 0.5) 75%, transparent 100%);
       padding: 2.5rem 2rem 1.5rem 2rem;
       color: #fff;
       z-index: 5;
-    }
-
-    html.light-theme .ab-tour-overlay {
-      background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 20%, transparent 100%);
-      color: #0f172a;
     }
 
     .ab-tour-overlay h3 {
@@ -3039,7 +3032,7 @@
     }
 
     .ab-tour-overlay p {
-      color: var(--color-text-secondary);
+      color: #cbd5e1;
       font-size: 0.95rem;
       line-height: 1.5;
     }

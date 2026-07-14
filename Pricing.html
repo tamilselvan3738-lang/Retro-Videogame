@@ -479,7 +479,7 @@
       padding: 0.5rem 0.8rem;
       border-radius: 4px;
       text-transform: uppercase;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5), var(--neon-glow-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transition: all var(--transition-fast);
       display: flex;
       align-items: center;
@@ -504,7 +504,7 @@
     .btn-login:hover {
       color: #000000;
       background: var(--color-neon-yellow);
-      box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 30px var(--color-neon-yellow);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
       transform: scale(1.05) translateY(-2px);
     }
 
@@ -795,7 +795,6 @@
       padding: 0.5rem 1rem;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      box-shadow: var(--neon-glow-cyan);
     }
 
     .hero-title {
@@ -854,7 +853,7 @@
       background: linear-gradient(135deg, var(--color-neon-pink), #e100ff);
       color: #ffffff;
       border-radius: 30px;
-      box-shadow: var(--neon-glow-pink), 0 10px 20px rgba(255, 0, 127, 0.2);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       transition: all var(--transition-fast);
       display: inline-flex;
       align-items: center;
@@ -863,7 +862,7 @@
 
     .btn-primary:hover {
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(255, 0, 127, 0.4), var(--neon-glow-pink);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
     }
     .btn-primary:active {
       transform: translateY(-1px);
@@ -1494,7 +1493,6 @@
       padding: 0.5rem 1.2rem;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      box-shadow: var(--neon-glow-cyan);
     }
 
     .pricing-section {
@@ -1656,6 +1654,12 @@
       border: 1px solid var(--color-neon-yellow);
       padding: 0.25rem 0.5rem;
       border-radius: 4px;
+    }
+
+    html.light-theme .card-badge {
+      background: var(--color-neon-yellow);
+      color: #ffffff;
+      border-color: var(--color-neon-yellow);
     }
 
     .card-header-title {

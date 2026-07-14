@@ -453,39 +453,33 @@
     .btn-pink {
       color: var(--color-neon-pink);
       border: 3px double var(--color-neon-pink);
-      box-shadow: var(--neon-glow-pink);
     }
     
     .btn-pink:hover {
       color: #000000;
       background: var(--color-neon-pink);
-      box-shadow: 0 0 15px var(--color-neon-pink);
       transform: scale(1.05) translateY(-2px);
     }
 
     .btn-cyan {
       color: var(--color-neon-cyan);
       border: 3px double var(--color-neon-cyan);
-      box-shadow: var(--neon-glow-cyan);
     }
     
     .btn-cyan:hover {
       color: #000000;
       background: var(--color-neon-cyan);
-      box-shadow: 0 0 15px var(--color-neon-cyan);
       transform: scale(1.05) translateY(-2px);
     }
 
     .btn-yellow {
       color: var(--color-neon-yellow);
       border: 3px double var(--color-neon-yellow);
-      box-shadow: var(--neon-glow-yellow);
     }
     
     .btn-yellow:hover {
       color: #000000;
       background: var(--color-neon-yellow);
-      box-shadow: 0 0 15px var(--color-neon-yellow);
       transform: scale(1.05) translateY(-2px);
     }
 
@@ -700,7 +694,7 @@
         textSpan.textContent = 'COIN OK!';
         textSpan.style.color = '#00f0ff';
         btnHome.style.borderColor = '#00f0ff';
-        btnHome.style.boxShadow = 'var(--neon-glow-cyan)';
+        btnHome.style.boxShadow = 'none';
         
         setTimeout(() => {
           textSpan.textContent = 'LOADING...';
